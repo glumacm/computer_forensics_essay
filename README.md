@@ -10,3 +10,4 @@ Writing essay for a course in Computer forensics (translating an existing articl
 * NPB - okrajšava za "napad s prikrivanjem blokov"
 * viability - obstanek
 * overhead - prekomerno
+* preliminaries - predhodna dejanja
