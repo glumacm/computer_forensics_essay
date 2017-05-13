@@ -58,9 +58,33 @@ Na koncu se tudi posvetijo analizi varnosti opisane sheme.
 \section{Uvod}
 Bitcoin je popularna kripto valuta, ki jo je prvo priporočil Satoshi Nakamoto \cite{nakamoto} leta 2008. Transakcije so javno preverljive v glavnem računu imenovanem "bločna veriga" (angl. blockchain). Bločna veriga je sestavljena iz veliko blokov, ki potrdi različne transakcije. Uporabniki, ki ustvarjajo in preverjajo te bloke se imenujejo rudarji. Rudarji nato kot motivacijo pridobijo novo ustvarjene Bitcoin-e. Da bi se reguliralo pretok Bitcoinov se bloki ustvarijo približno vsakih 10 minut. Rudarji morajo rešiti uganko (kot dokaz dela - angl. proof of work (PoW)), če hočejo pridobiti spodbudne Bitcoin-e. Čeprav obstajajo alternativne valute kot Permacoin \cite{permacoin} in Retriecoin \cite{retriecoin}, ki uporabljajo shrambe namesto računanja za ustvarjanje valute, je dokazovanje dela, ki ga uporablja Bitcoin zaenkrat še vedno najboljši načrt. V \cite{economicsofbitcoin} so Kroll  in drugi pokazali, da Bitcoin rudarjenje ni tako "končno", vodeno z vlogami in motivacijsko kompatibilen sistem kot pravijo nekateri njegovi zagovorniki. Napadi z bločnim prikrivanjem \cite{analysisofbitcoin},\cite{financialcryptography}
 
+\newpage
+
+\section{Luka - page 5 and forth}
 
 
- \begin{thebibliography}{9}
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | c | }
+    \hline
+    $\alpha$ & $\beta$ & $\gamma$ & p' & $\bigtriangleup G_h^O $  \\ \hline
+    0.200000 & 0.500000 & 0.700000 & 0.340000 & 0.248016 \\ \hline
+    0.100000 & 0.900000 & 0.700000 & 0.400000 & 0.417396 \\ \hline
+    0.200000 & 0.400000 & 0.700000 & 0.340000 & 0.214171 \\ \hline
+    0.160000 & 0.600000 & 0.700000 & 0.330000 & 0.254052 \\ \hline
+    0.200000 & 0.800000 & 0.700000 & 0.400000 & 0.394558 \\ \hline
+    0.200000 & 0.900000 & 0.700000 & 0.400000 & 0.408747 \\ \hline
+    0.200000 & 0.960000 & 0.700000 & 0.400000 & 0.414236 \\ \hline
+    0.200000 & 0.990000 & 0.700000 & 0.400000 & 0.416150 \\ \hline
+    0.200000 & 0.700000 & 0.700000 & 0.400000 & 0.415573 \\ \hline
+  \end{tabular}
+\end{center}
+TABELA II: Tabelarični prikaz vrednosti $\bigtriangleup G_h^O $ za različne vrednosti ustreznih parametrov. $\alpha$ prikazuje računsko moč napadalca. $\beta$ prikazuje del računske moči, ki jo napadalec uporabi pri napadu na bazen rudarjev P. $\gamma$ prikazuje del spodbude, ki jo bazen P' pridobi zaradi napada napdalaca, ter jo z njim deli. p' predstavlja računsko moč P'.
+\newline
+\newline
+Ker je 1 - $\alpha\beta$ dobiček P naraste $\frac{p'}{ 1 - \alpha\beta}$.  Torej je narastek dobička bazena rudarjev P'  $\frac{p'}{1 - \alpha\beta}$ - p' = $\frac{\alpha\beta p'}{1 - \alpha\beta}$
+
+
+\begin{thebibliography}{9}
  
  \bibitem{nakamoto}
  S. Nakamoto, 
