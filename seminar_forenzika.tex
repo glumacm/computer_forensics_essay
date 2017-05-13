@@ -37,7 +37,7 @@
 \newcommand{\gnuplot}{\textbf{gnuplot}}
 \newcommand{\pgfname}{\textsc{pgf}}
 \newcommand{\tikzname}{Ti\emph{k}Z}
-
+\newtheorem{theorem}{Izrek}
 \begin{document}
 \setcounter{page}{1}
 \pagenumbering{arabic}
@@ -58,6 +58,30 @@ Na koncu se tudi posvetijo analizi varnosti opisane sheme.
 
 \section{Uvod}
 Bitcoin je popularna kripto valuta, ki jo je prvo priporočil Satoshi Nakamoto \cite{nakamoto} leta 2008. Transakcije so javno preverljive v glavnem računu imenovanem "bločna veriga" (angl. blockchain). Bločna veriga je sestavljena iz veliko blokov, ki potrdi različne transakcije. Uporabniki, ki ustvarjajo in preverjajo te bloke se imenujejo rudarji. Rudarji nato kot motivacijo pridobijo novo ustvarjene Bitcoin-e. Da bi se reguliralo pretok Bitcoinov se bloki ustvarijo približno vsakih 10 minut. Rudarji morajo rešiti uganko (kot dokaz dela - angl. proof of work (PoW)), če hočejo pridobiti spodbudne Bitcoin-e. Čeprav obstajajo alternativne valute kot Permacoin \cite{permacoin} in Retriecoin \cite{retriecoin}, ki uporabljajo shrambe namesto računanja za ustvarjanje valute, je dokazovanje dela, ki ga uporablja Bitcoin zaenkrat še vedno najboljši načrt. V \cite{economicsofbitcoin} so Kroll  in drugi pokazali, da Bitcoin rudarjenje ni tako "končno", vodeno z vlogami in motivacijsko kompatibilen sistem kot pravijo nekateri njegovi zagovorniki. Napadi z bločnim prikrivanjem \cite{analysisofbitcoin},\cite{financialcryptography}
+
+
+V \cite{financialcryptography} Laszka in ostali priskrbijo na podlagi igre teoretično analizo napada s prikrivanjem blokov v katerih se pokažejo zanimivi rezultati o dolgolročni vzdržljivosti Nash ravnotežja med napadnjem bazenov v Bitcoin omrežju. Eyal in ostali \cite{minnersdilemma} predlagajo rudarsko igro kjer se bazen rudarjev poskuša vtihotapiti v druge bazne rudarjev tako, da pošlje svoje posamezne rudarje v druge bazene rudarjev kjer potem sprožijo NPB na ciljne bazene rudarjev. Pokazali so, v primeru, da se dva ali več bazenov napada med seboj, bodo pošteni rudarji zaslužili manj kot pričakujejo. V izvornem članku se o takem primeru tudi razpravlja. Vendar se delo avtorjev članka v \cite{originalarticle} razlikuje od dela Eyal in drugih \cite{minnersdilemma} na naslednje načine: (a) Avtorji članka se osredotočijo na znesek dobička, ki ga proizvede napadalec, ki sproži NPB nad nekim ciljnim bazenom rudarjev, katerega nagradi nek drugi bazen rudarjev, ker je napadalec napadel določen bazen rudarjev. Eyal in ostali izračunajo izraze prihodkov, ki jih proizvedejo bazeni rudarjev, ko je scenarij napada omrežja v sanju ravnotežja. (b) V modelu avtorjev \cite{originalarticle} lahko napadalec razdeli svojo računsko moč in tako napada oba bazena rudarjev. Tako lahko prejme nagrade od obeh bazenov, katera nagradita napadalca, ker mislita, da je napadalec napadel le drugi bazen. Toda Eval in drugi razpravljajo scenarij napada kjer so napadalci člani bazena rudarjev in delijo prihodke pridobljene iz napadenega bazena z rudarji v goljufivem bazenu.
+
+\subsection{Motivacija in ostalo delo}
+
+Eyal \cite{minnersdilemma} in ostali definirajo in analizirajo igro kjer identični bazeni rudarjev napadejo drug drugega. Pokazali so, da v takem primeru kjer bazeni rudarjev napadajo drug drugega obstaja Nash ravnotežje, kjer vsi rudarji zaslužijo manj kot če se ne bi napadali drug drugega. Luu in ostali \cite{powersplitting} so izvedli podrobno študijo NPB in pokazali dobiček napadalca ob različnih scenarijih. Dokazali so, da ta napad zares poveča dobiček napadalca. Izpeljali so različne izraze za dobičkonosnost napadalca ob različnih razmerah. Intuicija iza pridobljene napadalčeve spodbude preko NPB je ta, da napadalec uporablja del računske moči za zmanjševanje verjetnosti zmage bazena rudarjev ter tako poveča svoje možnosti za zmago.
+
+V članku \cite{originalarticle} avtorji predlagajo tako imenovani "spozorirani napad s prikrivanjem blokov". Opazili so, da z izvajanjem NPB nad ciljnim bazenom, bo napadalec posredno povečal verjetnost zmage nekateremu drugemu bazenu (kot tudi samemu sebi, če ima dodatne vire za privatno rudarjenje). Zato lahko napadalec kova zaroto z drugimi bazeni, da bo uporabil majhen del svoje moči za napad na nek bazen in posledično zmanjša verjetnosti zmage nad ciljnim bazenom. V takih primerih je lahko napadalec s strani sebičnega bazena za napad na konkurenčni bazen in nagrada naj bi bila proporcionalna glede na narastek spodbude sebičnega bazena, ki ga proizvede napadalec s tem ko napade določen bazen. Tako bo pričakovan narastek napadalca višji kot so to izračunali Luu in ostali v \cite{powersplitting}. To je motivacija za analize avtorjev članka \cite{originalarticle}, ki jo podajo pred koncem razdelka VI v članku \cite{originalarticle}.
+
+
+NPB lahko ima katastrofalne posledice na dolgoročnost obstanka Bitcoin sistema. V razdelku VI avtorji članka \cite{originalarticle} iščejo oblažitve za NPB. Avtorji članka \cite{originalarticle} predlagajo dejanske ukrepe, ki se lahko uporabijo za premagovanje NPB in tako naredijo Bitcoinove bazene rudarjev bolj varne za investiranje rudarjeve računske moči. Avtorji članka \cite{originalarticle} najprej razpravljajo o generični shemi, ki se jo lahko uporablja poleg kateregakoli kriptografsko zavezujočega protokola. Nato predlagajo različico te sheme, ki uporalja razpršilne funkcije namesto sheme, ki temelji na podlagi zavez. Shema je tako strukturirana, da ne dovoli rudarju, da bi vnaprej predvideval ali lahko kakšen njegov delež uporabljen za generiranje Bitcoinov s strani bazena. Rudar lahko to izve šele nato, ko njen delež v bazenu posredovan k administratorju bazena. O podrobnostih teh shem avtorji članka \cite{originalarticle} razpravljajo kasneje. Opozorilo velja, da naj bi ta protiukrep veljal za vse poznane NPB in ne le za "sponzorirane napade s prikrivanjem blokov".
+
+\subsection{Prispevek}
+
+Prispevek prevedenega članka \cite{originalarticle} je dvonamenski. Članek analizira NPB z mislijo na specifičen model sistema in hkrati predlaga dve rudarski shemi kot oblažitev tem napadom.
+\begin{itemize}
+	\item V razdelku IV avtorji članka \cite{originalarticle}  analizirajo funkcijo prihodkov napadalca, ki s podporo drugega bazena sproži NPB na ciljni bazen. Ta napad poveča prihodek bazena, ki podpira napadalca in posledično ta bazen lahko del svoje dodatne spodbude z napadalcem. Ta prihodek je glavna opazka na podlagi katere avtorji članka \cite{originalarticle}  izračunajo in analizirajo funkcijo prihodka napadalca. V razdelku V analizirajo dobiček napadalca, ki napade oba bazena.
+	Njihova študija je drugačna od \cite{minnersdilemma} v takem smislu, da se študija v  \cite{minnersdilemma} osredotoča na scenarij kjer nek bazen rudarjev pošlje svoje člane, da napade druge bazene. Rudar, ki deluje kot dvojni agent prenese vse svoje pridobljene spodbude nazaj do svojega zlonamernega bazena, kateri nato posreduje dobiček enakomerno med svoje člane. V modelu opisanega v članku \cite{originalarticle} pa rudar deluje neodvisno in dobi neko končno vrednost spodbude od vsakega bloka, ki ga prikrije pred administratorjem bazena.
+	\item Glavni rezultati članka so podani v izrekih 1, 2, 3 in 5. Ti rezultati se ukvarjajo z optimalnimi strategijami napadalca pri NPB, ki hoče efektivno uporabiti svoje računske moči, da zasluži kolikor je mogoče. V izreku 1 avtorji članka \cite{originalarticle} dokažejo bistven rezultat, ki ga napadalec lahko uporabi za največji možni dobitek spodbude z oblikovanjem ustrezne strategije napada. 
+	V izreku 2 dokažejo da, ko so računske moči bazena vzdrževane na neki konstantni vrednosti, potem napadalec napasti več bazenov istočasno, da se njegov dobiček poveča.
+	V izreku 3 pokažejo, da napadalec pridobi več z napadanjem kot s samostojnim rudarjenjem, ko so določeni izvedljivi pogoji izpolnjeni. V izreku 5 pokažejo, da obstaja tak izvedljiv pogoj pod katerim lahko napadalec pridobi največji možni dobiček tako, da napade več bazenov istočasno, ko je računska moč bazenov nekontantna. To pomeni, da napad le na en bazen ne bi pomenilo največjega možnega dobička. Ta ugotovitev je bolj podobna izreku 2. Razlika je ta, da v izreku 5 za razliko od izreka 2, dva bazena nimata vzdrževane računske moči na konstantni vrednosti.
+	\item Na koncu, v razdelku VI avtorji predlagajo izboljšavo trenutne Bitcoin sheme na tak način, da bi bilo neobčutljivo na NPB. Prvo predlagajo generično shemo, ki uporablja kriptografsko zavezujoč protokol. Nato predložijo posodobljeno shemo, ki uporablja razpršilno funkcijo namesto zavezujočega protokola. Osnovna ideja za obema shemama je ista. Bolj očitno je, da je druga shema malce preoblikovana prva shema. Avtorji pokažejo, da obe shemi lahko omogočijo odpornost Bitcoin rudarjenja na napade NPB brez ogrožanja ključnih lastnosti obstoječe rudarske sheme. Njihov protiukrep ni samo dober za omenjeni napad v  \cite{originalarticle}, ampak ustreza tudi za vse ostale napade NPB o katerih se razpravlja v \cite{analysisofbitcoin}, \cite{minnersdilemma}, \cite{subversivestrategies}, itd. Dodatni so preprosti za implementacijo in nimajo vpliva na prekomerno računanje dokaza dela.
+\end{itemize}
 
 \newpage
 
@@ -133,9 +157,11 @@ $Num = -\alpha^3(1 - \gamma)p'\beta^2 + (4\alpha^3 - 2 \alpha^4 - 2\alpha^3 p' +
 \newline
 \newline
 Opazimo lahko, da $Den \not= 0 \forall\beta \in [0, 1].$ Če se G razširi nad $\beta = \beta_0, \frac{\partial G}{\partial\beta}|_\beta=\beta_0 = 0$. Torej $-\alpha^3(1-\gamma)p' \beta_0^2 + (4\alpha^3 - 2\alpha^4 - 2\alpha^3 p' + 2\alpha^2 p' - 2\alpha^2)\beta_0 + (\alpha^4 - 2\alpha^3 + 2\alpha^3 p' - 2\alpha^2 p' - \alpha^2 \gamma p' + \alpha^2 + \alpha^2 p'^2 - \alpha\gamma p'^2 + \alpha\gamma p') = 0$. Zaradi tega, ker $\alpha \not= 0$, lahko izraz napišemo kot $-\alpha^2(1 - \gamma)p' \beta^2 + (4\alpha^2 - qalpha\gamma p' + \alpha + \alpha p'^2 - \gamma p'^2 - \gamma p'^2 + \gamma p') = 0$. 
-
+\newline
+\newline
 \textbf{Lema 2.} Naj bo $ F(\alpha, \gamma, \beta, p') = A\beta^2 + B\beta + C $. V tem primeru je F(.) padajoča funkcija nad $ \beta $, če je $ \alpha $ manjše od 0.25.
 
+Slika 1 prikazuje grafično predstavo vrednosti $ F(\alpha, \gamma, \beta, p') = A\beta^2 + B\beta + C $, kjer so A, B ter C definirani tako kot v Lemi 1. Avtorji so izrisali vrednosti F(.) s tem da so vrednosti $\beta$ in p' variabile, $\alpha$ pa ostaja enak. V primeru, da je p' pod določeno mejo, lahko F(.) zavzame tako negativno, kot pozitivno vrednost. Prav tako lahko opazimo, da F(.) monotono pada, če upoštevamo rezultate Leme 2. Torej lahko sklepamo, obstaja tak $\beta_0$, da je $ F(\alpha, \gamma, \beta, p') = 0 $, kadar je p' pod neko določeno mejo. Podobno, ker je $ F(\alpha, \gamma, \beta, p') > 0 za \beta < \beta_0 $ je G naraščujoča funkcija $\beta$, za $\beta > \beta_0$, kadar je p' majši od omenjene omejitve. Ko je p' najd omenjeno omejitvijo, je G vedno naraščujoča funkcija. Za napadalca se v tem primeru najbolj splača inverstirati vse svoje računske zmožnosti v bazen rudarjev P. V primeru ko je vrednost p' dovolj nizka, obstaja tak $\beta \in [0, 1]$, ki omogoča maksimalen dobiček. Ta $\beta_0$ ustreza križišču dveh krivulj $Z = F(\alpha, \gamma, \beta, p') in Z = 0$ na Sliki 1. 
 \newpage
 \begin{thebibliography}{9}
  
@@ -187,6 +213,12 @@ Opazimo lahko, da $Den \not= 0 \forall\beta \in [0, 1].$ Če se G razširi nad $
  S. Bag and K. Sakurai, 
  \textit{Yet another note on block withholding attack on bitcoin mining pools}, in Information Security - 19th International Conference, ISC 2016, Honolulu, HI, USA, September 3-6, 2016, Proceedings, ser. Lecture Notes in Computer Science,
  M. Bishop and A. C. A. Nascimento, Eds., vol. 9866. 2016, pp. 167–180.
+ 
+ \bibitem{originalarticle}
+ Samiran Bag, Sushmita Ruj and Kouichi Sakurai,
+\textit{Bitcoin Block Withholding Attack : Analysis and
+Mitigation}
+IEEE Transactions on Information Forensics and Security
 \end{thebibliography}
 \end{document}
 
