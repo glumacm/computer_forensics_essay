@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.12)  13 MAY 2017 12:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.12)  13 MAY 2017 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -912,46 +912,41 @@ Package babel Info: Redefining slovene shorthand "|
 \tf@brf=\write5
 \openout5 = `seminar_forenzika.brf'.
 
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 74.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 88.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 74.
+(babel)             in language  on input line 88.
 Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 74.
+(babel)             in language  on input line 88.
  [2]
 Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 117.
+(babel)             in language  on input line 115.
 Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 117.
+(babel)             in language  on input line 115.
  [3]
-Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 117.
-Package babel Info: Redefining slovene shorthand "|
-(babel)             in language  on input line 117.
- [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 117.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 117.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 115.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 115.
 
 (./seminar_forenzika.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 117.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 117.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 115.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 115.
 Package rerunfilecheck Info: File `seminar_forenzika.out' has not changed.
 (rerunfilecheck)             Checksum: 549DA91CB0B068FD61E191AA53136252;39.
 Package rerunfilecheck Info: File `seminar_forenzika.brf' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 117.
+(rerunfilecheck)             Checksum: 109A7566A69F90B47F6F61DB63058B42;275.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 115.
  ) 
 Here is how much of TeX's memory you used:
- 16324 strings out of 493014
- 307169 string characters out of 6133351
- 370533 words of memory out of 5000000
- 19537 multiletter control sequences out of 15000+600000
+ 16328 strings out of 493014
+ 307227 string characters out of 6133351
+ 369565 words of memory out of 5000000
+ 19541 multiletter control sequences out of 15000+600000
  12481 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,11n,54p,1138b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,11n,54p,1200b,461s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></us
@@ -962,10 +957,10 @@ l/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/
 texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on seminar_forenzika.pdf (4 pages, 162338 bytes).
+Output written on seminar_forenzika.pdf (3 pages, 161039 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 99 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  18 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
