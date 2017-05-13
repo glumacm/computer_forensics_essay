@@ -36,7 +36,7 @@
 \newcommand{\gnuplot}{\textbf{gnuplot}}
 \newcommand{\pgfname}{\textsc{pgf}}
 \newcommand{\tikzname}{Ti\emph{k}Z}
-
+\newtheorem{theorem}{Izrek}
 \begin{document}
 \setcounter{page}{1}
 \pagenumbering{arabic}
@@ -71,10 +71,26 @@ V \cite{financialcryptography} Laszka in ostali priskrbijo na podlagi igre teore
 
 \subsection{Motivacija in ostalo delo}
 
-Eyal \cite{minnersdilemma} in ostali definirajo in analizirajo igro kjer identični bazeni rudarjev napadejo drug drugega. Pokazali so, da v takem primeru kjer bazeni rudarjev napadajo drug drugega obstaja Nash ravnotežje, kjer vsi rudarji zaslužijo manj kot če se ne bi napadali drug drugega. Luu in ostali \cite{powersplitting} so izvedli podrobno študijo NPB.
-Eyal et al. [7] defined and analyzed a game where identical mining pools attack each other. They have showed that in such a scenario where the mining pools attack each other, there exists a Nash equilibrium where all of them earn less than what they should have if none had attacked.
-Luu et al. [8] performed detailed study of BWH attack and showed the gain of the attacker under different sce- narios. They proved that this attack could indeed increase the gain of the attacker. They derived various expressions for the attackers gain under different settings. The intuition behind the attacker’s incentive earned through BWH attack
-is that she uses part of her computing power in reducing
+Eyal \cite{minnersdilemma} in ostali definirajo in analizirajo igro kjer identični bazeni rudarjev napadejo drug drugega. Pokazali so, da v takem primeru kjer bazeni rudarjev napadajo drug drugega obstaja Nash ravnotežje, kjer vsi rudarji zaslužijo manj kot če se ne bi napadali drug drugega. Luu in ostali \cite{powersplitting} so izvedli podrobno študijo NPB in pokazali dobiček napadalca ob različnih scenarijih. Dokazali so, da ta napad zares poveča dobiček napadalca. Izpeljali so različne izraze za dobičkonosnost napadalca ob različnih razmerah. Intuicija iza pridobljene napadalčeve spodbude preko NPB je ta, da napadalec uporablja del računske moči za zmanjševanje verjetnosti zmage bazena rudarjev ter tako poveča svoje možnosti za zmago.
+
+V članku \cite{originalarticle} avtorji predlagajo tako imenovani "spozorirani napad s prikrivanjem blokov". Opazili so, da z izvajanjem NPB nad ciljnim bazenom, bo napadalec posredno povečal verjetnost zmage nekateremu drugemu bazenu (kot tudi samemu sebi, če ima dodatne vire za privatno rudarjenje). Zato lahko napadalec kova zaroto z drugimi bazeni, da bo uporabil majhen del svoje moči za napad na nek bazen in posledično zmanjša verjetnosti zmage nad ciljnim bazenom. V takih primerih je lahko napadalec s strani sebičnega bazena za napad na konkurenčni bazen in nagrada naj bi bila proporcionalna glede na narastek spodbude sebičnega bazena, ki ga proizvede napadalec s tem ko napade določen bazen. Tako bo pričakovan narastek napadalca višji kot so to izračunali Luu in ostali v \cite{powersplitting}. To je motivacija za analize avtorjev članka \cite{originalarticle}, ki jo podajo pred koncem razdelka VI v članku \cite{originalarticle}.
+
+
+NPB lahko ima katastrofalne posledice na dolgoročnost obstanka Bitcoin sistema. V razdelku VI avtorji članka \cite{originalarticle} iščejo oblažitve za NPB. Avtorji članka \cite{originalarticle} predlagajo dejanske ukrepe, ki se lahko uporabijo za premagovanje NPB in tako naredijo Bitcoinove bazene rudarjev bolj varne za investiranje rudarjeve računske moči. Avtorji članka \cite{originalarticle} najprej razpravljajo o generični shemi, ki se jo lahko uporablja poleg kateregakoli kriptografsko zavezujočega protokola. Nato predlagajo različico te sheme, ki uporalja razpršilne funkcije namesto sheme, ki temelji na podlagi zavez. Shema je tako strukturirana, da ne dovoli rudarju, da bi vnaprej predvideval ali lahko kakšen njegov delež uporabljen za generiranje Bitcoinov s strani bazena. Rudar lahko to izve šele nato, ko njen delež v bazenu posredovan k administratorju bazena. O podrobnostih teh shem avtorji članka \cite{originalarticle} razpravljajo kasneje. Opozorilo velja, da naj bi ta protiukrep veljal za vse poznane NPB in ne le za "sponzorirane napade s prikrivanjem blokov".
+
+\subsection{Prispevek}
+
+Prispevek prevedenega članka \cite{originalarticle} je dvonamenski. Članek analizira NPB z mislijo na specifičen model sistema in hkrati predlaga dve rudarski shemi kot oblažitev tem napadom.
+\begin{itemize}
+	\item V razdelku IV avtorji članka \cite{originalarticle}  analizirajo funkcijo prihodkov napadalca, ki s podporo drugega bazena sproži NPB na ciljni bazen. Ta napad poveča prihodek bazena, ki podpira napadalca in posledično ta bazen lahko del svoje dodatne spodbude z napadalcem. Ta prihodek je glavna opazka na podlagi katere avtorji članka \cite{originalarticle}  izračunajo in analizirajo funkcijo prihodka napadalca. V razdelku V analizirajo dobiček napadalca, ki napade oba bazena.
+	Njihova študija je drugačna od \cite{minnersdilemma} v takem smislu, da se študija v  \cite{minnersdilemma} osredotoča na scenarij kjer nek bazen rudarjev pošlje svoje člane, da napade druge bazene. Rudar, ki deluje kot dvojni agent prenese vse svoje pridobljene spodbude nazaj do svojega zlonamernega bazena, kateri nato posreduje dobiček enakomerno med svoje člane. V modelu opisanega v članku \cite{originalarticle} pa rudar deluje neodvisno in dobi neko končno vrednost spodbude od vsakega bloka, ki ga prikrije pred administratorjem bazena.
+	\item Glavni rezultati članka so podani v izrekih 1, 2, 3 in 5. Ti rezultati se ukvarjajo z optimalnimi strategijami napadalca pri NPB, ki hoče efektivno uporabiti svoje računske moči, da zasluži kolikor je mogoče. V izreku 1 avtorji članka \cite{originalarticle} dokažejo bistven rezultat, ki ga napadalec lahko uporabi za največji možni dobitek spodbude z oblikovanjem ustrezne strategije napada. 
+	V izreku 2 dokažejo da, ko so računske moči bazena vzdrževane na neki konstantni vrednosti, potem napadalec napasti več bazenov istočasno, da se njegov dobiček poveča.
+	V izreku 3 pokažejo, da napadalec pridobi več z napadanjem kot s samostojnim rudarjenjem, ko so določeni izvedljivi pogoji izpolnjeni. V izreku 5 pokažejo, da obstaja tak izvedljiv pogoj pod katerim lahko napadalec pridobi največji možni dobiček tako, da napade več bazenov istočasno, ko je računska moč bazenov nekontantna. To pomeni, da napad le na en bazen ne bi pomenilo največjega možnega dobička. Ta ugotovitev je bolj podobna izreku 2. Razlika je ta, da v izreku 5 za razliko od izreka 2, dva bazena nimata vzdrževane računske moči na konstantni vrednosti.
+	\item Na koncu, v razdelku VI avtorji predlagajo izboljšavo trenutne Bitcoin sheme na tak način, da bi bilo neobčutljivo na NPB. Prvo predlagajo generično shemo, ki uporablja kriptografsko zavezujoč protokol. Nato predložijo posodobljeno shemo, ki uporablja razpršilno funkcijo namesto zavezujočega protokola. Osnovna ideja za obema shemama je ista. Bolj očitno je, da je druga shema malce preoblikovana prva shema. Avtorji pokažejo, da obe shemi lahko omogočijo odpornost Bitcoin rudarjenja na napade NPB brez ogrožanja ključnih lastnosti obstoječe rudarske sheme. Njihov protiukrep ni samo dober za omenjeni napad v  \cite{originalarticle}, ampak ustreza tudi za vse ostale napade NPB o katerih se razpravlja v \cite{analysisofbitcoin}, \cite{minnersdilemma}, \cite{subversivestrategies}, itd. Dodatni so preprosti za implementacijo in nimajo vpliva na prekomerno računanje dokaza dela.
+\end{itemize}
+
+
 \newpage
 
 \section{Luka - page 5 and forth}
@@ -151,6 +167,12 @@ Ker je 1 - $\alpha\beta$ dobiček P naraste $\frac{p'}{ 1 - \alpha\beta}$.  Tore
  S. Bag and K. Sakurai, 
  \textit{Yet another note on block withholding attack on bitcoin mining pools}, in Information Security - 19th International Conference, ISC 2016, Honolulu, HI, USA, September 3-6, 2016, Proceedings, ser. Lecture Notes in Computer Science,
  M. Bishop and A. C. A. Nascimento, Eds., vol. 9866. 2016, pp. 167–180.
+ 
+ \bibitem{originalarticle}
+ Samiran Bag, Sushmita Ruj and Kouichi Sakurai,
+\textit{Bitcoin Block Withholding Attack : Analysis and
+Mitigation}
+IEEE Transactions on Information Forensics and Security
 \end{thebibliography}
 \end{document}
 
