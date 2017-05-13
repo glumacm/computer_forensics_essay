@@ -56,25 +56,8 @@ Na koncu se tudi posvetijo analizi varnosti opisane sheme.
 {\large \bf Ključne besede:} Bitcoin rudarjenje, napad z bločnim prikrivanjem, sebičen rudar, rudarske skupine, zavezujoče sheme.
 
 \section{Uvod}
-Bitcoin je popularna kripto valuta, ki jo je prvo priporočil Satoshi Nakamoto \cite{nakamoto} leta 2008. Transakcije so javno preverljive v glavnem računu imenovanem "bločna veriga" (angl. blockchain). Bločna veriga je sestavljena iz veliko blokov, ki potrdi različne transakcije. Uporabniki, ki ustvarjajo in preverjajo te bloke se imenujejo rudarji. Rudarji nato kot motivacijo pridobijo novo ustvarjene Bitcoin-e. Da bi se reguliralo pretok Bitcoinov se bloki ustvarijo približno vsakih 10 minut. Rudarji morajo rešiti uganko (kot dokaz dela - angl. proof of work (PoW)), če hočejo pridobiti spodbudne Bitcoin-e. Čeprav obstajajo alternativne valute kot Permacoin \cite{permacoin} in Retriecoin \cite{retriecoin}, ki uporabljajo shrambe namesto računanja za ustvarjanje valute, je dokazovanje dela, ki ga uporablja Bitcoin zaenkrat še vedno najboljši načrt.
+Bitcoin je popularna kripto valuta, ki jo je prvo priporočil Satoshi Nakamoto \cite{nakamoto} leta 2008. Transakcije so javno preverljive v glavnem računu imenovanem "bločna veriga" (angl. blockchain). Bločna veriga je sestavljena iz veliko blokov, ki potrdi različne transakcije. Uporabniki, ki ustvarjajo in preverjajo te bloke se imenujejo rudarji. Rudarji nato kot motivacijo pridobijo novo ustvarjene Bitcoin-e. Da bi se reguliralo pretok Bitcoinov se bloki ustvarijo približno vsakih 10 minut. Rudarji morajo rešiti uganko (kot dokaz dela - angl. proof of work (PoW)), če hočejo pridobiti spodbudne Bitcoin-e. Čeprav obstajajo alternativne valute kot Permacoin \cite{permacoin} in Retriecoin \cite{retriecoin}, ki uporabljajo shrambe namesto računanja za ustvarjanje valute, je dokazovanje dela, ki ga uporablja Bitcoin zaenkrat še vedno najboljši načrt. V \cite{economicsofbitcoin} so Kroll  in drugi pokazali, da Bitcoin rudarjenje ni tako "končno", vodeno z vlogami in motivacijsko kompatibilen sistem kot pravijo nekateri njegovi zagovorniki. Napadi z bločnim prikrivanjem \cite{analysisofbitcoin},\cite{financialcryptography}
 
- V \cite{economicsofbitcoin} so Kroll  in drugi pokazali, da Bitcoin rudarjenje ni tako "končno", vodeno z vlogami in motivacijsko kompatibilen sistem kot pravijo nekateri njegovi zagovorniki. Napadi z prikrivanjem blokov \cite{analysisofbitcoin},\cite{financialcryptography}, \cite{minnersdilemma}, \cite{powersplitting} so zelo poznani in o njih se pogovarjajo na Bicoin forumih. V takem napadu, goljufivi rudarji poskušajo povečati njihove spodbude s tem, da zmanjšajo zmagovito verjetnost drugih rudarjev. V Bitcoin omrežju se nekaj rudarjev združi tako, da nastane skupina rududarjev oz. bazen rudarjev, da združijo svoje računske moči s ciljem, da proizvedejo centralo z ogromno računske moči. V takih bazeni rudarjev, mora vsak rudar redno predložiti dokaz dela administratorju bazena rudarjev, da dokaže svoje delo proti rešitvi, ki je povezana z Bitcoin blokom. Reševanje dokaza dela je manj zahtevno kot reševanje dokaza dela, ki lahko bil povezan z Bitcoin blokom. Le tem pravimo delni dokazi dela. Delni dokazi dela so nadmnožica Bitcoinovih dokazov dela, zato je celoten dokaz dela, ki lahko pridobi spodbudo v vrednosti 25BTC lahko tudi delni dokaz dela za kateriholi bazen rudarjev. Tako  služijo ti delni dokazi dela dvem namenom. Prvič, da se preverja ali rudar zares porablja svoje računske vire za reševanje dokazovanje dela na Bitcoin sistemu. Drugič, računanje delnih dokazov je veljavno delo za reševanje Bitcoinovega dokaza dela in računanje delnih dokazov le teh ni nepotrebna poraa računske moči bazena rudarjev. Vendar računanje vseh delnih dokazov povzroči veliko obremenitve za upravitelja bazena rudarjev. To se lahko omeji tako, da se izbere določeno stopnjo zahtevnosti za delne dokaze.
-
-Vsak rudar iz bazena rudarjev poskuša poiskati dokaz dela na množici transakcij, ki vsebuje začetno transakcijo bloka, katera loči to množico transakcij od množic transakcij drugih rudarskih bazenov ali samostojnih rudarjev. Ta začetna transakcija bloka omogoči administratorju bazena, da zahteva dobitno nagrado v primeru, da njegov bazen rudarjev zmaga v igri rudarjenja. Tako v primeru, da rudar, ki pripada nekemu P bazenu rudarjev, dobi rešitev uganke, ima dve možnosti. Lahko odda rešitev administratorju bazena, ali pa prikrije dejstvo, da je našel rešitev. Rudar dobljene rešitve ne more poslati Bitcoin omrežju preko drugega bazena rudarjev.  Tudi če protokol omogoča rudarju, da odda block s celotnim dokazom dela neposredno na Bitcoin omrežje, bo bazen rudarjev kateremu pripada še vedno dobil nagrado zahvaljujoč začetni transakciji, ki je vključena v bloku.
-
-V napadih s prikrivanjem blokov bo goljufivi rudar administratorju bazena rudarjev posredoval le delne dokaze dela, ki pa niso celoviti dokazi dela in tako skril celovite dokaze, ki jih izračuna. Administrator bazena se tako ne zaveda, da rudar prikriva odkrit blok in tako misli, da rudar kot vsak drugi rudar uporablja svojo računsko moč za reševanje dokaza dela uganke. Tako bazen, nezavedujoč se o zlonamernem delovanju rudarja, deli svoje dobičke z goljufivim rudarjem. Tako lahko zlonamerni rudar pridobi spodbude na račun poštenih rudarjev znotraj bazena, brez da bi naredil karkoli koristnega za bazen rudarjev v katerem sodeluje.
-
-Napad s prikrivanjem blokov je bil prvo predlagan v \cite{analysisofbitcoin}. V \cite{subversivestrategies} Curtois in Bahack pokažeta, da lahko goljufivi rudar deluje nepošteno, le za svojo lasno korist in tako postavi ugled Bitcoina v nevarnost s posredno uporabo računske moči ostalih poštenih rudarjev za svoj lasten dobiček in hkrati prikrajša ostale rudarje za spodbudo, ki si jo zaslužijo. V \cite{powersplitting} Luu in ostali podajo kvantitivno analizo koliko spodbude lahko rudar predvidoma poveča dobiček z izvajanjem napada s prikrivanjem blokov nad nekim bazenom rudarjev. Pokazali so, da do dobička pride, ker goljufivi rudar zmanjša verjetnost zmage bazena rudarjev, ki ga napada. S tem napadalec poveča svoje možnosti za zmago v Bitcoinovi igri rudarjev. Na dan 13. junij 2014 je bilo poročanje o razsežnem NPB (napad s prikrivanjem blokov) nad rudarskim bazenom Eligius \cite{subversivestrategies}, ki je povzročil izgube v višini 300BTC (Bitcoin valuta) na račun poštenih rudarjev.
-
-
-V \cite{financialcryptography} Laszka in ostali priskrbijo na podlagi igre teoretično analizo napada s prikrivanjem blokov v katerih se pokažejo zanimivi rezultati o dolgolročni vzdržljivosti Nash ravnotežja med napadnjem bazenov v Bitcoin omrežju. Eyal in ostali \cite{minnersdilemma} predlagajo rudarsko igro kjer se bazen rudarjev poskuša vtihotapiti v druge bazne rudarjev tako, da pošlje svoje posamezne rudarje v druge bazene rudarjev kjer potem sprožijo NPB na ciljne bazene rudarjev. Pokazali so, v primeru, da se dva ali več bazenov napada med seboj, bodo pošteni rudarji zaslužili manj kot pričakujejo. V izvornem članku se o takem primeru tudi razpravlja. Vendar se delo avtorjev članka v \cite{originalarticle} razlikuje od dela Eyal in drugih \cite{minnersdilemma} na naslednje načine: (a) Avtorji članka se osredotočijo na znesek dobička, ki ga proizvede napadalec, ki sproži NPB nad nekim ciljnim bazenom rudarjev, katerega nagradi nek drugi bazen rudarjev, ker je napadalec napadel določen bazen rudarjev. Eyal in ostali izračunajo izraze prihodkov, ki jih proizvedejo bazeni rudarjev, ko je scenarij napada omrežja v sanju ravnotežja. (b) V modelu avtorjev \cite{originalarticle} lahko napadalec razdeli svojo računsko moč in tako napada oba bazena rudarjev. Tako lahko prejme nagrade od obeh bazenov, katera nagradita napadalca, ker mislita, da je napadalec napadel le drugi bazen. Toda Eval in drugi razpravljajo scenarij napada kjer so napadalci člani bazena rudarjev in delijo prihodke pridobljene iz napadenega bazena z rudarji v goljufivem bazenu.
-
-\subsection{Motivacija in ostalo delo}
-
-Eyal \cite{minnersdilemma} in ostali definirajo in analizirajo igro kjer identični bazeni rudarjev napadejo drug drugega. Pokazali so, da v takem primeru kjer bazeni rudarjev napadajo drug drugega obstaja Nash ravnotežje, kjer vsi rudarji zaslužijo manj kot če se ne bi napadali drug drugega. Luu in ostali \cite{powersplitting} so izvedli podrobno študijo NPB.
-Eyal et al. [7] defined and analyzed a game where identical mining pools attack each other. They have showed that in such a scenario where the mining pools attack each other, there exists a Nash equilibrium where all of them earn less than what they should have if none had attacked.
-Luu et al. [8] performed detailed study of BWH attack and showed the gain of the attacker under different sce- narios. They proved that this attack could indeed increase the gain of the attacker. They derived various expressions for the attackers gain under different settings. The intuition behind the attacker’s incentive earned through BWH attack
-is that she uses part of her computing power in reducing
 \newpage
 
 \section{Luka - page 5 and forth}
@@ -104,58 +87,53 @@ Ker je 1 - $\alpha\beta$ dobiček P naraste $\frac{p'}{ 1 - \alpha\beta}$.  Tore
 \begin{thebibliography}{9}
  
  \bibitem{nakamoto}
- S. Nakamoto,
+ S. Nakamoto, 
  \textit{Bitcoin: A peer-to-peer electronic cash system}, 2008.
+ 
  \bibitem{permacoin}
- A. Miller, A. Juels, E. Shi, B. Parno, and J. Katz,
+ A. Miller, A. Juels, E. Shi, B. Parno, and J. Katz, 
  \textit{Permacoin: Repurposing bitcoin work for data preservation}, in 2014 IEEE Symposium on Security and Privacy, SP 2014, Berkeley, CA, USA, May 18-21, 2014. IEEE Computer Society, 2014, pp. 475–490.
+ 
  \bibitem{retriecoin}
- B. Sengupta, S. Bag, S. Ruj, and K. Sakurai,
+ B. Sengupta, S. Bag, S. Ruj, and K. Sakurai, 
  \textit{Retricoin: Bitcoin based on compact proofs of retrievability}, in Proceedings of the 17th International Conference on Distributed Computing and Net- working, ser. ICDCN ’16, 2016, pp. 14:1–14:10.
-
+ 
  \bibitem{economicsofbitcoin}
- J. A. Kroll, I. C. Davey, and E. W. Felten,
+ J. A. Kroll, I. C. Davey, and E. W. Felten, 
  \textit{The economics of bitcoin mining, or bitcoin in the presence of adversaries,}Proceedings of WEIS, vol. 2013, 2013.
-
+ 
  \bibitem{analysisofbitcoin}
  M. Rosenfeld,
  \textit{Analysis of bitcoin pooled mining reward systems}, CoRR, vol. abs/1112.4980, 2011. [Online]. Available: http://arxiv.org/abs/1112.4980
-
+ 
  \bibitem{financialcryptography}
- A. Laszka, B. Johnson, and J. Grossklags,
+ A. Laszka, B. Johnson, and J. Grossklags, 
  \textit{Financial Cryptography and Data Security: FC 2015 International Workshops, BITCOIN, WAHC, and Wearable, San Juan, Puerto Rico, January 30, 2015, Revised Selected Papers.} Berlin, Heidelberg: Springer Berlin Heidelberg, 2015, ch. When Bitcoin Mining Pools Run Dry, pp. 63–77.
-
+ 
  \bibitem{minnersdilemma}
- . Eyal,
+ . Eyal, 
  \textit{The miner’s dilemma}, in 2015 IEEE Symposium on Security and Privacy, SP 2015, San Jose, CA, USA, May 17-21, 2015. IEEE Computer Society, 2015, pp. 89–103.
-
+ 
  \bibitem{powersplitting}
- L. Luu, R. Saha, I. Parameshwaran, P. Saxena, and A. Hobor,
+ L. Luu, R. Saha, I. Parameshwaran, P. Saxena, and A. Hobor, 
  \textit{On power splitting games in distributed computation: The case of bit- coin pooled mining}, in IEEE 28th Computer Security Foundations Symposium, CSF 2015, Verona, Italy, 13-17 July, 2015, C. Fournet, M. W. Hicks, and L. Vigano`, Eds. IEEE Computer Society, 2015, pp. 397–411.
-
+ 
  \bibitem{subversivestrategies}
- N. T. Courtois and L. Bahack,
+ N. T. Courtois and L. Bahack, 
  \textit{On subversive miner strategies and block withholding attack in bitcoin digital currency}, arXiv preprint arXiv:1402.1718, 2014.
-
+ 
  \bibitem{datamininglectures}
- I. Damg{\'a}rd,
+ I. Damg{\'a}rd, 
  \textit{Lectures on Data Security: Modern Cryptology in The- ory and Practice.} Berlin, Heidelberg: Springer Berlin Heidelberg, 1999, ch. Commitment Schemes and Zero-Knowledge Protocols, pp. 63–86.
-
+ 
  \bibitem{incentivecompability}
- D. B. Okke Schrijvers, Joseph Bonneau and T. Roughgarde,
+ D. B. Okke Schrijvers, Joseph Bonneau and T. Roughgarde, 
  \textit{In- centive compatibility of bitcoin mining pool reward functions}, in Financial Cryptography and Data Security: FC 2016 International Workshops.
-
+ 
  \bibitem{noteonblockattack}
- S. Bag and K. Sakurai,
+ S. Bag and K. Sakurai, 
  \textit{Yet another note on block withholding attack on bitcoin mining pools}, in Information Security - 19th International Conference, ISC 2016, Honolulu, HI, USA, September 3-6, 2016, Proceedings, ser. Lecture Notes in Computer Science,
  M. Bishop and A. C. A. Nascimento, Eds., vol. 9866. 2016, pp. 167–180.
-
- \bibitem{originalarticle}
- Samiran Bag, Sushmita Ruj and Kouichi Sakurai,
- \textit{Bitcoin Block Withholding Attack : Analysis and
-Mitigation},
-IEEE Transactions on Information Forensics and Security
-
-
 \end{thebibliography}
 \end{document}
+
