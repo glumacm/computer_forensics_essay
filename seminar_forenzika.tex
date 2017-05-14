@@ -336,8 +336,62 @@ Enostavno je videti, da je predlagana shema odporna na NPB, ki jo izvedejo rudar
 	Predlagano rudarjenje zagotavlja, da bazen rudarjev ne more ugotoviti dokaz dela z uporabo manj računske moči kot bi jo morali.
 \end{lema}
 
-\noindent \textit{Dokaz.} Če bazen rudarjev poskuša pretentati obstoječo rudarsko shemo, mora storiti naslednje; Predpostavimo, da bazen rudarjev izbere dvobitna niza \textit{r} in \textit{s} tako, da je \textit{$|r| + |s| = K$} in potem izračuna zavezo \textit{$com \leftarrow Commit(r||s, CK)$}.
-\newpage
+\section{STRAN 10}
+
+\noindent \textit{Dokaz.} Če bazen rudarjev poskuša pretentati obstoječo rudarsko shemo, mora storiti naslednje; Predpostavimo, da bazen rudarjev izbere dvobitna niza \textit{r} in \textit{s} tako, da je \textit{$|r| + |s| = K$} in potem izračuna zavezo \textit{$com \leftarrow Commit(r||s, CK)$}. Bazen rudarjev mora potem najti blok katerega hash se začne z bitnim nizom \textit{$0^{z'}||r$}. Ker je \textit{$|r| = z - z'$}, je verjetnost, da bi dobili takšen blok v vsakem naključnem poskusu $\frac{1}{2^{z}}$ kar je povsem enako kot je v trenutni Bitcoin shemi rudarjenja. 
+
+Alternativno, lahko bazen rudarjev izbere arbitraren \textit{$p$} kot zavezo. Ustvari blok B z hash vrednostjo, katere prvih \textit{$z$} bitov je danih od \textit{$0^{z'}||r$}. Nato bazenu rudarjev mora samo še najti niz  \textit{$s' \in \{0, 1\}^{\kappa-|r'|}$}, tako da velja \textit{$p = Commit(r'||s',CK)$}. Torej, če bazen rudarjev lahko to naredi, bi se zlomila vezava lastnosti zveznega protokola, ker obstaja samo ena vrednost \textit{$r||s$}, da velja \textit{$p \leftarrow Commit(r||s, CK)$} in verjetnost \textit{$Pr [r'||s' = r||s] = \frac{1}{2^{K}}$}. Izberemo lahko varnostni parameter \textit{$K$}, ki lahko prepreči zmožnost lomljenja vezave lastnosti zveznega protokola.
+
+Bazen rudarjev lahko izbere dve vrednosti "nonce" \textit{$r$} in \textit{$s$}, tako da je \textit{$|r| + |s| = \kappa$}. Potem lahko izračuna \textit{$p = Commit(r||s,CK)$}. Nato bazen rudarjev lahko ustvari blok B tako, za  prvih \textit{$z$} bitov hash-a bloka B velja \textit{$\{0\}^{z'}||r',r' \neq r$}. Nato mora bazen rudarjev izračunati "nonce" \textit{$s'$}, \textit{$|s'| = K - |r'|$} tako da je \textit{$p = Commit(r'||s',CK)$}. Toda to bi bilo v nasprotju z vezavnimi lastnostmi zvezne sheme.
+
+\begin{lema}\label{lema4}
+	Predlagana shema rudarjenja je varna pred BWH napadi, ki jih vloži administrator bazena.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Avtorji predpostavljajo, da administrator bazena javno razkrije prekinitev zveze \textit{$d$} (na primer= v združeni "nonce" \textit{$r||s$} vsakič ko se spremeni set transakcij. Naj bo \textit{$p$} zveza za združeni "nonce" \textit{$r||s$}. Vsi rudarji vključijo \textit{$p$} v dokaz dela, ki ga izračunajo. Vsakič, ko administrator bazena spremeni set transakcij, le-ta razkrije prekinitev zveze \textit{$d$} vsem rudarjem. Potem lahko rudarji izračunajo \textit{$r||s = Open(p,d)$} in ciljni \textit{$0^{z'}||r$}, kjer je \textit{$|r| = z -z'$}. Tako lahko rudar zazna, če je res izračunal poln dokaz dela ali ne.
+
+\subsection{Shema 2}
+
+Tukaj avtorji predlagajo alternativno implementacijo prejšnje sheme. Tukaj je namesto vezalne sheme uporabljena hash funkcija. To je edina razlika v primerjavi z prejšnjo shema, glavna ideja pa ostaja enaka v obeh shemah. V tej shemi se prav tako posveti posebno polje v bloku za shranjevanje niza, ki neposredno povezuje "nonce", ki določa nekaj skrajno desnih bitov cilja. Ta shema deluje na sledeči način:
+
+\begin{itemize}
+
+\item Bazen rudarjev \textit{$P$} izbere naključen bitni niz \textit{$r, |r| = z - z'$}. Bazen izbere tudi dodaten naključen niz \textit{$s \in \{0,1\}^*$}, pri čemer naj velja \textit{$p = H(r||s)$}. Opomba, če ne bi imeli \textit{$s$} bi bilo enostavno najti \textit{$r$} z uporabo grobe sile. Tukaj je uporabljen niz \textit{$s$} zato, da postane iskanje vrednosti \textit{$r$} z metodo grobe sile za napadalce težje.
+
+\item  Bazen naredi \textit{$p$} in \textit{$z'$} javna. Nato vsi člani bazena  vključijo \textit{$p$} in \textit{$z'$} v glavo bloka in medtem rudarijo na enak način kot v shemi 1. To je iskanje bloka, ki vključuje \textit{$p$} in \textit{$z'$} kot novo polje v glavi bloka (kot je prikazano na sliki 4). To polje je poimenovano 'blockpad'.
+
+\item Bazen prejme delež bazena (delni dokazi) od njegovih članov tako, da bloki, ki so jih oddali člani vsebujejo nekaj \textit{$z'$} ničelnih bitov. Bazen izračuna hash-e vseh blokov dokler ne najde bloka z hash vrednostjo \textit{$0^{z'}||r||\{0,1\}^*$}. Če bazen najde takšen blok ga objavi skopaj z vrednostjo \textit{$r||s$}.
+
+\item Potem, ko eden izmed bazenov rudarjev pošlje blok skupaj združenim "nonce"\textit{$r||s$}, vsako Bitcoin vozlišče preveri, če je hash pad-a (\textit{$H(r||s)$}) vključen v blok in če je prvih \textit{$z - z'$} bitov združenega "nonce" enakih \textit{$r$}, kjer je hash bloka enak \textit{$0^{z'}||r||\{0,1\}^*$}. Če je to preverjanje uspešno je blok sprejet in dodan v bločno verigo.
+\end{itemize}
+
+Na ta način postane Bitcoin shema rudarjenja odporna na BWH napade tako, da se prepusti administratorju, da določi zadnjih \textit{$z - z'$} bitov v izzivu. Ker vsak delni delež bazena mora imeti \textit{$z'$} vodilnih ničelnih bitov, noben Bitcoin rudar ne more razločiti med blokom z delnim dokazom dela in blokom z polnim dokazom dela. Posledično tudi ne more izvesti BWH napada na bazen. Poleg tega, ker mora bazen vljučiti \textit{$p$} znotraj glave bloka, ni mogoče, da bi se zmanjšala količina dela, ki je potrebna za rešitev uganke. Količina dela, ki ga je potrebno opraviti je enaka kot izvirni Bitcoin shemi rudarjenja. Formalno je prikazano v lemmi 5.
+
+\begin{figure}
+  \includegraphics[scale=0.45]{image10.png}
+  \caption{Nova shema za rudarjenje}
+  \label{fig:boat3}
+\end{figure}
+
+\begin{lema}\label{lema5}
+	Predlagana shema 2 povzroči, da je rudarjenje v bazenu odporno na BWH napade dokler je združeni "nonce"\textit{$r||s$} tajen.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Shema preprečuje BWH napad, če administrator bazena ne razkrije \textit{$r$} in \textit{$s$} rudarjem v bazenu. Rudarji izvejo samo vrednost \textit{$H(r||s)$}. Zato ne morejo uganiti vrednosti \textit{$r$} dokler je vrednost \textit{$s$} tajna. Toda, če je \textit{$s$} razkrit, lahko rudarji uganejo \textit{$r$} z napadom grobe sile preko vseh možnih  vrednosti \textit{$r$}. Ker velja \textit{$|r| = z - z'$} lahko bilo kateri rudar najde \textit{$r$} z izračunom največ \textit{$2^{z-z'}$} hash-ov, kar je trivialno za majhne vrednosti \textit{$z - z'$}. Zato mora administrator bazena zagotoviti, da ostaneta \textit{$r$} in \textit{$s$} tajna dokler se ni dokaz o izvedenem delu najden in oddan.
+
+\section{STRAN 11}
+
+\begin{lema}\label{lema6}
+	Shema 2 ne zmanjša količine opravljenega dela, ki ga potrebuje bazen rudarjev za izračun dokaza o opravljenem delu.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Če lahko bazen rudarjev ogoljufa shemo, potem mora izračunati "nonce"\textit{$r,s$} tako, da velja \textit{$|r| = z - z'$}, \textit{$0 \leq z' \leq z$}, \textit{$|r| + |s| = \kappa$} in \textit{$p = H(r||s)$} kjer je \textit{$p$} vključen v blok. Predpostavimo, da je bazen rudarjev našel blok B, katerega hash se prične z \textit{$z'$} ničlami, kjer je \textit{$0 \leq z' \leq z$}. Verjetno najdbe takšnega bloka v vsakem poskusu je enaka $\frac{1}{2^{z'}}$. Naj bo prvih \textit{$z - z'$} bitov po \textit{$0^{z'}$} v hash-u bloka B enakih \textit{$r'$}. Torej vse kar morajo rudarji narediti, je to da odkrijejo "nonce" \textit{$s'$}, \textit{$|r'| + |s'| = \kappa$} in \textit{$p = H(r'||s')$}. Izberemo lahko hash funkcijo, ki ima izhod dolžine \textit{$|p|$} in je tako velik, da zahteva iskanje vrednosti \textit{$s'$} tako računsko zahtevno, da postane nepraktično za rudarja.
+
+Tako kot shema 1 se lahko tudi shema 2 uporablja za preprečevanje BHW napadov, ki jih izvede administrator bazena. Če protokol bazena določa, da mora administrator razkriti združeni "nonce"\textit{$r||s$} vsakič ko se "blockpad" posodobi. Torej bodo vsi rudarji bili sposobni preveriti če so ustvarili veljaven blok z polnim dokazom o opravljenem delu. Opomba, vsakič, ko se set transakcij posodobljen se mora posodobiti tudi "blockpad" in "nonce" razkriti vsem rudarjem.
+
+\section{Zaključek}
+V tem članku so avtorji prikazali kako lahko sebičen rudar dobi dodatno spodbudo za izvajanje BWH napada na bazen rudarjev. Ta spodbuda pride iz drugih podobno mislečih bazenov rudarjev, ki želijo pridobiti koristi iz napada. Bazen, ki sodeluje pri napadu deli del spodbude, ki jo zasluži potom iz napada. Avtorji so kvantitativno izmerili količino skupnega dobička, ki bi ga napadalec lahko pričakoval po izvedbi različnih napadalnih strategij. Prikazali so tudi nekaj zanimivih rezultatov, ki bi jih napadalec lahko uporabil za povečanje skupnega dobička. Pokazali so, da v scenariju kjer je sta samo dva bazena rudarjev, lahko napadalec porazdeli računsko moč zato, da napade oba bazena in maksimira njegov dobiček. Predstavili so tudi strategijo za učinkovito odvračanje BWH napadov v vsakem bazenu rudarjev in da jo je mogoče implementirati s pomočjo hash funkcije. Pokazali so, da strategija preprečuje napade s strani administratorja bazena in članov rudarjev. Strategija deluje tako, da rudarjem prepreči sposobnost razlikovanja med delnim in polnim dokazom zaupanja  ter ob istem času zavezuje administratorja, da sčasoma vsem rudarjem omogoči da preverijo, če so našli poln dokaz o opravljenem delu. Strategijo je mogoče implementirati na enostaven način s pomočjo hash funkcije ali kriptografskih protokolov za prevzem obveznosti brez dodatnega količine dela za iskanje dokaza o opravljenem delu.
+
 \begin{thebibliography}{9}
  
  \bibitem{nakamoto}
