@@ -291,6 +291,25 @@ potrjuje rezultate izreka 2. Sedaj bodo avtorji dokazali še eno lastnost dobič
 \newline
 \textit{Proof}. Skupni dobiček napdalca $G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha} + \frac{p\alpha\beta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\delta^2}{p'(1- \alpha\beta - \alpha\delta)} + \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} + \frac{\alpha\delta p \gamma}{1 - \alpha\delta}. \frac{\partial G}{\partial \beta}_{\beta=0} = \frac{\alpha^2(1 - \delta)}{(1 - \alpha\delta)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1- \alpha\delta)^2} + \alpha p' \gamma > 0$. Torej je G naraščujoča funkcija $\beta$ za $\beta = 0.$
 
+Maksimalna vrednost, ki jo $\beta$ lahko zavzame je $1- \delta$. Torej je $\frac{\partial G}{\partial \beta}_{\beta=1-\delta} = \frac{\alpha^2(1- \delta)(p - \alpha(1-\delta))}{p(1-\alpha)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1 - \alpha)^2} + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1-\delta)}{p(1 - \alpha)} = \frac{\alpha^2}{(1-\alpha)^2} - \frac{\alpha^3}{(1 - \alpha)^2}(\frac{(1 - \delta^2)}{p} + \frac{\delta^2}{p'}) + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)}.$ Sedaj, če je $\frac{\gamma p'}{(1 - \alpha + \alpha\beta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \alpha)}{p(1 - \alpha)}, \frac{\alpha\gamma p'}{(1 + \alpha + \alpha\delta)^2} + \frac{\alpha^2}{(1- \alpha)^2} - \frac{k\alpha^3}{(1 - \alpha)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)} > 0.$. Torej, $\frac{(1 - \delta)^2}{p} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2}{p'} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2 + \delta^2}{p'} \leq \frac{1}{p'} \leq k$, ker je $p' \geq \frac{1}{k}$.
+\newline
+Torej, $\frac{\partial G}{\partial \beta} = 1- \delta > 0.$
+Sedaj je potrebno dokazati, da je G vedno narašča pri $\beta \in (0, 1- \delta)$. Za to je potrebno dokazati, da G ne doseže maksimuma na intervalu $(0, 1- \delta)$. Najprej predpostavimo, da G doseže maksimum na intervalu $(0, 1- \delta)$. Potrebno je izpostaviti, da če G dejansko doseže maksimum na $\beta = \beta_1, \beta_1 \in (0, 1- \delta)$ ter $\frac{\partial G}{\partial \beta}_{\beta=\beta_0} > 0$, mora obstajati različna vrednost $\beta_2$ v $(0, 1 - \delta)$, tako da je $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2} = 0$ ter $\frac{\partial G}{\partial \beta}|_{\beta\in(\beta_2, 1 - \delta)} > 0$. Torej $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2}$ mora biti večje od 0.
+\newline
+\newline
+Torej, $\frac{\partial^2 G}{\partial \beta^2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta} - \frac{2 \alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1-\alpha\beta)^3(1 - \alpha\beta - \alpha\delta)}$.
+\newline
+\newline
+Sedaj, $\frac{\partial^2 G}{\partial \beta^2}|_{\beta=\beta_2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta}|_{\beta=\beta_2} - \frac{2\alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1 - \alpha\beta)^3(1 - \alpha\beta-\alpha\delta)}$. Zato, $\frac{\partial G}{\partial\beta}|_{\beta=\beta_2} < 0$. Zgornje predstavlja protislovje, zato predpostavimo, da so naše domneve napačne. Torej G ne doseže maksimuma na intervalih (0, 1 - $\delta$).Sepravi, G vedno narašča na $\beta$, ko $\delta$ ostane konstanten. Torej je rezultat
+\newline
+\newline
+\textbf{Posledica 4} \textit{Če je $\frac{\gamma p}{(1 - \alpha + \alpha\beta)} + \frac{\alpha - k\alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \beta)}{p' (1 - \alpha)}$, kjer je p $\geq \frac{1}{k}$, G narašča skupaj z $\delta$, medtem ko $\beta$ ostaja konstanten.}
+
+\textbf{Opomba 1.} V primeru, da se zadosti pogoj Izreka 3, potem se napadlcu najbolj izplača uporabiti vso svojo računsko moč za napad na dva bazena rudarjev. Slika 3 prikazuje grafični izris napdalčevega dobička, ko sta $\beta$ in $\delta$ variabila za različne vrednosit $\delta, p $ in $p'$. Avtorji so z lahkoto opazili, da je dobiček maksimalen pri $\beta + \delta = 1$. To predstavlja visualno skladnost rezultatov leme 3.
+\newline
+\newline
+Table IV prikazuje, da se pogoj $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2} + \frac{\delta - k\delta^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \delta)}{p(1 - \alpha)}$, kjer je $p' \geq \frac{1}{k}$ da doseči. Avtorji so pokazali, da je za niz parametrov pogoj izvedljiv, če parametri zavzamejo praktične vrednosti. 
+
 \newpage 
 Stran 9 naprej
 
@@ -318,25 +337,6 @@ Enostavno je videti, da je predlagana shema odporna na NPB, ki jo izvedejo rudar
 \end{lema}
 
 \noindent \textit{Dokaz.} Če bazen rudarjev poskuša pretentati obstoječo rudarsko shemo, mora storiti naslednje; Predpostavimo, da bazen rudarjev izbere dvobitna niza \textit{r} in \textit{s} tako, da je \textit{$|r| + |s| = K$} in potem izračuna zavezo \textit{$com \leftarrow Commit(r||s, CK)$}.
-
-Maksimalna vrednost, ki jo $\beta$ lahko zavzame je $1- \delta$. Torej je $\frac{\partial G}{\partial \beta}_{\beta=1-\delta} = \frac{\alpha^2(1- \delta)(p - \alpha(1-\delta))}{p(1-\alpha)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1 - \alpha)^2} + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1-\delta)}{p(1 - \alpha)} = \frac{\alpha^2}{(1-\alpha)^2} - \frac{\alpha^3}{(1 - \alpha)^2}(\frac{(1 - \delta^2)}{p} + \frac{\delta^2}{p'}) + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)}.$ Sedaj, če je $\frac{\gamma p'}{(1 - \alpha + \alpha\beta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \alpha)}{p(1 - \alpha)}, \frac{\alpha\gamma p'}{(1 + \alpha + \alpha\delta)^2} + \frac{\alpha^2}{(1- \alpha)^2} - \frac{k\alpha^3}{(1 - \alpha)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)} > 0.$. Torej, $\frac{(1 - \delta)^2}{p} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2}{p'} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2 + \delta^2}{p'} \leq \frac{1}{p'} \leq k$, ker je $p' \geq \frac{1}{k}$.
-\newline
-Torej, $\frac{\partial G}{\partial \beta} = 1- \delta > 0.$
-Sedaj je potrebno dokazati, da je G vedno narašča pri $\beta \in (0, 1- \delta)$. Za to je potrebno dokazati, da G ne doseže maksimuma na intervalu $(0, 1- \delta)$. Najprej predpostavimo, da G doseže maksimum na intervalu $(0, 1- \delta)$. Potrebno je izpostaviti, da če G dejansko doseže maksimum na $\beta = \beta_1, \beta_1 \in (0, 1- \delta)$ ter $\frac{\partial G}{\partial \beta}_{\beta=\beta_0} > 0$, mora obstajati različna vrednost $\beta_2$ v $(0, 1 - \delta)$, tako da je $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2} = 0$ ter $\frac{\partial G}{\partial \beta}|_{\beta\in(\beta_2, 1 - \delta)} > 0$. Torej $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2}$ mora biti večje od 0.
-\newline
-\newline
-Torej, $\frac{\partial^2 G}{\partial \beta^2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta} - \frac{2 \alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1-\alpha\beta)^3(1 - \alpha\beta - \alpha\delta)}$.
-\newline
-\newline
-Sedaj, $\frac{\partial^2 G}{\partial \beta^2}|_{\beta=\beta_2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta}|_{\beta=\beta_2} - \frac{2\alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1 - \alpha\beta)^3(1 - \alpha\beta-\alpha\delta)}$. Zato, $\frac{\partial G}{\partial\beta}|_{\beta=\beta_2} < 0$. Zgornje predstavlja protislovje, zato predpostavimo, da so naše domneve napačne. Torej G ne doseže maksimuma na intervalih (0, 1 - $\delta$).Sepravi, G vedno narašča na $\beta$, ko $\delta$ ostane konstanten. Torej je rezultat
-\newline
-\newline
-\textbf{Posledica 4} \textit{Če je $\frac{\gamma p}{(1 - \alpha + \alpha\beta)} + \frac{\alpha - k\alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \beta)}{p' (1 - \alpha)}$, kjer je p $\geq \frac{1}{k}$, G narašča skupaj z $\delta$, medtem ko $\beta$ ostaja konstanten.}
-
-\textbf{Opomba 1.} V primeru, da se zadosti pogoj Izreka 3, potem se napadlcu najbolj izplača uporabiti vso svojo računsko moč za napad na dva bazena rudarjev. Slika 3 prikazuje grafični izris napdalčevega dobička, ko sta $\beta$ in $\delta$ variabila za različne vrednosit $\delta, p $ in $p'$. Avtorji so z lahkoto opazili, da je dobiček maksimalen pri $\beta + \delta = 1$. To predstavlja visualno skladnost rezultatov leme 3.
-\newline
-\newline
-Table IV prikazuje, da se pogoj $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2} + \frac{\delta - k\delta^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \delta)}{p(1 - \alpha)}$, kjer je $p' \geq \frac{1}{k}$ da doseči. Avtorji so pokazali, da je za niz parametrov pogoj izvedljiv, če parametri zavzamejo praktične vrednosti. 
 \newpage
 \begin{thebibliography}{9}
  
