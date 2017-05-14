@@ -386,8 +386,40 @@ Te enačbe lahko zapišemo kot:\newline
 
 $\frac{\partial G}{\partial \beta}|_{\beta=0} =
 \frac{\alpha}{1-\alpha e} - (
-\frac{\alpha p'^2}{(p' + \alpha e)^2(1-\alpha e)} + )$
+\frac{\alpha p'^2}{(p' + \alpha e)^2(1-\alpha e)} + 
+\frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} -
+\alpha\gamma(p' + \alpha e))$\newline
 
+
+$\frac{\partial G}{\partial \beta}|_{\beta=e} = (
+\frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} +
+\frac{\alpha\gamma(p'+\alpha^2e^2-\alpha e)}{(1 - \alpha e)^2} - \alpha\gamma(p +\alpha e)) - \frac{\alpha}{1 - \alpha e}.
+$\newline
+
+Ker je \textit{$\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p'+\alpha e)$} in \textit{$p > p'$}, \textit{$\frac{\alpha}{1-\alpha e} - (\frac{\alpha p'^2}{(p'+\alpha e)^2(1-\alpha e)}+ \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' +\alpha e)) > 0$}. Torej je \textit{$\frac{\partial G}{\partial \beta}|_{\beta=0} > 0$}.
+
+Spet,\textit{$\frac{\alpha}{1-\alpha e} >
+\frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} +
+\frac{\alpha\gamma(p'+\alpha^2e^2 -\alpha e)}{(1-\alpha e)^2} -
+\alpha\gamma(p+\alpha e)$}.
+
+Torej \textit{$\frac{\partial G}{\partial \beta}|_{\beta=e}<0$}.
+
+
+Ker je \textit{$\frac{\partial G}{\partial \beta}|_{\beta=0}> 0 > \frac{\partial G}{\partial \beta}|_{\beta=e'}$}, so avtorji sklenili, da obstaja tak \textit{$\beta_{max} \in (0, e)$}, da velja \textit{$\frac{\partial G}{\partial \beta}|_{\beta = \beta_{max}} = 0$}  in \textit{$\frac{\partial G}{\partial \beta}|_{\beta = \beta_{max}} < 0$},  \textit{$\forall \beta \in (\beta_{max}, e)$}.
+
+Zato, da se lahko pokaže da vzamemo delno izpeljavo \textit{$\frac{\partial G}{\partial \beta}$} glede na \textit{$\beta$} in vidimo \textit{$\frac{\partial^2G}{\partial \beta^2} = - \frac{2\alpha^2p^2}{(1-\alpha e)(p+\alpha\beta}^3 - \frac{2\alpha^2p'^2}{(p'+\alpha(e-\beta))^3(1-\alpha e)} - \frac{2\alpha^2\gamma(1-p-\alpha e)}{(1-\alpha\beta)^3}-\frac{2\alpha^2\gamma(1-p-\alpha e)}{(1-\alpha(e-\beta))^3} < 0$}.
+
+Torej \textit{$\frac{\partial G}{\partial \beta}$} vedno upada.
+
+
+Zato je lahko obstaja največ en \textit{$\beta_{max} \in (0,e)$} tako da velja \textit{$\frac{\partial G}{\partial \beta}|_{\beta=\beta_{max}} = 0$} in \textit{$\frac{\partial G}{\partial \beta} < 0$}, \textit{$\forall \beta \in (\beta_{max}, e)$}.
+
+\textbf{Opomba 2.} Tabela 5 prikazuje da pogoj \textit{$\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' +\alpha e)$} mogoče doseči. Avtorji so to dokazali, za nekaj vrednosti iz seta parametrov, da je ta pogoj mogoče doseči, ko imajo parametri praktične vrednosti.
+
+\subsection{PREPREČEVANJE NAPADA}
+
+Napad BWH je lahko katastrofalen za katerikoli odprt bazen rudarjev, ki dovoljuje včlanjenje nezaupljivim rudarjem kadarkoli. Do nastanka tega članka ni obstajal noben način za obrambo pred takšnimi napadi. Rosenfeld \cite{analysisofbitcoin} je predlagal tehniko za generiranje opravil, ki bi napeljevala k rešitvi bloka. Ta tehnika uporablja "Honeypot" za izvabljanje  rudarjev v past. Bazen bi tako ujel napadalca, ki bi zadržal rešitev takšnega bloka. Toda v takšni shemi mora bazen zahtevati od rudarjev, da potrošijo računsko moč za neuporabne izračune. Schrijvers et al. \cite{incentivecompabiliti} je  predlagal, da se BWH napade prepreči tako, da se izboljša nagradno strategijo. Bag et al. \cite{noteonblockattack} je predlaga dodatno nagrado za najditelja zmagovalnega bloka. Razlika med tema dvema shemama je ta, da v metodi Bag et al. sheme najditelj vedno dobi dodatno nagrado medtem ko v drugi metodi najditelj dobi dodatno nagrado samo, ko ostali rudarji zakasnijo oddajo deleža bazena. To je, v Schrijvers et al. shemi najditelj dobi večjo nagrado samo če deleži bazena niso oddani administratorju. V tej sekciji avtorji predlaga enostavno izboljšavo obstoječi rudarski shemi, ki bi naredila BWH napade nepraktične tako za navadne rudarje kot za administratorje bazena. Predlagana je generična shema, ki uporablja kriptografske vezavne sheme.
 
 Potem v razdelku \ref{sekcija6b} je prikazano kako lahko isto shemo implementiramo z uporabi razpršitvenih funkcij, ki je v nekem smislu sama po sebi zavezujoča shema. Vseeno pa je potrebno opraviti majhen popravek na izvorni shemi, da to lahko deluje. Shema avtorjev v \cite{originalarticle} se brani pred NPB tako, da onemogoča rudarjem možnost, da bi bili sposobni razlikovati med delnim dokazom dela in med celovitim dokazom dela.
 
