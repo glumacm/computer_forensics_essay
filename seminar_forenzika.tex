@@ -1,57 +1,106 @@
-\documentclass[12pt]{article}
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+% For tracking purposes - this is V3.1SP - APRIL 2009
 
-%Uporabljeni paketi
-\usepackage[utf8]{inputenc}
-\usepackage{cmap}
-\usepackage{type1ec}
-\usepackage[T1]{fontenc}
-\usepackage{amsthm}
-\usepackage{fancyhdr}
-\usepackage{graphicx,epsfig}
-\usepackage{tabularx,ragged2e,booktabs,caption}
-\usepackage{mathtools}
-\usepackage[slovene]{babel}
-\usepackage{cite}
-
-\usepackage[pdftex,colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black,pagebackref]{hyperref}
-\usepackage{tikz}
-
-%Velikost strani - dvostransko
-\oddsidemargin 1.4cm
-\evensidemargin 0.35cm
-\textwidth 14cm
-\topmargin 0.26cm
-\headheight 0.6cm
-\headsep 1.5cm
-\textheight 20cm
-
-%Nastavitev glave in repa strani
-\pagestyle{fancy}
-\fancyhead{}
-\renewcommand{\sectionmark}[1]{\markright{\textsf{\thesection\  #1}}{}}
-%\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-%\fancyhead[LE,RO]{\thepage}
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0.0pt}
-\renewcommand{\footrulewidth}{0.0pt}
+\documentclass{acm_proc_article-sp}
+\usepackage{tabularx}
 \graphicspath{ {images/} }
-
-\newcommand{\gnuplot}{\textbf{gnuplot}}
-\newcommand{\pgfname}{\textsc{pgf}}
-\newcommand{\tikzname}{Ti\emph{k}Z}
-\newtheorem{theorem}{Izrek}
-\newtheorem{definicija}{Definicija}
-\newtheorem{lema}{Lema}
+\newdef{theorem}{Izrek}
+\newdef{definicija}{Definicija}
+\newdef{lema}{Lema}
 \begin{document}
-\setcounter{page}{1}
-\pagenumbering{arabic}
-
-\title{Bitcoin Block Withholding Attack : Analiza in ublažitev napada}
-\author{Anej Budihna,Luka Golinar, Matjaz Glumac}
-
-
-\maketitle
+	
+	\title{Bitcoin napad s prikrivanjem blokov : Analiza in ublažitev napada}
+	%
+	% You need the command \numberofauthors to handle the 'placement
+	% and alignment' of the authors beneath the title.
+	%
+	% For aesthetic reasons, we recommend 'three authors at a time'
+	% i.e. three 'name/affiliation blocks' be placed beneath the title.
+	%
+	% NOTE: You are NOT restricted in how many 'rows' of
+	% "name/affiliations" may appear. We just ask that you restrict
+	% the number of 'columns' to three.
+	%
+	% Because of the available 'opening page real-estate'
+	% we ask you to refrain from putting more than six authors
+	% (two rows with three columns) beneath the article title.
+	% More than six makes the first-page appear very cluttered indeed.
+	%
+	% Use the \alignauthor commands to handle the names
+	% and affiliations for an 'aesthetic maximum' of six authors.
+	% Add names, affiliations, addresses for
+	% the seventh etc. author(s) as the argument for the
+	% \additionalauthors command.
+	% These 'additional authors' will be output/set for you
+	% without further effort on your part as the last section in
+	% the body of your article BEFORE References or any Appendices.
+	
+	\numberofauthors{3} %  in this sample file, there are a *total*
+	% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+	% reasons) and the remaining two appear in the \additionalauthors section.
+	%
+	\author{
+		% You can go ahead and credit any number of authors here,
+		% e.g. one 'row of three' or two rows (consisting of one row of three
+		% and a second row of one, two or three).
+		%
+		% The command \alignauthor (no curly braces needed) should
+		% precede each author name, affiliation/snail-mail address and
+		% e-mail address. Additionally, tag each line of
+		% affiliation/address with \affaddr, and tag the
+		% e-mail address with \email.
+		%
+		% 1st. author
+		\alignauthor
+		Anej Budihna \\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		% 2nd. author
+		\alignauthor
+		Luka Golinar\\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		% 3rd. author
+		\alignauthor 
+		Matjaž Glumac \\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		\and  % use '\and' if you need 'another row' of author names
+		% 4th. author
+	}
+	% There's nothing stopping you putting the seventh, eighth, etc.
+	% author on the opening page (as the 'third row') but we ask,
+	% for aesthetic reasons that you place these 'additional authors'
+	% in the \additional authors block, viz.
+	
+	\date{30 July 1999}
+	% Just remember to make sure that the TOTAL number of authors
+	% is the number that will appear on the first page PLUS the
+	% number that will appear in the \additionalauthors section.
+	
+	\maketitle
 \begin{abstract}
 
 Avtorji se posvetijo dvema problemoma: prvi je študija različice napada imenovanega "bločno prikrivanje" (angl. block withholding attack - BWA) v Bitcoinih in drugi je priporočilo rešitev za preprečitev vseh obstoječih vrst  BWA napadov. Predstavijo analize strategij sebičnega Bitcoin rudarja, ki v potuhi z neko skupino rudarjev poskuša napadati neko drugo skupino in pri tem dobi določeno nagrado, ker je prisostvoval pri napadu na drugo skupino. Tak napad so avtorji poimenovali "sponzorirani napad z bločnim prikrivanjem". Poleg tega predstavijo podrobno kvantitivno analizo dobičkonosnosti, ki jo lahko sebični rudar pridobi s tem, ko rudar uporablja omenjen napad v različnih primerih. V članku avtorji dokažejo, da ob določenih pogojih lahko napadalec optimalno poveča svoj prihodek z uporabo nekaterih strategij in s pametnim izkoriščanjem svojih računalniških virov. Pokažejo tudi, da lahko napadalec uporabi to strategijo za napad na obe skupini, da bi pri tem lahko dosegel višjo dobičkonosnost.
@@ -99,7 +148,7 @@ Preostanek članka  \cite{originalarticle} je organiziran po sledečem vrstnem r
 \subsection{Oznake in definicije}
 \begin{center}
 	
-	\begin{tabular} {| c | c | c |}
+	\begin{tabular} {| p{1cm} | p{1cm} | p{4cm}|}
 		\hline
 		Serijska št. & Oznaka  & Opis \\ \hline
 		1 & $\alpha$ & Računska moč napadalca \\  \hline
@@ -130,11 +179,11 @@ Ne-interaktivna zavezujoča shema \cite{datamininglectures} C je sestavljena iz 
 \indent Naj bo \textit{C} zavezujoča shema.
 \begin{enumerate}
 	\item Lastnost skrivanja: Za vse nasprotno verjetnostno polinomske čase \textit{A},
-	$|P_r[CK \xleftarrow C.Setup(1^k),(m_0,m_1,st) \leftarrow A(CK), b \xleftarrow{U}  \{0,1\},(com_b, decom_b) \leftarrow C.Commit(CK,m_b) : b = A(CK,st,com_b)] - \frac{1}{2}|  \le negl(k)$
+	$|P_r[CK \xleftarrow C.Setup(1^k),(m_0,m_1,st) \leftarrow A(CK), b \xleftarrow{U}  \\ \{0,1\},(com_b, decom_b) \leftarrow C.Commit(CK,m_b) : b = A(CK,st,com_b)] - \frac{1}{2}|  \le negl(k)$
 	\item Lastnost vezanja: Za vse nasprotno verjetnostno polinomske čase \textit{A},
-	$ Pr[CK \leftarrow C.Setup(1^k),(com,decom,decom') \leftarrow A(CK),m \leftarrow C.Open(com,decom), m' \leftarrow C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot ] \le negl(k)  $
+	$ Pr[CK \leftarrow \\ C.Setup(1^k),(com,decom,decom') \leftarrow A(CK),m \leftarrow C.Open(com,decom), m' \leftarrow \\ C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot ] \le negl(k)  $
 	\item Sproščeno vezanje: Za vse nasprotno verjetnostno polinomske čase \textit{A},
-	$ Pr[CK \leftarrow C.Setup(1^k) , (m,st) \leftarrow A(CK) (com,decom) \leftarrow C.Commit(m,CK), decom' \leftarrow A(CK,st,com,decom'), m \leftarrow C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot \le negl(k)] $
+	$ Pr[CK \leftarrow C.Setup(1^k) , (m,st) \leftarrow A(CK) (com,decom) \leftarrow C.Commit(m,CK), decom' \leftarrow A(CK,st,com,decom'), m \leftarrow \\ C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot \le negl(k)] $
 \end{enumerate}
 
 \section{Sistemski model  za sponzoriran napad s prikrivanjem blokov}
@@ -207,7 +256,7 @@ Ker je $ \alpha\beta < p $ je torej $ \alpha\beta^2 < \alpha\beta < p $. Torej a
 \end{equation}
 \newline
 \begin{figure}
-  \includegraphics[scale=0.5]{image1.png}
+  \includegraphics[scale=0.4]{image1.png}
   \caption{Grafični prikaz obnašanja $Z = F(\alpha, \gamma, \beta, p')$, ko sta $\alpha = 0.2, \gamma = 0.7$}
   \label{fig:boat1}
 \end{figure}
@@ -276,7 +325,7 @@ Z enačbe 5 in 6, dobimo $\frac{\partial G}{\partial \beta}_{\beta=0} > 0$ and $
 Če bi želeli poiskati tak $\beta_0$, ki maksimira dobiček G napdalace, je potrebno rešiti $\frac{\partial G}{\partial \beta} = 0$. Torej $\frac{p \alpha - 2\alpha^2 \beta_0}{p(1 - \alpha e)} + \frac{-p'\alpha + 2\alpha^2(e - \beta_0)}{p'(1- \alpha e)} + \frac{\alpha\gamma p'}{(1 - \alpha\beta_0)^2} - \frac{\alpha\gamma p}{(1- \alpha(e - \beta_0))^2}$
 
 \begin{figure}
-  \includegraphics[scale=0.6]{image7_2.png}
+  \includegraphics[scale=0.5]{image7_2.png}
   \caption{Grafični prikaz dobička napadalca, ki zaradi napada na oba bazena rudarjev od obeh bazenov dobi nagrado. Parametri vsakega grafa so prikazani v tabeli III.}
   \label{fig:boat1}
 \end{figure}
@@ -291,7 +340,7 @@ potrjuje rezultate izreka 2. Sedaj bodo avtorji dokazali še eno lastnost dobič
 \newline
 \textit{Proof}. Skupni dobiček napdalca $G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha} + \frac{p\alpha\beta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\delta^2}{p'(1- \alpha\beta - \alpha\delta)} + \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} + \frac{\alpha\delta p \gamma}{1 - \alpha\delta}. \frac{\partial G}{\partial \beta}_{\beta=0} = \frac{\alpha^2(1 - \delta)}{(1 - \alpha\delta)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1- \alpha\delta)^2} + \alpha p' \gamma > 0$. Torej je G naraščujoča funkcija $\beta$ za $\beta = 0.$
 
-Maksimalna vrednost, ki jo $\beta$ lahko zavzame je $1- \delta$. Torej je $\frac{\partial G}{\partial \beta}_{\beta=1-\delta} = \frac{\alpha^2(1- \delta)(p - \alpha(1-\delta))}{p(1-\alpha)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1 - \alpha)^2} + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1-\delta)}{p(1 - \alpha)} = \frac{\alpha^2}{(1-\alpha)^2} - \frac{\alpha^3}{(1 - \alpha)^2}(\frac{(1 - \delta^2)}{p} + \frac{\delta^2}{p'}) + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)}.$ Sedaj, če je $\frac{\gamma p'}{(1 - \alpha + \alpha\beta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \alpha)}{p(1 - \alpha)}, \frac{\alpha\gamma p'}{(1 + \alpha + \alpha\delta)^2} + \frac{\alpha^2}{(1- \alpha)^2} - \frac{k\alpha^3}{(1 - \alpha)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)} > 0.$. Torej, $\frac{(1 - \delta)^2}{p} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2}{p'} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2 + \delta^2}{p'} \leq \frac{1}{p'} \leq k$, ker je $p' \geq \frac{1}{k}$.
+Maksimalna vrednost, ki jo $\beta$ lahko zavzame je $1- \delta$. Torej je $\frac{\partial G}{\partial \beta}_{\beta=1-\delta} = \frac{\alpha^2(1- \delta)(p - \alpha(1-\delta))}{p(1-\alpha)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1 - \alpha)^2} + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1-\delta)}{p(1 - \alpha)} = \frac{\alpha^2}{(1-\alpha)^2} - \frac{\alpha^3}{(1 - \alpha)^2}(\frac{(1 - \delta^2)}{p} + \frac{\delta^2}{p'}) + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)}.$ Sedaj, če je $\frac{\gamma p'}{(1 - \alpha + \alpha\beta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \\ \frac{2\alpha(1 - \alpha)}{p(1 - \alpha)}, \frac{\alpha\gamma p'}{(1 + \alpha + \alpha\delta)^2} + \frac{\alpha^2}{(1- \alpha)^2} - \frac{k\alpha^3}{(1 - \alpha)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)} > 0.$. Torej, $\frac{(1 - \delta)^2}{p} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2}{p'} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2 + \delta^2}{p'} \leq \frac{1}{p'} \leq k$, ker je $p' \geq \frac{1}{k}$.
 \newline
 Torej, $\frac{\partial G}{\partial \beta} = 1- \delta > 0.$
 Sedaj je potrebno dokazati, da je G vedno narašča pri $\beta \in (0, 1- \delta)$. Za to je potrebno dokazati, da G ne doseže maksimuma na intervalu $(0, 1- \delta)$. Najprej predpostavimo, da G doseže maksimum na intervalu $(0, 1- \delta)$. Potrebno je izpostaviti, da če G dejansko doseže maksimum na $\beta = \beta_1, \beta_1 \in (0, 1- \delta)$ ter $\frac{\partial G}{\partial \beta}_{\beta=\beta_0} > 0$, mora obstajati različna vrednost $\beta_2$ v $(0, 1 - \delta)$, tako da je $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2} = 0$ ter $\frac{\partial G}{\partial \beta}|_{\beta\in(\beta_2, 1 - \delta)} > 0$. Torej $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2}$ mora biti večje od 0.
@@ -300,7 +349,7 @@ Sedaj je potrebno dokazati, da je G vedno narašča pri $\beta \in (0, 1- \delta
 Torej, $\frac{\partial^2 G}{\partial \beta^2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta} - \frac{2 \alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1-\alpha\beta)^3(1 - \alpha\beta - \alpha\delta)}$.
 \newline
 \newline
-Sedaj, $\frac{\partial^2 G}{\partial \beta^2}|_{\beta=\beta_2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta}|_{\beta=\beta_2} - \frac{2\alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1 - \alpha\beta)^3(1 - \alpha\beta-\alpha\delta)}$. Zato, $\frac{\partial G}{\partial\beta}|_{\beta=\beta_2} < 0$. Zgornje predstavlja protislovje, zato predpostavimo, da so naše domneve napačne. Torej G ne doseže maksimuma na intervalih (0, 1 - $\delta$).Sepravi, G vedno narašča na $\beta$, ko $\delta$ ostane konstanten. Torej je rezultat
+Sedaj, $\frac{\partial^2 G}{\partial \beta^2}|_{\beta=\beta_2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta}|_{\beta=\beta_2} - \\ \frac{2\alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1 - \alpha\beta)^3(1 - \alpha\beta-\alpha\delta)}$. Zato, $\frac{\partial G}{\partial\beta}|_{\beta=\beta_2} < 0$. Zgornje predstavlja protislovje, zato predpostavimo, da so naše domneve napačne. Torej G ne doseže maksimuma na intervalih (0, 1 - $\delta$).Sepravi, G vedno narašča na $\beta$, ko $\delta$ ostane konstanten. Torej je rezultat
 \newline
 \newline
 \textbf{Posledica 4} \textit{Če je $\frac{\gamma p}{(1 - \alpha + \alpha\beta)} + \frac{\alpha - k\alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \beta)}{p' (1 - \alpha)}$, kjer je p $\geq \frac{1}{k}$, G narašča skupaj z $\delta$, medtem ko $\beta$ ostaja konstanten.}
@@ -313,7 +362,7 @@ Table IV prikazuje, da se pogoj $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2}
 \section{STRAN 8}
 
 \begin{figure}
-  \includegraphics[scale=0.35]{image8.png}
+  \includegraphics[scale=0.25]{image8.png}
   \caption{Grafični prikaz dobička napadalca, ki zaradi napada na oba bazena rudarjev od obeh bazenov dobi nagrado pri čemer se spreminjata $\beta$ in $\delta$}.
   \label{fig:boat1}
 \end{figure}
@@ -322,7 +371,7 @@ Table IV prikazuje, da se pogoj $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2}
 \textit{B. Ko računske moči rudarskih bazenov niso konstantne}
 
 Tukaj avtorji preučujejo lastnosti gain-funkcije napadalca kadar se računska moč razlikuje od računalniške moči ki jo vloži napadalec v bazena. Naj bosta \textit{$p$} in \textit{$p'$} računska moč bazena \textit{$P$} in \textit{$P'$} brez prispevka napadalca. Ker napadalec potroši \textit{$\alpha\beta$} računske moči za napadanje bazena \textit{$P$}, postane skupna moč bazena \textit{$P$} enaka \textit{$p + \alpha\beta$} kjer je \textit{$\alpha\beta$} računska moč namenjena sponzoriranemu BWH napadu. Podobno postane računska moč bazena \textit{$P'$} enaka \textit{$p' + \alpha\delta$} kjer je \textit{$\alpha\delta$} prispevek napadalca. Tako postane napadalčev dobiček, \newline
-$G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha\delta} + \frac{p\alpha\beta}{(p+\alpha\beta)(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta}{(p' + \alpha\delta)(1 - \alpha\beta - \alpha\delta)} + \frac{\alpha\beta(p' + \alpha\delta)\gamma}{1 - \alpha\beta} + \frac{\alpha\delta(p + \alpha\beta)\gamma}{1 - \alpha\delta}$
+$G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha\delta} + \frac{p\alpha\beta}{(p+\alpha\beta)(1 - \alpha\beta - \alpha\delta)} + \\ \frac{p'\alpha\delta}{(p' + \alpha\delta)(1 - \alpha\beta - \alpha\delta)} + \frac{\alpha\beta(p' + \alpha\delta)\gamma}{1 - \alpha\beta} + \frac{\alpha\delta(p + \alpha\beta)\gamma}{1 - \alpha\delta}$
 \newline
 
 Teorem 5. \textit{Če napadalec potroši konstantno količino računske moči za napadanje obeh bazenov to je če je $\beta + \delta = e$, bo napadalčev dobiček maksimiran za nekatere $\beta \in \{0,e\}$ če velja $\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p + \alpha e)^2(1 - \alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' + \alpha e)$}.\newline
@@ -360,7 +409,7 @@ V obstoječi Bitcoin shemi mora rudar izračunati \textit{"nonce" n} (nonce je 3
 	\item V shemi avtorjev se kot v obstoječi shemi pusti administratorju bazena odločitev koliko bitnih vrednosti "0" je potrebnih v delnih dokazih dela, da jih lahko posamezni rudarji oddajo administratorju. Naj bo \textit{z'} kjer je \textit{$z' \le z$}. Delni dokaz dela je blok čigar razpršitvena vrednost se začne s številom \textit{z'} ničelnih bitov.
 	\item Bazen rudarjev izbere \textit{$z - z'$} najmanj pombembnih bitov ciljnega celovitega dokaza dela. Naj bo to \textit{r}, $r \in \{0, 1\} z - z'$ . Bazen izbere tudi naključen niz $s \in \{0, 1\}^*$ , kjer je \textit{$ |s| + |r| = k$}, kjer je \textit{k} varnostni parameter zavezujoče sheme, ki jo definira Bitcoin sistem in ne bazen sam. Tukaj je vloga \textit{s} ta, da naredi dolžino združenega "nonce" \textit{$r||s$} enako \textit{k}, ki je predpisana dolžina zavezujoče sheme. Vrednost varnostnega parametra naj bi bila taka, da naj bi bil "zlom" zavezujoče sheme težji kot iskanje celovitega dokaza dela. Splošno lahko uporabimo kot varnostni parameter 256 za shemo avtorjev \cite{originalarticle}. Glavna razlika med shemo avtorjev in trenutno rudarsko shemo je ta, da v shemi avtorji bazen določi zadnjih \textit{$ z - z' $} zadnjih bitov tarče, ki je lahko v obliki $\{0, 1\}^{z-z'}$.
 	\item Končna tarča celovitega dokaza dela bazena tako postane \textit{$0^{z'}||r$}, ki je dolžine \textit{z} in je enake dolžine kot tarča trenutne Bitcoin rudarske sheme.
-	\item Bazen rudarjev proizvede zavezo \textit{$(com, decom) \leftarrow - Commit(r||s, CK)$}. Bazen pošlje zavezo vsem rudarjem in zaenkrat ohrani začetno vrednost \textit{decom} skrito.
+	\item Bazen rudarjev proizvede zavezo \textit{$(com, decom) \leftarrow \\ - Commit(r||s, CK)$}. Bazen pošlje zavezo vsem rudarjem in zaenkrat ohrani začetno vrednost \textit{decom} skrito.
 	\item  Vsi rudarji bazena vključijo zavezo \textit{com} in \textit{z'} v dokazih dela, ki ga izračunajo. Ko rudar zgradi blok se zaveza \textit{com} in dolžina tarče delnega dokaza prav tako vključi v blok. Delni dokazi vkjučujejo vse bloke katerih razpršitvena vrednost se začne z $0^{z'}$. Tako lahko rudar odda vse bloke, ki imajo razpršitvene vrednosti enake $0^{z'}||\{0, 1\}^*$
 	\item Administrator bazena prejme kot delne dokaze vse bloke katerih razpršitvena vrednost se začne z $0^{z'}$. Sedaj administrator pregleduje te delne dokaze dokler ne najde celovitega dokaza, ki vsebuje razpršitveno vrednost, ki se začne z $0^{z'}||r$. Če lahko najde takšen blok, potem odda ta blok v Bitcoin sistem skupaj z začetno zavezo \textit{decom}. 
 	\item Ko vozlišča Bitcoin omrežja prejmejo ta blok in začetno vrednost \textit{decom} bodo izluščili vrednost zaveze \textit{com} in \textit{z'}, ki sta vsebovani v bloku in nato izluščijo \textit{$ r||s \leftarrow Open(com,decom)$}. Blok je sprejet, če se izkaže da je prvih \textit{z} bitov razpršitvene vrednosti enakih $0^{z'}||r$, kjer je \textit{r} prvih \textit{$z-z'$} bitov iz \textit{Open(com, decom)}. Če je kaj neskladja, se blok zavrne. Opozoriti velja, da je lahko vrednost \textit{z'} med bazeni različna. Vseeno lahko Bitcoin vozlišče poišče isto vrednost za določen bazen v oddanem bloku bazena. Če se razpršitvena vrednost bloka začne z \textit{'1'}, potem mora biti vrednost \textit{z} za blok enaka 0.
@@ -378,9 +427,9 @@ Enostavno je videti, da je predlagana shema odporna na NPB, ki jo izvedejo rudar
 
 \noindent \textit{Dokaz.} Če bazen rudarjev poskuša pretentati obstoječo rudarsko shemo, mora storiti naslednje; Predpostavimo, da bazen rudarjev izbere dvobitna niza \textit{r} in \textit{s} tako, da je \textit{$|r| + |s| = K$} in potem izračuna zavezo \textit{$com \leftarrow Commit(r||s, CK)$}. Bazen rudarjev mora potem najti blok katerega hash se začne z bitnim nizom \textit{$0^{z'}||r$}. Ker je \textit{$|r| = z - z'$}, je verjetnost, da bi dobili takšen blok v vsakem naključnem poskusu $\frac{1}{2^{z}}$ kar je povsem enako kot je v trenutni Bitcoin shemi rudarjenja. 
 
-Alternativno, lahko bazen rudarjev izbere arbitraren \textit{$p$} kot zavezo. Ustvari blok B z hash vrednostjo, katere prvih \textit{$z$} bitov je danih od \textit{$0^{z'}||r$}. Nato bazenu rudarjev mora samo še najti niz  \textit{$s' \in \{0, 1\}^{\kappa-|r'|}$}, tako da velja \textit{$p = Commit(r'||s',CK)$}. Torej, če bazen rudarjev lahko to naredi, bi se zlomila vezava lastnosti zveznega protokola, ker obstaja samo ena vrednost \textit{$r||s$}, da velja \textit{$p \leftarrow Commit(r||s, CK)$} in verjetnost \textit{$Pr [r'||s' = r||s] = \frac{1}{2^{K}}$}. Izberemo lahko varnostni parameter \textit{$K$}, ki lahko prepreči zmožnost lomljenja vezave lastnosti zveznega protokola.
+Alternativno, lahko bazen rudarjev izbere arbitraren \textit{$p$} kot zavezo. Ustvari blok B z hash vrednostjo, katere prvih \textit{$z$} bitov je danih od \textit{$0^{z'}||r$}. Nato bazenu rudarjev mora samo še najti niz  \textit{$s' \in \{0, 1\}^{\kappa-|r'|}$}, tako da velja \\ \textit{$p = Commit(r'||s',CK)$}. Torej, če bazen rudarjev lahko to naredi, bi se zlomila vezava lastnosti zveznega protokola, ker obstaja samo ena vrednost \textit{$r||s$}, da velja \textit{$p \leftarrow Commit(r||s, CK)$} in verjetnost \textit{$Pr [r'||s' = r||s] = \frac{1}{2^{K}}$}. Izberemo lahko varnostni parameter \textit{$K$}, ki lahko prepreči zmožnost lomljenja vezave lastnosti zveznega protokola.
 
-Bazen rudarjev lahko izbere dve vrednosti "nonce" \textit{$r$} in \textit{$s$}, tako da je \textit{$|r| + |s| = \kappa$}. Potem lahko izračuna \textit{$p = Commit(r||s,CK)$}. Nato bazen rudarjev lahko ustvari blok B tako, za  prvih \textit{$z$} bitov hash-a bloka B velja \textit{$\{0\}^{z'}||r',r' \neq r$}. Nato mora bazen rudarjev izračunati "nonce" \textit{$s'$}, \textit{$|s'| = K - |r'|$} tako da je \textit{$p = Commit(r'||s',CK)$}. Toda to bi bilo v nasprotju z vezavnimi lastnostmi zvezne sheme.
+Bazen rudarjev lahko izbere dve vrednosti "nonce" \textit{$r$} in \textit{$s$}, tako da je \textit{$|r| + |s| = \kappa$}. Potem lahko izračuna \\ \textit{$p = Commit(r||s,CK)$}. Nato bazen rudarjev lahko ustvari blok B tako, za  prvih \textit{$z$} bitov hash-a bloka B velja \\ \textit{$\{0\}^{z'}||r',r' \neq r$}.\\ Nato mora bazen rudarjev izračunati "nonce" \textit{$s'$}, \textit{$|s'| = K - |r'|$} tako da je \textit{$p = Commit(r'||s',CK)$}. Toda to bi bilo v nasprotju z vezavnimi lastnostmi zvezne sheme.
 
 \begin{lema}\label{lema4}
 	Predlagana shema rudarjenja je varna pred BWH napadi, ki jih vloži administrator bazena.
@@ -406,7 +455,7 @@ Tukaj avtorji predlagajo alternativno implementacijo prejšnje sheme. Tukaj je n
 Na ta način postane Bitcoin shema rudarjenja odporna na BWH napade tako, da se prepusti administratorju, da določi zadnjih \textit{$z - z'$} bitov v izzivu. Ker vsak delni delež bazena mora imeti \textit{$z'$} vodilnih ničelnih bitov, noben Bitcoin rudar ne more razločiti med blokom z delnim dokazom dela in blokom z polnim dokazom dela. Posledično tudi ne more izvesti BWH napada na bazen. Poleg tega, ker mora bazen vljučiti \textit{$p$} znotraj glave bloka, ni mogoče, da bi se zmanjšala količina dela, ki je potrebna za rešitev uganke. Količina dela, ki ga je potrebno opraviti je enaka kot izvirni Bitcoin shemi rudarjenja. Formalno je prikazano v lemmi 5.
 
 \begin{figure}
-  \includegraphics[scale=0.45]{image10.png}
+  \includegraphics[scale=0.30]{image10.png}
   \caption{Nova shema za rudarjenje}
   \label{fig:boat3}
 \end{figure}
@@ -427,9 +476,10 @@ Na ta način postane Bitcoin shema rudarjenja odporna na BWH napade tako, da se 
 
 Tako kot shema 1 se lahko tudi shema 2 uporablja za preprečevanje BHW napadov, ki jih izvede administrator bazena. Če protokol bazena določa, da mora administrator razkriti združeni "nonce"\textit{$r||s$} vsakič ko se "blockpad" posodobi. Torej bodo vsi rudarji bili sposobni preveriti če so ustvarili veljaven blok z polnim dokazom o opravljenem delu. Opomba, vsakič, ko se set transakcij posodobljen se mora posodobiti tudi "blockpad" in "nonce" razkriti vsem rudarjem.
 
-\section{Zaključek}
+\section{ZAKLJUČEK}
 V tem članku so avtorji prikazali kako lahko sebičen rudar dobi dodatno spodbudo za izvajanje BWH napada na bazen rudarjev. Ta spodbuda pride iz drugih podobno mislečih bazenov rudarjev, ki želijo pridobiti koristi iz napada. Bazen, ki sodeluje pri napadu deli del spodbude, ki jo zasluži potom iz napada. Avtorji so kvantitativno izmerili količino skupnega dobička, ki bi ga napadalec lahko pričakoval po izvedbi različnih napadalnih strategij. Prikazali so tudi nekaj zanimivih rezultatov, ki bi jih napadalec lahko uporabil za povečanje skupnega dobička. Pokazali so, da v scenariju kjer je sta samo dva bazena rudarjev, lahko napadalec porazdeli računsko moč zato, da napade oba bazena in maksimira njegov dobiček. Predstavili so tudi strategijo za učinkovito odvračanje BWH napadov v vsakem bazenu rudarjev in da jo je mogoče implementirati s pomočjo hash funkcije. Pokazali so, da strategija preprečuje napade s strani administratorja bazena in članov rudarjev. Strategija deluje tako, da rudarjem prepreči sposobnost razlikovanja med delnim in polnim dokazom zaupanja  ter ob istem času zavezuje administratorja, da sčasoma vsem rudarjem omogoči da preverijo, če so našli poln dokaz o opravljenem delu. Strategijo je mogoče implementirati na enostaven način s pomočjo hash funkcije ali kriptografskih protokolov za prevzem obveznosti brez dodatnega količine dela za iskanje dokaza o opravljenem delu.
 
+\newpage
 \begin{thebibliography}{9}
  
  \bibitem{nakamoto}
