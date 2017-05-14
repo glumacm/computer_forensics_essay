@@ -11,3 +11,4 @@ Writing essay for a course in Computer forensics (translating an existing articl
 * viability - obstanek
 * overhead - prekomerno
 * preliminaries - predhodna dejanja
+* nonce - 32 bitno polje v bitcoin bloku (angl. The "nonce" in a bitcoin block is a 32-bit (4-byte) field whose value is set so that the hash of the block will contain a run of leading zeros. The rest of the fields may not be changed, as they have a defined meaning.)
