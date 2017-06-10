@@ -1,0 +1,586 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+% For tracking purposes - this is V3.1SP - APRIL 2009
+
+\documentclass{acm_proc_article-sp}
+
+
+
+\usepackage{tabularx}
+\graphicspath{ {images/} }
+\newdef{theorem}{Izrek}
+\newdef{definicija}{Definicija}
+\newdef{lema}{Lema}
+\begin{document}
+	
+	\title{Bitcoin napad s prikrivanjem blokov:\\ Analiza in ublažitev napada}
+	\subtitle{Povzetek članka}
+	%
+	% You need the command \numberofauthors to handle the 'placement
+	% and alignment' of the authors beneath the title.
+	%
+	% For aesthetic reasons, we recommend 'three authors at a time'
+	% i.e. three 'name/affiliation blocks' be placed beneath the title.
+	%
+	% NOTE: You are NOT restricted in how many 'rows' of
+	% "name/affiliations" may appear. We just ask that you restrict
+	% the number of 'columns' to three.
+	%
+	% Because of the available 'opening page real-estate'
+	% we ask you to refrain from putting more than six authors
+	% (two rows with three columns) beneath the article title.
+	% More than six makes the first-page appear very cluttered indeed.
+	%
+	% Use the \alignauthor commands to handle the names
+	% and affiliations for an 'aesthetic maximum' of six authors.
+	% Add names, affiliations, addresses for
+	% the seventh etc. author(s) as the argument for the
+	% \additionalauthors command.
+	% These 'additional authors' will be output/set for you
+	% without further effort on your part as the last section in
+	% the body of your article BEFORE References or any Appendices.
+	
+	\numberofauthors{3} %  in this sample file, there are a *total*
+	% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+	% reasons) and the remaining two appear in the \additionalauthors section.
+	%
+	\author{
+		% You can go ahead and credit any number of authors here,
+		% e.g. one 'row of three' or two rows (consisting of one row of three
+		% and a second row of one, two or three).
+		%
+		% The command \alignauthor (no curly braces needed) should
+		% precede each author name, affiliation/snail-mail address and
+		% e-mail address. Additionally, tag each line of
+		% affiliation/address with \affaddr, and tag the
+		% e-mail address with \email.
+		%
+		% 1st. author
+		\alignauthor
+		Anej Budihna \\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		% 2nd. author
+		\alignauthor
+		Luka Golinar\\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		% 3rd. author
+		\alignauthor 
+		Matjaž Glumac \\
+		\affaddr{Univerza v Ljubljani, Fakulteta za računalništvo in informatiko}\\
+		\and  % use '\and' if you need 'another row' of author names
+		% 4th. author
+	}
+	% There's nothing stopping you putting the seventh, eighth, etc.
+	% author on the opening page (as the 'third row') but we ask,
+	% for aesthetic reasons that you place these 'additional authors'
+	% in the \additional authors block, viz.
+	
+	\date{30 July 1999}
+	% Just remember to make sure that the TOTAL number of authors
+	% is the number that will appear on the first page PLUS the
+	% number that will appear in the \additionalauthors section.
+	
+	\maketitle
+\begin{abstract}
+
+Bitcoin je prva kriptovaluta, ki še danes prevladuje v popularnosti in količini uporabe. V tem članku je obravnavana  varnostna luknja v obstoječi shemi sistema Bitcoin, ki omogoča, ki omogoča izvajanje napadov s prikrivanjem blokov (block witholding attack - BWA). Ta napad se izvaja nad rudarskimi bazeni (mining pool) in ima lahko velike posledice tako za člane bazena kot tudi za celoten Bitcoin sistem. Avtorji so raziskovali nekaj posebnih različic tega napada in poskušali ugotoviti dobiček, ki ga pridobi napadalec. Predlagali so tudi nekaj načinov oziroma tega napada, ki se razlikujejo obstoječih predlaganih rešitev.
+Namesto odkrivanja ali zmanjšanja motivacije za napad so se avtorji odločili za pristop, ki popolnoma izniči zmožnosti izvajanja takšnega napada, s pomočjo kriptografskih in računskih metod.
+
+\end{abstract}
+\keywords{Bitcoin rudarjenje, napad z bločnim prikrivanjem, sebičen rudar, rudarske skupine, zavezujoče sheme}
+
+\section{UVOD} \label{sekcija1}
+
+Bitcoin je popularna kriptovaluta, ki jo je prvi predlagal Satoshi Nakamoto leta 2008. Vse izvedene transakcije se hranijo v verigi blokov (blockchain). Veriga blokov je javno dostopna in preverljiva knjiga nakazil na kateri temelji celotno omrežje Bitcoin. Veriga zagotavlja, da je mogoče trošiti samo bitcoine, ki so dejansko v lasti plačnika in omogoča preverjanje stanj denarnic. Vsak blok je sestavljen iz več nakazil, nakazilo pa predstavlja prenos bitcoinov iz ene denarnice v drugo. Vsako nakazilo mora biti podpisano s skrivnim ključem, ki ga hrani denarnica. Poleg avtentikacije podpis zagotavlja da nakazila, ki so vedno javna, ni mogoče kasneje spreminjati. Informacija o novem nakazilu oziroma transakciji je vedno poslana vsem zainteresiranim članom omrežja.
+
+Zato, da je veriga blokov vredna zaupanja je potrebno vsako transakcijo overiti s potrditvijo omrežja, temu procesu pravimo rudarjenje (mining). Rudarjenje je razpršen sistem doseganja soglasja, ki ga izvajajo člani omrežja. Rudarji nakazila zberejo in jih zapakirajo v bloke, ki morajo zadoščati zelo strogim pravilom šifriranja, ki ji preverja omrežje.  Bloke se overi tako, da se izračuna njihovo hash vrednost, zato da rudar ustreže zahtevam omrežja mora bloku transakcij dodati žeton (nonce). Iskanje te vrednosti predstavlja glavnino dela, ki jo opravlja rudar. Ko rudar najde pravo vrednost objavi dokaz in ga skupaj z blokom doda v verigo. Za najdbo pravega žetona je nagrajen sz 25 novo ustvarjenimi bitcoini. Ta nagrada služi kot motivacija za izvajanje overjanja, z regulacijo pravil šifriranja pa se uravnava dotok novih bitcoinov v omrežje. Rudar v blok transakcij vključi transakcijo nagrade v svojo denarnico, kar onemogoča možnost da bi kdo ukradel njegovo opravljeno delo. Pri tem je treba poudariti, da je rudarjenje “tekmovalna loterija”, kar pomeni, da rudarji tekmujejo med seboj, saj nagrado dobi samo tisti, ki prvi reši uganko, in da je izid tekmovanja močno odvisen od sreče.
+
+Ker rudarjenje temelji na metodi grobe sile in je zelo računsko zahtevno opravilo se rudarji pogosto združujejo v rudarske bazene (mining pool). V takšnih bazenih administratorji porazdeljujejo delo tako, da rudarjem pošljejo podpisan blok transakcij z razponom žetonov, ki jih morajo raziskati. Rudarji pa izvajajo izračune in periodično pošiljajo preverjene žetone ter izračunane hashe, ki predstavljajo delni dokaz o opravljenem delu (partial proof of work). Izračun teh delnih dokazov je veliko lažji od iskanja polnega dokaza, ki zagotavlja nagrado. Vsakič ko rudar poskuša najti delni dokaz ima možnost najdbe polnega dokaza, ki ga lahko posreduje administratorju. Administrator nato vknjiži blok in pobere nagrado, ki jo porazdeli med sodelujoče rudarje. Delež s katerim je nagrajen vsak rudar je odvisen od količine delnih dokazov, ki jih pošlje administratorju med rudarjenjem. Administratorjev podpis v bloku zagotavlja, da noben izmed rudarjev ne more nagrado pobrati zase.
+
+Toda, ko eden izmed članov bazena najde poln dokaz ima tudi opcijo, da dokaza ne posreduje administratorju. Rudar lahko pošilja vse delne dokaze in zakrije polne dokaze, čeprav nagrade ne more zahtevati zase, lahko na ta način od bazena dobiva deleže nagrade na račun drugih članov, kljub temu, da omrežju ne doprinaša nobenih koristi. Takšen napad je poimenovan napad s prikrivanjem blokov(block witholding attack). Trenutno je takšen napad nemogoče zaznati ali preprečiti.
+
+\section{NAPAD S PRIKRIVANJEM BLOKOV} \label{sekcija2}
+
+Napad s prikrivanjem blokov je bil v prvo predlagan leta 2011, ko so raziskovalci hkrati dokazali, da lahko napadalec na ta način služi tako da zlorablja računsko moč poštenih rudarjev za lasten dobiček. Napadalčev dobiček izvira tudi iz zmanjšanja verjetnosti zmage bazena, ki je žrtev napada. Na ta način se poveča verjetnost, da bo napadalec našel poln dokaz, na bloku transakcij s svojim podpisom. Podobno se lahko več članov bazena združi in skupaj napade konkurenčen bazen. Eden izmed največjih takšnih napadov je bil zabeležen junija 2014, zaradi katerega so pošteni člani bazena Eligius zabeležili 300 bitcoinov izgube.
+
+V tem članku so avtorji raziskali podoben scenarij, s tem da so se osredotočili na dve variaciji napada. V prvem primeru so raziskali količino dobička, ki jo ustvari napadalec, ki izvede napad s prikrivanjem blokov (BWH) na izbran bazen in je za napad nagrajen s strani drugega bazena. V drugem primeru je model spremenjen tako, da napadalec porazdeli svojo računsko moč in napade oba bazena. Napadalec lahko celo prejme nagrado s strani obeh dveh bazenov. Takšne napade avtorji poimenujejo ''sponzorirani napad s prikrivanjem blokov". Na ta način napadalec z deležem svojih računskih moči poveča možnost zmage za naročnika napada in zase, če ima dodatna sredstva za rudarjenje.  Ta ranljivost Bitcoin sistema močno vpliva na njegovo delovanje, zato avtorji v članku predlagajo nekaj rešitev, ki so jih sami zasnovali.
+
+\section{UBLAŽITEV NAPADA} \label{sekcija3}
+
+V obstoječi shemi je poln dokaz hash vrednost, bloka in žetona, ki ima na najbolj pomembnih bitih z ničel. Delni dokazi o opravljenem delu pa so nizi, ki imajo z' začetnih ničelnih bitov, kjer je z' < z.
+Delne dokaze rudarji pošiljajo administratorju, ki jih zbira in preverja. Administrator je odgovoren za določitev vrednosti z', ki mora biti taka, da lahko rudarji redno najdejo dokaz in hkrati ne presežejo računskih sposobnosti zaradi preverjanja.
+ 
+Avtorji članka predlagajo sledečo spremembo Bitcoin sheme:
+Administrator izbere vrednost z'. Bazen poleg tega določi še naključen niz bitov s in vrednost zadnjih z – z' najmanj pomembnih bitov hash vrednosti. Ta niz bitov poimenujemo r.
+Bazen iz parametrov ustvari varnostno shemo com z ključem decom. Administrator pošlje shemo com vsem rudarjem, ključ pa hrani pri sebi in skrbi za to, da ostane tajen. Ko rudarji sestavijo blok vanj vključijo tudi shemo com in dolžino ciljne vrednosti delnega dokaza o opravljenem delu (z'). Rudarji administratorju posredujejo vse bloke, ki imajo hash vrednosti z z' začetnimi ničlami. Administrator prejme bloke in med preverjanjem išče takega, ki ustreza začetnim kriterijem. V primeru da najde takšen blok, ga posreduje Bitcoin sistemu skupaj z ključem. Ko vsa vozlišča v sistemu prejmejo blok in ključ, shemo odklenejo in preverijo, če ustreza kriterijem. Blok je sprejet, če je prvih z bitov hash vrednosti sestavljenih iz z' ničel in niza r.
+ 
+V tej shemi rudarji ne morejo razlikovati med delnim in polnim dokazom dela. Ko se zamenja obdelovani blok mora administrator razkriti ključ s katerim rudarji preverijo svoje izračunane dokaze. Na ta način rudarjem odvzamemo sposobnost izvajanja dokazov, od administratorja pa zahtevamo dokazovanje poštenosti. Avtorji članka so dokazali, da ta shema ne vpliva na težavnost rudarjenja.
+
+
+
+\subsection{Motivacija in ostalo delo}\label{sekcija1a}
+
+Eyal \cite{minnersdilemma} in ostali definirajo in analizirajo igro kjer identični bazeni rudarjev napadejo drug drugega. Pokazali so, da v takem primeru kjer bazeni rudarjev napadajo drug drugega obstaja Nash ravnotežje, kjer vsi rudarji zaslužijo manj kot če se ne bi napadali drug drugega. Luu in ostali \cite{powersplitting} so izvedli podrobno študijo NPB in pokazali dobiček napadalca ob različnih scenarijih. Dokazali so, da ta napad zares poveča dobiček napadalca. Izpeljali so različne izraze za dobičkonosnost napadalca ob različnih razmerah. Intuicija iza pridobljene napadalčeve spodbude preko NPB je ta, da napadalec uporablja del računske moči za zmanjševanje verjetnosti zmage bazena rudarjev ter tako poveča svoje možnosti za zmago.
+
+V članku \cite{originalarticle} avtorji predlagajo tako imenovani "spozorirani napad s prikrivanjem blokov". Opazili so, da z izvajanjem NPB nad ciljnim bazenom, bo napadalec posredno povečal verjetnost zmage nekateremu drugemu bazenu (kot tudi samemu sebi, če ima dodatne vire za privatno rudarjenje). Zato lahko napadalec kova zaroto z drugimi bazeni, da bo uporabil majhen del svoje moči za napad na nek bazen in posledično zmanjša verjetnosti zmage nad ciljnim bazenom. V takih primerih je lahko napadalec s strani sebičnega bazena za napad na konkurenčni bazen in nagrada naj bi bila proporcionalna glede na narastek spodbude sebičnega bazena, ki ga proizvede napadalec s tem ko napade določen bazen. Tako bo pričakovan narastek napadalca višji kot so to izračunali Luu in ostali v \cite{powersplitting}. To je motivacija za analize avtorjev članka \cite{originalarticle}, ki jo podajo pred koncem razdelka VI v članku \cite{originalarticle}.
+
+
+NPB lahko ima katastrofalne posledice na dolgoročnost obstanka Bitcoin sistema. V razdelku VI avtorji članka \cite{originalarticle} iščejo oblažitve za NPB. Avtorji članka \cite{originalarticle} predlagajo dejanske ukrepe, ki se lahko uporabijo za premagovanje NPB in tako naredijo Bitcoinove bazene rudarjev bolj varne za investiranje rudarjeve računske moči. Avtorji članka \cite{originalarticle} najprej razpravljajo o generični shemi, ki se jo lahko uporablja poleg kateregakoli kriptografsko zavezujočega protokola. Nato predlagajo različico te sheme, ki uporalja razpršilne funkcije namesto sheme, ki temelji na podlagi zavez. Shema je tako strukturirana, da ne dovoli rudarju, da bi vnaprej predvideval ali lahko kakšen njegov delež uporabljen za generiranje Bitcoinov s strani bazena. Rudar lahko to izve šele nato, ko njen delež v bazenu posredovan k administratorju bazena. O podrobnostih teh shem avtorji članka \cite{originalarticle} razpravljajo kasneje. Opozorilo velja, da naj bi ta protiukrep veljal za vse poznane NPB in ne le za "sponzorirane napade s prikrivanjem blokov".
+
+\subsection{Prispevek}\label{sekcija1b}
+
+Prispevek prevedenega članka \cite{originalarticle} je dvonamenski. Članek analizira NPB z mislijo na specifičen model sistema in hkrati predlaga dve rudarski shemi kot oblažitev tem napadom.
+\begin{itemize}
+	\item V razdelku IV avtorji članka \cite{originalarticle}  analizirajo funkcijo prihodkov napadalca, ki s podporo drugega bazena sproži NPB na ciljni bazen. Ta napad poveča prihodek bazena, ki podpira napadalca in posledično ta bazen lahko del svoje dodatne spodbude z napadalcem. Ta prihodek je glavna opazka na podlagi katere avtorji članka \cite{originalarticle}  izračunajo in analizirajo funkcijo prihodka napadalca. V razdelku V analizirajo dobiček napadalca, ki napade oba bazena.
+	Njihova študija je drugačna od \cite{minnersdilemma} v takem smislu, da se študija v  \cite{minnersdilemma} osredotoča na scenarij kjer nek bazen rudarjev pošlje svoje člane, da napade druge bazene. Rudar, ki deluje kot dvojni agent prenese vse svoje pridobljene spodbude nazaj do svojega zlonamernega bazena, kateri nato posreduje dobiček enakomerno med svoje člane. V modelu opisanega v članku \cite{originalarticle} pa rudar deluje neodvisno in dobi neko končno vrednost spodbude od vsakega bloka, ki ga prikrije pred administratorjem bazena.
+	\item Glavni rezultati članka so podani v izrekih 1, 2, 3 in 5. Ti rezultati se ukvarjajo z optimalnimi strategijami napadalca pri NPB, ki hoče efektivno uporabiti svoje računske moči, da zasluži kolikor je mogoče. V izreku 1 avtorji članka \cite{originalarticle} dokažejo bistven rezultat, ki ga napadalec lahko uporabi za največji možni dobitek spodbude z oblikovanjem ustrezne strategije napada. 
+	V izreku 2 dokažejo da, ko so računske moči bazena vzdrževane na neki konstantni vrednosti, potem napadalec napasti več bazenov istočasno, da se njegov dobiček poveča.
+	V izreku 3 pokažejo, da napadalec pridobi več z napadanjem kot s samostojnim rudarjenjem, ko so določeni izvedljivi pogoji izpolnjeni. V izreku 5 pokažejo, da obstaja tak izvedljiv pogoj pod katerim lahko napadalec pridobi največji možni dobiček tako, da napade več bazenov istočasno, ko je računska moč bazenov nekontantna. To pomeni, da napad le na en bazen ne bi pomenilo največjega možnega dobička. Ta ugotovitev je bolj podobna izreku 2. Razlika je ta, da v izreku 5 za razliko od izreka 2, dva bazena nimata vzdrževane računske moči na konstantni vrednosti.
+	\item Na koncu, v razdelku VI avtorji predlagajo izboljšavo trenutne Bitcoin sheme na tak način, da bi bilo neobčutljivo na NPB. Prvo predlagajo generično shemo, ki uporablja kriptografsko zavezujoč protokol. Nato predložijo posodobljeno shemo, ki uporablja razpršilno funkcijo namesto zavezujočega protokola. Osnovna ideja za obema shemama je ista. Bolj očitno je, da je druga shema malce preoblikovana prva shema. Avtorji pokažejo, da obe shemi lahko omogočijo odpornost Bitcoin rudarjenja na napade NPB brez ogrožanja ključnih lastnosti obstoječe rudarske sheme. Njihov protiukrep ni samo dober za omenjeni napad v  \cite{originalarticle}, ampak ustreza tudi za vse ostale napade NPB o katerih se razpravlja v \cite{analysisofbitcoin}, \cite{minnersdilemma}, \cite{subversivestrategies}, itd. Dodatki so preprosti za implementacijo in nimajo vpliva na prekomerno računanje dokaza dela.
+\end{itemize}
+
+\textit{
+	Razdelek VI je neodvisen od razdelkov \ref{sekcija4} in \ref{sekcija5} brez medsebojnih povezav. Zato lahko bralec, če je zainteresiran samo v spoznavanje obrambnega mehanizma proti NPB, preskoči razdelek VI in  \ref{sekcija5} ter nadaljuje neposredno na razdelek VI. }
+
+\subsection{Organizacija}\label{sekcija1c}
+
+Preostanek članka  \cite{originalarticle} je organiziran po sledečem vrstnem red: v razdelku II avtorji članka definirajo "dobiček" rudarja in predstavijo bralcu idejo kriptografsko zavezujočega protokola in rudarjenja v Bitcoin sistemu. V razdelku III opišejo model napada in njihove predpostavke v študiji. V razdelku IV avtorji analizirajo spodbudo napadalca, ki napade le posamezen bazen. V razdelku V preučijo spodbudo napadalca, ki napade oba bazena. Na koncu Bag  \cite{originalarticle} in ostali predlagajo izboljšavo na Bitcoin rudarski shemi, s katero se lahko rudarski bazeni obranijo pred NPB. Zaključek članka sledi v razdelku VII.
+
+\section{Predhodna dejanja}\label{sekcija2}
+\subsection{Oznake in definicije}\label{sekcija2a}
+\begin{center}
+	
+	\begin{tabular} {| p{1cm} | p{1cm} | p{4cm}|}
+		\hline
+		Serijska št. & Oznaka  & Opis \\ \hline
+		1 & $\alpha$ & Računska moč napadalca \\  \hline
+		2 & $\beta$ & Delec računske moči, ki je uporabljena za napad na bazen  P \\  \hline
+		3 & $\delta$ & Delec  računske moči, ki je uporabljena za napad na bazen P' \\  \hline
+		4 & $\gamma$ & Delec dodatnega dobička, ki ga bazen deli z napadalcem \\  \hline
+		5 & p & Računska moč bazena P  \\ \hline
+		6 & p' & Računska moč bazena P'  \\ \hline
+	\end{tabular}
+	\captionof{table}{Tabela definicij}
+\end{center}
+
+\begin{definicija}
+	 Avtorji \cite{originalarticle} uporabljajo isto definijo "dobička" kot v \cite{powersplitting}. Dobiček rudarja je definiran kot delček vrednosti zaslužene spodbude rudarja z rudarjenjem s pomočjo svoje računske moči v skladu s specifično rudarsko strategijo z obzirom do skupno zaslužene spodbude celonega Bitcoin omrežja. $g_m$ predstavlja spodbudo, ki jo zasluži nek določen rudar in $g_B$ pa spodbudo, ki jo zasluži celotno Bitcoin omrežje. Tako potem dobimo dobiček rudarja kot $\frac{g_m}{g_B}$
+\end{definicija} 
+
+\subsection{Zavezujoča shema}\label{sekcija2b}
+Ne-interaktivna zavezujoča shema \cite{datamininglectures} C je sestavljena iz treh verjetnostnih algoritmov polinomnske časovne zahtevnosti \textit{C.Setup()}, \textit{C.Commit()} in \textit{C.Open()}.
+\begin{itemize}
+	\item \textit{C.Setup($1^k$)} : Ob podanem parametru \textit{k}, bo algoritem \textit{Setup($1^k$)} izpisal javen parameter \textit{CK} zavezujoče sheme.
+	\item \textit{C.Commit(CK, x)} : Za parameter x vzame niz $x \in \{0,1\}^k$ in izpiše par  \textit{(com, decom)}. V članku \cite{originalarticle} se zaradi lažjega pisanja včasih izpusti vrednost \textit{decom} in se zapiše  \textit{com} $\leftarrow$ \textit{C.Commit(CK,x)}. Vendar bo bralec zaznal, da ob vsaki izvedbi \textit{C.Commit(CK,x)} bo algoritem izpisal tako zavezujočo kot tudi začetno vrednost.
+	\item \textit{C.Open(CK, com, decom)} : Prejme zavezo \textit{com} , prekinitev zaveze \textit{decom} in izpiše x ali simbol za napako $\bot$.
+\end{itemize}
+
+\noindent{\large \bfseries Varnostna lastnost }
+\newline
+\indent Kriptgrafsko zavezujoča shema ima sledeče lastnosti:
+\indent Naj bo \textit{C} zavezujoča shema.
+\begin{enumerate}
+	\item Lastnost skrivanja: Za vse nasprotno verjetnostno polinomske čase \textit{A},
+	$|P_r[CK \xleftarrow C.Setup(1^k),(m_0,m_1,st) \leftarrow A(CK), b \xleftarrow{U}  \\ \{0,1\},(com_b, decom_b) \leftarrow C.Commit(CK,m_b) : b = A(CK,st,com_b)] - \frac{1}{2}|  \le negl(k)$
+	\item Lastnost vezanja: Za vse nasprotno verjetnostno polinomske čase \textit{A},
+	$ Pr[CK \leftarrow \\ C.Setup(1^k),(com,decom,decom') \leftarrow A(CK),m \leftarrow C.Open(com,decom), m' \leftarrow \\ C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot ] \le negl(k)  $
+	\item Sproščeno vezanje: Za vse nasprotno verjetnostno polinomske čase \textit{A},
+	$ Pr[CK \leftarrow C.Setup(1^k) , (m,st) \leftarrow A(CK) (com,decom) \leftarrow C.Commit(m,CK), decom' \leftarrow A(CK,st,com,decom'), m \leftarrow \\ C.Open(com,decom') : m \ne m' \bigwedge m' \ne \bot \le negl(k)] $
+\end{enumerate}
+
+\section{Sistemski model  za sponzoriran napad s prikrivanjem blokov}\label{sekcija3}
+
+V tem razdelku avtorji članka razpravljajo  o nekaterih predpostavkah, ki so jih uporabili v analizi "sponzoriranih napadov s prikrivanjem blokov" v naslednji dveh razdelkih, v razdelkih IV in V. Bralce opominjamo, da te predpostavke niso povezane z razpravo v razdelku VI, kjer predlagajo proti ukrep proti NPB. V razdelkih IV in V, avtorji upoštevajo model bazena rudarjev z enim samim administratorjem bazena. Odgovornost administratorja je ta ,da koordinira izračune dokaze dela (angl. PoW). Ta izbere množico transakcij in nato določi koren Merkle in ostale parametre. Posamezni rudarji potem poskušajo konstruirati dokaz dela na podlagi teh parametrov. Administrator prav tako nastavi stopnjo zahtevnosti za delne dokaze dela, katere rudarji redno oddajajo administratorju za pregled. Zahtevnostna stopnja delnih dokazov dela je običajno nižja od tiste od Bitcoin sistema, vendar ne sme biti dovolj velika, da preseže kapacitete administratorja. Administrator pregleda vsak delni dokaz dela, ki ga dobi v pregled dokler ne najde enega, ki ustreza zahtevnostni stopnji dokaza o delu (angl. PoW) celotnega Bitcoin omrežja. Če najde kakšen delni dokaz dela, ki ustreza ciljni zahtevnostni stopnji Bitcoin omrežja ga odda Bitcoin sistemu in zahteva nagrado. Avtorji prav tako predpostavijo, da je administrator bazena pošten in da ne more biti skorupiran.
+
+Sedaj sledi podroben opis napada. Bag \cite{originalarticle} in ostali predpostavijo, da je računska moč celonega Bitcoin sistema enaka 1. Imamo dva bazena, P in P'. Naj bo A napadalec čigar računska moč je enaka \textit{a}. Ta razdeli svojo računsko moč na dva dela; prvi del uporablja za samostojno rudarjenje in preostali del uporablja za izvedbo NPB na bazen rudarjev. Napadalec se pridruži ciljnemu bazenu P pod krinko, da je zvest rudar in tako redno oddaja svoje delne dokaze administratorju bazena. Ti deli so le dokazi dela za nizko zahtevnostno stopnjo. Kadarkoli napadalec po naključju najde pravo rešitev, ki ima enako zahtevnostno stopnjo kot celoten Bitcoin sistem, jo prikrije bazenu in je torej ne odda v pregled. Prav tako ne more neposredno oddati te rešitve v celotetn Bitcoin sistem \cite{powersplitting}. Do tega pride, ker obstoječi protokol bazena zahteva, da morajo rudarji oddati block preko administratorja bazena. Tudi če protokol dovoli napadalcu oddajo rešitve neposredno do Bitcoin omrežja, bo začetna transakcija znotraj bloka poskrbela, da bo nagrada odšla neposredno v žep administratorja bazena. Rudar ne bo mogel ohraniti nič dodatnega, razen svojega deleža, ki je enakomerno razdeljen s strani administratorja bazena.
+
+Napadalec namesto tega odda rešitev v bazen P', ki je konkurent bazena P. P' ima skrivnostno zavezo z A. Kadarkoli A prikrije blok bazenu P, ponudi bazen P' nekaj nagrade napadalcu A. P' lahko enostavno preveri pravilnost oddanega bloka s strani napadalca ob predpostavki, da P' pozna množico transakcij na kateri dela bazen P, vključno s transakcijo korena Merkle, kar omogoči P' da preveri dokaz dela, ki ga je napadalec prikril pred bazenom P. Tako lahko predpostavimo, da je bazen P odprt bazen, zato obstaja verjetnost, da bo bazen P' pridobil množico transakcij na kateri dela bazen P. Tako se dobiček napadalca poveča , saj ima sponzorja, ki spodbuja izvajanje napadov na bazen P. Nagrada, ki jo P' da napadalcu $A_1$ je sorazmerna pričakovanemu znesku dobička , ki ga bazen P' proizvede z napadom napadalca A na bazen P. Tako oba, P' in A pridobita na račun računskih virov poštenih rudarjev v bazenu P. Pričakovan dobiček napadalca je višji kot dobiček pri običajnemu NPB , kjer napadalec ne pridobi nobene spodbude s strani konkurenčnih bazenov.
+
+\section{Analiza zaslužene spodbude, ki jo napadalec prejme ob napadu na posamezen bazen} \label{sekcija4}
+
+Avtorji v \cite{powersplitting} so se predvsem osredotočili na študijo dobička napadalca, ki izkorišča NPB za dobiček s strani nekaterega drugega sebičnega bazena. Pomislimo o scenariju kjer imamo dva bazena rudarjev P in P' v celotnem omrežju in enega samega napadalca A. Računska moč napadalca je \textit{a}. Napadalec \textit{A} izkorišča $\beta$ deleža svoje računske moči za rudarjenje v bazenu P in uporablja preostanek $1-\beta$ deleža svoje računske moči za izvajanje samostojnega rudarjenja. Računska moč bazena P in P' so p in p'. Napadalec A rudari v P  z $\alpha \beta $ računske moči in oddaja svoje deleže bazenu le ko deleži ne ustrezajo pravilni rešitvi dejanskega dokaza dela. V primeru da napadalec A dejansko najde veljaven blok, ga le tega ne odda bazenu. Pravtako ga ne more oddati v isti Bitcoin sistem, da bi prejel nagrado. Namesto tega ga odda administratorju bazena P'. Administrator bazena P' da napadalcu nekaj spodbude za izvajanje napada na bazen P in tako poveča verjetnost zmage bazena P'. Razlika med modelom avtorjev članka \cite{originalarticle} in \cite{minnersdilemma} je ta, da v modelu \cite{originalarticle} napadalec izvaja napad neodvisno in ne kot član bazena P'. Zato napadalec ohrani vse morebitne spodbude. V modelu o katerem se govori v \cite{minnersdilemma} deluje napadalec kot zaveznik nekaterega drugega bazena in prenese vse svoje pridobljene spodbude v slabonamerni bazen, kjer se dobiček enakomerno razporedi med člane. Naj bo $\gamma$ delček spodbude, ki jo napadalec prejme od bazena P' za izvajanje NPB na P. Tako predpostavimo, da omrežje nima nobenega drugega igralca, to je
+
+\begin{equation} \label{equation:player}
+\alpha(1-\beta) + p + p' = 1 .
+\end{equation}
+
+\begin{lema}
+	Dobiček, ki ga dobi bazen P', ko napadalec izvede napads prikrivanjem blokov na bazen P, je podan kot  $ G_P$$'= \frac{\alpha \beta p'}{1-\alpha \beta}$.
+\end{lema}
+\noindent\textit{Dokaz.} Če napadalec uporabi svojo računsko moč, da izvede NPB nad bazenom P, bi bila računska moč celotnega omrežja enaka 1. Tako bi bil pričakovan dobiček za P'  enak p'. Ko pa napadalec uporabi \textit{ $\alpha \beta$} delec svoje računske moči za napad na P, potem pade učinkovita računska moč omrežja na 1 - $\alpha\beta$, zato  dobiček P naraste $\frac{p'}{ 1 - \alpha\beta}$.  Torej je narastek dobička bazena rudarjev P'  $\frac{p'}{1 - \alpha\beta}$ - p' = $\frac{\alpha\beta p'}{1 - \alpha\beta}$
+
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | c | }
+    \hline
+    $\alpha$ & $\beta$ & $\gamma$ & p' & $\bigtriangleup G_h^O $  \\ \hline
+    0.200000 & 0.500000 & 0.700000 & 0.340000 & 0.248016 \\ \hline
+    0.100000 & 0.900000 & 0.700000 & 0.400000 & 0.417396 \\ \hline
+    0.200000 & 0.400000 & 0.700000 & 0.340000 & 0.214171 \\ \hline
+    0.160000 & 0.600000 & 0.700000 & 0.330000 & 0.254052 \\ \hline
+    0.200000 & 0.800000 & 0.700000 & 0.400000 & 0.394558 \\ \hline
+    0.200000 & 0.900000 & 0.700000 & 0.400000 & 0.408747 \\ \hline
+    0.200000 & 0.960000 & 0.700000 & 0.400000 & 0.414236 \\ \hline
+    0.200000 & 0.990000 & 0.700000 & 0.400000 & 0.416150 \\ \hline
+    0.200000 & 0.700000 & 0.700000 & 0.400000 & 0.415573 \\ \hline
+  \end{tabular}
+\end{center}
+TABELA II: Tabelarični prikaz vrednosti $\bigtriangleup G_h^O $ za različne vrednosti ustreznih parametrov. $\alpha$ prikazuje računsko moč napadalca. $\beta$ prikazuje del računske moči, ki jo napadalec uporabi pri napadu na bazen rudarjev P. $\gamma$ prikazuje del spodbude, ki jo bazen P' pridobi zaradi napada napdalaca, ter jo z njim deli. p' predstavlja računsko moč P'.
+\newline
+\newline
+
+Sedaj je potrebno izračunati spodbudo A. Ker A za napad na P uporablja $\alpha\beta$ del svoje računske moči, lahko predpostavimo, da je računska moč aktivnega omrežja enaka 1 - $\alpha\beta$. Tukaj avtorji predpostavijo\cite{originalarticle}, da so vsi ostali rudarji v baznu P in P' pošteni. Spodbuda A je trojna. Najprej predpostavimo, da je dobiček A zasebnega rudarjenja enaka $ G_1 = \frac{\alpha(1 - \beta)}{ 1 - \alpha\beta}$. Pričakujoč delež spodbude rudarjenja v bazenu P je $ G_2 = \frac{p - \alpha\beta)}{ 1 - \alpha\beta} \frac{\alpha\beta}{p}$. Ponovno je potrebno izpostaviti, da je spodbuda pridobljena iz rudarjenja v bazenu P' zaradi napada na konkurenčni bazen (P) definirana z $ G_3 = G_P' * \gamma = \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} $. 
+
+Torej je skupen dobiček napadalca enaka:
+\newline
+\begin{equation} \label{eq:2}
+G = G_1 + G_2 + G_3 = \frac{\alpha(p-\alpha\beta^2 + p'\beta\gamma)}{p(1 - \alpha\beta)}.
+\end{equation}
+
+\textbf{Iz zgornje enačbe so avtorji opazili, da se spodbuda napadalca večka, če napade večji bazen rudarjev, ter dobi spodbudo iz manjšega bazena rudarjev.}
+\newline
+Avtorji izpostavljajo, da je ko je napadalec uporabil le klasični BWH napad brez tajnega sporazuma z bazenom rudarjev P' je bil pričakovan dobiček enak: $ G = G_1 + G_2 + G_3 = \frac{\alpha(p-\alpha\beta^2 + p'\beta\gamma)}{p(1 - \alpha\beta)}. $ Naraščaj dobičeka, ki ga napadalec pridobi v razmerju z dobičkom originalnega BMH napada se izrazi z:
+\newline
+\begin{equation} \label{eq:3}
+\bigtriangleup G_{BWH}^O = \frac{G}{G'} - 1 = \frac{p'\beta\gamma}{p - \alpha\beta^2}.
+\end{equation}
+
+Ker je $ \alpha\beta < p $ je torej $ \alpha\beta^2 < \alpha\beta < p $. Torej avtorji predpostavijo, da je $ \bigtriangleup G_{BWH}^O > 0.$ V primeru, da je bil napadalec pošten rudar je spodbuda, ki jo je precej iz poštenega rudarjenja enaka $G_h = \alpha$. Razmerje spodbude, ki jo napdalec sedaj prejme od tretjih blokov z NPB napadom se izrazi z $\bigtriangleup G_O^h = \frac{G}{G_h} - 1 = \frac{\alpha\beta p + p' \beta\gamma - \alpha\beta^2}{p(1 - \alpha\beta)}$. Če zamenjamo p z $ 1 - p' - \alpha - \alpha\beta$ dobimo,
+\begin{equation} \label{eq:4}
+\bigtriangleup G_O^h = \frac{G}{G_h} - 1 = \frac{\alpha\beta 1 - p' - \alpha - \alpha\beta + p' \beta\gamma - \alpha\beta^2}{(1 - p' - \alpha - \alpha\beta)(1 - \alpha\beta)}.
+\end{equation}
+\newline
+\begin{figure}
+  \includegraphics[scale=0.4]{image1.png}
+  \caption{Grafični prikaz obnašanja $Z = F(\alpha, \gamma, \beta, p')$, ko sta $\alpha = 0.2, \gamma = 0.7$}
+  \label{fig:boat1}
+\end{figure}
+\newline
+\textbf{Izrek 1}. Naj bo $ \beta_0 \in (0, 1) $ tak, da je skupen dobiček napadalca enak $G|_\beta=\beta_0 = max(G|_\beta=\beta_0'): \forall\beta' \in [0,1]$. V tem primeru $\beta_0$ zadosti
+\begin{equation}
+A \beta_0^2 + B\beta_0 + C = 0
+\end{equation}
+kjer je $A = -\alpha^2(1 - \gamma)p', B = 4\alpha^2 - 2\alpha^3 - 2\alpha^2p' + 2\alpha p' - 2\alpha, C = \alpha^3 - 2\alpha^2 + 2\alpha^2 p' - 2\alpha p' - \alpha\gamma p' + \alpha + \alpha p'^2 - \gamma p'^2 + \gamma p' $.
+
+\textit{Dokaz.} Dokazali smo, da je v trenutni nastavitvi skupni dobiček napadalca A enak $G = \frac{\alpha(p - \alpha\beta^2 + p'\beta\gamma)}{p(1 - \alpha\beta)}$. V primeru, da p zamenjamo z 1 - p' - $\alpha + \alpha\beta$ v Enačbi(2), dobimo skupni dobiček definiran kot:
+
+\begin{equation}
+G = \frac{\alpha(1 - p' - \alpha + \alpha\beta - \alpha\beta^2 + p' \beta\gamma)}{1 - p' - \alpha + \alpha\beta(1 - \alpha\beta)}
+\end{equation}
+
+Če diferenciramo po $\beta$, dobimo
+$\frac{\partial G}{\partial\beta} = \frac{\alpha(-2\alpha\beta + \gamma p' + \alpha)}{(1 - \alpha\beta)(\alpha\beta - p' - \alpha + 1)} + \frac{\alpha^2(-\alpha\beta^2 + \gamma p'\beta + \alpha\beta - p' - \alpha + 1)}{(1 - \alpha\beta)^2(\alpha\beta - p' - \alpha + 1)} - \frac{\alpha(-\alpha\beta^2 + \gamma p'\beta + \alpha\beta - p' - \alpha + 1)}{(1 - \alpha\beta)(\alpha\beta - p' - \alpha + 1)^2}$. Avtorji so izraz poenostavili, ter dobili $\frac{\partial G}{\partial\beta} = \frac{Num}{Den}$, kjer sta, 
+\newline
+$Den = (1 - \alpha\beta)^2(1 - p' - \alpha + \alpha\beta)^2$
+\newline
+$Num = -\alpha^3(1 - \gamma)p'\beta^2 + (4\alpha^3 - 2 \alpha^4 - 2\alpha^3 p' + 2\alpha^2 p' - 2\alpha^2)\beta + (\alpha^4 - 2\alpha^3 + 2\alpha^3 p' - 2\alpha^2 p' - alpha^2\gamma p' + \alpha^2 + \alpha^2 p'^2 - \alpha\gamma p'^2 + \alpha\gamma p')$.
+\newline
+\newline
+Opazimo lahko, da $Den \not= 0 \forall\beta \in [0, 1].$ Če se G razširi nad $\beta = \beta_0, \frac{\partial G}{\partial\beta}|_\beta=\beta_0 = 0$. Torej $-\alpha^3(1-\gamma)p' \beta_0^2 + (4\alpha^3 - 2\alpha^4 - 2\alpha^3 p' + 2\alpha^2 p' - 2\alpha^2)\beta_0 + (\alpha^4 - 2\alpha^3 + 2\alpha^3 p' - 2\alpha^2 p' - \alpha^2 \gamma p' + \alpha^2 + \alpha^2 p'^2 - \alpha\gamma p'^2 + \alpha\gamma p') = 0$. Zaradi tega, ker $\alpha \not= 0$, lahko izraz napišemo kot $-\alpha^2(1 - \gamma)p' \beta^2 + (4\alpha^2 - qalpha\gamma p' + \alpha + \alpha p'^2 - \gamma p'^2 - \gamma p'^2 + \gamma p') = 0$. 
+\newline
+\newline
+\textbf{Lema 2.} Naj bo $ F(\alpha, \gamma, \beta, p') = A\beta^2 + B\beta + C $. V tem primeru je F(.) padajoča funkcija nad $ \beta $, če je $ \alpha $ manjše od 0.25.
+
+Slika 1 prikazuje grafično predstavo vrednosti $ F(\alpha, \gamma, \beta, p') = A\beta^2 + B\beta + C $, kjer so A, B ter C definirani tako kot v Lemi 1. Avtorji so izrisali vrednosti F(.) s tem da so vrednosti $\beta$ in p' variabile, $\alpha$ pa ostaja enak. V primeru, da je p' pod določeno mejo, lahko F(.) zavzame tako negativno, kot pozitivno vrednost. Prav tako lahko opazimo, da F(.) monotono pada, če upoštevamo rezultate Leme 2. Torej lahko sklepamo, obstaja tak $\beta_0$, da je $ F(\alpha, \gamma, \beta, p') = 0 $, kadar je p' pod neko določeno mejo. Podobno, ker je $ F(\alpha, \gamma, \beta, p') > 0 za \beta < \beta_0 $ je G naraščujoča funkcija $\beta$, za $\beta > \beta_0$, kadar je p' majši od omenjene omejitve. Ko je p' najd omenjeno omejitvijo, je G vedno naraščujoča funkcija. Za napadalca se v tem primeru najbolj splača inverstirati vse svoje računske zmožnosti v bazen rudarjev P. V primeru ko je vrednost p' dovolj nizka, obstaja tak $\beta \in [0, 1]$, ki omogoča maksimalen dobiček. Ta $\beta_0$ ustreza križišču dveh krivulj $Z = F(\alpha, \gamma, \beta, p')$ in Z = 0 na Sliki 1. Vrednost $\beta_0$ lahko dobimo tako, da rešimo kvadratično enačbo $A\beta^2 + B\beta + C = 0$. Vrednost $\beta_0$, ki najbolj poveča dobiček napadalca je $\{\frac{-B - 4AC}{2A}, \frac{-B -4AC}{2A}\}$.
+\newline
+Potrebno je izpostaviti, da v primeru, da F(.) monotono pada, obstaja natanko ena vrednost $\beta_0$, ki maksimizira dobiček G. Zaradi tega veljata $0 < \frac{-B-4AC}{2A} < 1$ ali pa $0 < \frac{-B - 4 AC}{2A} < 1$, nikakor pa ne oba hkrati.
+
+\section{NAPAD NA OBA BAZENA RUDARJENJA HKRATI} \label{sekcija5}
+Ponovno si predstavljamo situacijo, v kateri napadalec napade hkrati bazen rudarjev P ter P'. Tako prej, lahko predpostavljamo, da je napadalčeva računska moč enaka $\alpha$. Napadalec razdeli računsko moč na tri dele; $A_1, A_2, A_3$, z računsko močjo enako $\alpha\beta$, $\alpha\delta$ in $1 - \alpha\beta - \alpha\delta$. Napadalec uporabi $\alpha\beta$ njegove računske moči za napad P ter pridobitev spodbude P'. Podobno, uporabi $\alpha\delta$ njegove procesorske moči in tako napade P' ter pridobi spodbudo od P. Na ta način, bo pričakavoma spodbuda napdalčevega osebnega rudarjenja enaka $ G = \frac{\alpha(1 - \beta - \delta)}{1 - \alpha\delta - \delta\gamma}$. Delež nagrade, ki ga pridobi iz P je izražen kot $G_2 = \frac{p - \alpha\beta}{1 - \alpha(\beta + \delta)} \frac{\alpha\beta}{p}$. Nagrada pridobljena z rudarjenjem bazena P' se poda z $G_3 = \frac{p' - \alpha\delta}{1 - \alpha\beta - \alpha\delta} \frac{\alpha\delta}{p'}$. Spodbuda, ki jo napadalec dobi zaradi napada na P pa je podana z $G_4 = \frac{\alpha\beta p' \gamma}{1 - \alpha\beta}$. Podobno je definirana tudi spodbuda, ki jo napadelc pridobi z bazena P, zaradi napada na P'; $G_5 = \frac{\alpha\delta p \gamma}{1 - \alpha\delta}$. Predpostavimo lahko torej, da je skupni dobiček napadalca predstavljen kot $G = \Sigma_{i=1}^5 G_i = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha\delta} + \frac{p \alpha\beta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p' \alpha\delta - \alpha^2\delta^2}{p'(1 - \alpha\beta - \alpha\delta)} + \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} + \frac{\alpha\delta p \gamma}{1 - \alpha\delta}$
+\newline
+\newline
+\subsection{Ko so računske moči rudarskih bazenov konstantne} \label{sekcija5a}
+V nasledjem primeru si bomo ogledali spodbudo napadalca, ki napada bazen P in P' hkrati. Najprej predpostavimo, da sta računski moči P in P' konstatni čez celotno periodo. To se zgodi, ko rudar vloži v bilo kateri bazen vlogi nekaj dodatne procesorske moči, administrator bazena izključi nekaj svojih sistemov, ter na ta način vzdržuje konstantno procesorsko moč. Drugi način pa se zgodi, ko nekaj rudarjev zapusti bazen. Takrat sistemski administrator vključi nekaj svojih resursov in tako nadoknadi izgubo. Na ta način zagotovimo konstantko računsko moč P in P'. Na ta način obržimo režijske stroške administratorju bazena konstantne. Tako, kot smo to opisali prej, člani bazena administratorju konstantno delne dokaze njihovega dela. Administrator bazena lahko tako preveri, da vsi njegovi člani v bazen res vlagajo dogovorjeno računsko moč. Vsako odstopanje, se izraža v številu in frekvenci oddanih vložkov. To povzroči dodatne režiske stroške na administratorja bazena. Zaradi tega razloga, se administrator trudi obdržati režiske stroške konstantne. Torej, se napadalec trudi obdržati odstopanja rudarske moči zaradi izstopa enega ali dve rudarjev čim manjšo. Lahko bi diskutirali razmišljanje za tako hipotezo, saj v večini primerov, rudarski bazeni nimajo nikoli konstane moči računanja zgoščevalne funkcije. Avtorji povdarjajo, da se konstantna procesroska moč predpostavi zaradi lažjega analize in ne za prikaz realističnega primera. V sekciji V-B smo analizirali scenarij, kjer se računska moč bazena zaradi izhoda in prihoda novih rudarjev spreminja. Bralec lahko ta razdelek smatra kot vstopna točka za razdelek \ref{sekcija5b}.
+
+\textbf{Izrek 2}. Naj bo A napadalec, ki uporabla frakcijo e njegove procesorske moči pri napadu na bazen P in P'. Primer: $\beta + \delta = e$. Obstaja tudi taka enolična vrednost $\beta_0 \in (0, e)$, da je napadalčev dobiček G maksimiziran za $\beta = \beta_0$, če velja naslednji pogoj:
+\begin{equation}
+\gamma p'^2 + \frac{2\alpha e}{1 - \alpha e > \frac{\gamma p p'}{(1 - \alpha e)^2}}.
+\end{equation}
+
+\textit{Dokaz}. Skupni dobiček napadalca $G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha\delta} + \frac{p \alpha\beta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\delta^2}{p'(1 - \alpha\beta - \alpha\delta)} + \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} + \frac{\alpha\delta p \gamma}{1 - \alpha\delta}$. Zamenjamo $\delta$ z e - $\alpha$ in dobimo $G = \frac{\alpha(1 - e)}{1 - \alpha e} + \frac{p \alpha\beta - \alpha^2\beta^2}{p(1 - \alpha e)} + \frac{p' \alpha(e - \beta) - \alpha^2(e - \beta)^2}{p'(1 - \alpha e)} + \frac{\alpha(\beta p' \gamma)}{1 - \alpha\beta} + \frac{\alpha(e - \beta) p \gamma}{1 - \alpha(e - \beta}$. Uporabimo delni odvod in dobimo: $\beta, \frac{\partial G}{\partial \beta} = \frac{p\alpha - 2\alpha^2\beta}{p(1 - \alpha e)} + \frac{-p' \alpha + 2 \alpha^2(e - \beta)}{p' (1- \alpha e)} + \frac{\alpha\gamma p'}{(1 - \alpha\beta)^2} - \frac{\alpha\gamma p'}{(1 - \alpha\beta)^2} - \frac{\alpha\gamma p}{(1 - \alpha(e - \beta)) ^ 2}$
+
+\begin{equation}
+\frac{\partial G}{\partial \beta} |_{\beta=0} = \frac{2\alpha^2 e}{p' (1 - \alpha e)} + \alpha\gamma p' - \frac{\alpha\gamma p }{(1 - \alpha e)^2}.
+\end{equation}
+\begin{equation}
+\frac{\partial G}{\partial \beta} |_{\beta=e} = -\frac{2\alpha^2 e}{p' (1 - \alpha e)}- \frac{\alpha\gamma p' }{(1 - \alpha e)^2} + \alpha\gamma p.
+\end{equation}
+Ker je $\gamma p'^2 + \frac{2\alpha e}{1 - \alpha e} - \frac{\gamma}{(1 - \alpha e) ^ 2} p p' > 0$
+\begin{equation}
+\alpha\gamma p' + \frac{2\alpha^2 e}{p'(1 - \alpha e)} - \frac{\alpha\gamma p}{(1 - \alpha e)^2} > 0.
+\end{equation}
+Zaradi tega, ker je P večji bazen je p > p'. Torej je $\gamma p^2 + \frac{2\alpha e}{1 - \alpha e} - \frac{\gamma}{(1 - \alpha e)^2} p p' > 0$. Torej,
+\begin{equation}
+\alpha\gamma p + \frac{2\alpha^2 e}{p(1 - \alpha e)} - \frac{\alpha\gamma p'}{(1- \alpha e)^2} > 0.
+\end{equation}
+
+Z enačbe 5 in 6, dobimo $\frac{\partial G}{\partial \beta}_{\beta=0} > 0$ and $\frac{\partial G} {\partial \beta}_{\beta=e} < 0$. Torej, obstaja tak $\beta \in (0, e)$, da je G pri $\beta=\beta_0$ maksimalen. Kar je potrebno se dokazati, je da obstaja enoličen $\beta_0 \in (0,e)$, tako da obstaja $\frac{\partial G}{\partial \beta}|_{\beta=\beta_0} = 0$. Sedaj pa $\frac{\partial G}{\partial \beta} = \frac{p\alpha - 2\alpha^2 \beta}{p(1 - \alpha e)} + \frac{-p' \alpha + 2 \alpha^2(e - \beta)}{p' (1 - \alpha e)} + \frac{\alpha\gamma p'}{(1 - \alpha\beta)^2} - \frac{\alpha\gamma p}{(1 - \alpha(e- \beta))^2}$. Torej $\frac{\partial^2 G}{\partial \beta^2} = \frac{2\alpha^2}{p(1 - \alpha e)} - \frac{2 \alpha^2}{p(1 - \alpha e)} + \frac{2\alpha\gamma p'}{(1 - \alpha\beta)^3} - \frac{2\alpha^2 \gamma p}{(1 - \alpha(e - \beta))^3}$. Sedaj, $1 - \alpha\beta > p > p'$. Torej, $(1 - \alpha\beta)^2 > pp' > \gamma p p'$. Velja tudi $(1- \alpha\beta) > (1- \alpha e)$. Zato, $(1- \alpha\beta)^3 > \gamma p p'(1- \alpha e)$. Torej $\frac{2\alpha^2}{p(1 - \alpha e)} > \frac{2\alpha^2 \gamma p'}{(1 - \alpha\beta)^3}$. Iz tega lahko sklepamo, da je $\frac{\partial^2 G}{\partial \beta^2} < 0$. Torej $\frac{\partial G}{\partial \beta}$ monotono pada na območju $\beta \in (0, e)$. Torej ne more objstajati več kot en tak $\beta_0 \in (0, e)$, da je $\frac{\partial G}{\partial \beta}|_{\beta=\beta_0} = 0$
+\newline
+\newline
+Če bi želeli poiskati tak $\beta_0$, ki maksimira dobiček G napdalace, je potrebno rešiti $\frac{\partial G}{\partial \beta} = 0$. Torej $\frac{p \alpha - 2\alpha^2 \beta_0}{p(1 - \alpha e)} + \\ \frac{-p'\alpha + 2\alpha^2(e - \beta_0)}{p'(1- \alpha e)} + \frac{\alpha\gamma p'}{(1 - \alpha\beta_0)^2} - \frac{\alpha\gamma p}{(1- \alpha(e - \beta_0))^2}$
+
+\begin{figure}
+  \includegraphics[scale=0.5]{image7_2.png}
+  \caption{Grafični prikaz dobička napadalca, ki zaradi napada na oba bazena rudarjev od obeh bazenov dobi nagrado. Parametri vsakega grafa so prikazani v tabeli III.}
+  \label{fig:boat1}
+\end{figure}
+
+
+Lema 2 dokazuje, da ko ima napadalec fiksno računsko močo investirano za NPB napad na oba bazena, jo lahko pametno razdeli tako da je njegov pričakovam dobiček iz rudarjenja najbolj optimalen. Z drugimi besedami, če napadalec uporablja privatno rudarjenje z fiksnim deležem računske moči in uporabi ostal del za napad na bazena P in P', lahko računsko moč uporabljeno napad razdeli tako, da je njegov dobiček zaradi napada na bazena P in P' maksimiran. Na sliki 2 so avtorji prikazali krivulje napadalčevega dobička, v primeru da je njegova računska moč $\alpha(\beta + \delta)$ fiksna. Zelo lahko je razvidno, da doseže dobiček maksium za nekatere vrednosti $\beta$ za vse ostale vrednosti ostalih prametrov. Krivulja dobička začne po maksimalni vrednosti padati. Torej sklepamo, da če se $\beta$ po maksimalni vrednosti se poveča, začne dobiček padati. Sepravi je očitno razvidno, da Slika 2 
+potrjuje rezultate izreka 2. Sedaj bodo avtorji dokazali še eno lastnost dobiča napadalca. Dokazali bodo, da lahko napadalec pod določenimi omejitvami pridobi več dobička, če uporabi  več svoje računske moči za napad, kot za osebno rudarjenje. V tem primeru, lahko napadalec poazbi na osebno rudarjenje in uporabo vso svojo računsko moč za napad.
+\newline
+\newline
+\textbf{Izrek 3} \textit{Naj bo $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \delta)}{p(1 - \alpha)}$, kjer je $p' \geq \frac{1}{k}$. V tem primeru se napadlcu najbolj splača investirati vso svojo računsko moč za napad.}
+\newline
+\newline
+\textit{Proof}. Skupni dobiček napdalca $G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha} + \frac{p\alpha\beta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\beta^2}{p(1 - \alpha\beta - \alpha\delta)} + \frac{p'\alpha\delta - \alpha^2\delta^2}{p'(1- \alpha\beta - \alpha\delta)} + \frac{\alpha\beta p' \gamma}{1 - \alpha\beta} + \frac{\alpha\delta p \gamma}{1 - \alpha\delta}. \frac{\partial G}{\partial \beta}_{\beta=0} = \frac{\alpha^2(1 - \delta)}{(1 - \alpha\delta)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1- \alpha\delta)^2} + \alpha p' \gamma > 0$. Torej je G naraščujoča funkcija $\beta$ za $\beta = 0.$
+
+Maksimalna vrednost, ki jo $\beta$ lahko zavzame je $1- \delta$. Torej je $\frac{\partial G}{\partial \beta}_{\beta=1-\delta} = \frac{\alpha^2(1- \delta)(p - \alpha(1-\delta))}{p(1-\alpha)^2} + \frac{\alpha^2\delta(p' - \alpha\delta)}{p'(1 - \alpha)^2} + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1-\delta)}{p(1 - \alpha)} = \frac{\alpha^2}{(1-\alpha)^2} - \frac{\alpha^3}{(1 - \alpha)^2}(\frac{(1 - \delta^2)}{p} + \frac{\delta^2}{p'}) + \frac{\alpha p' \gamma}{(1 - \alpha + \alpha\delta)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)}.$ Sedaj, če je $\frac{\gamma p'}{(1 - \alpha + \alpha\beta)^2} + \frac{\alpha - k \alpha^2}{(1 - \alpha)^2} > \\ \frac{2\alpha(1 - \alpha)}{p(1 - \alpha)}, \frac{\alpha\gamma p'}{(1 + \alpha + \alpha\delta)^2} + \frac{\alpha^2}{(1- \alpha)^2} - \frac{k\alpha^3}{(1 - \alpha)^2} - \frac{2\alpha^2(1 - \delta)}{p(1 - \alpha)} > 0.$. Torej, $\frac{(1 - \delta)^2}{p} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2}{p'} + \frac{\delta^2}{p'} < \frac{(1 - \delta)^2 + \delta^2}{p'} \leq \frac{1}{p'} \leq k$, ker je $p' \geq \frac{1}{k}$.
+\newline
+Torej, $\frac{\partial G}{\partial \beta} = 1- \delta > 0.$
+Sedaj je potrebno dokazati, da je G vedno narašča pri $\beta \in (0, 1- \delta)$. Za to je potrebno dokazati, da G ne doseže maksimuma na intervalu $(0, 1- \delta)$. Najprej predpostavimo, da G doseže maksimum na intervalu $(0, 1- \delta)$. Potrebno je izpostaviti, da če G dejansko doseže maksimum na $\beta = \beta_1, \beta_1 \in (0, 1- \delta)$ ter $\frac{\partial G}{\partial \beta}_{\beta=\beta_0} > 0$, mora obstajati različna vrednost $\beta_2$ v $(0, 1 - \delta)$, tako da je $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2} = 0$ ter $\frac{\partial G}{\partial \beta}|_{\beta\in(\beta_2, 1 - \delta)} > 0$. Torej $\frac{\partial G}{\partial \beta}|_{\beta=\beta_2}$ mora biti večje od 0.
+\newline
+\newline
+Torej, $\frac{\partial^2 G}{\partial \beta^2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta} - \frac{2 \alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1-\alpha\beta)^3(1 - \alpha\beta - \alpha\delta)}$.
+\newline
+\newline
+Sedaj, $\frac{\partial^2 G}{\partial \beta^2}|_{\beta=\beta_2} = \frac{2\alpha}{1 - \alpha\beta - \alpha\delta} \frac{\partial G}{\partial \beta}|_{\beta=\beta_2} - \\ \frac{2\alpha^2}{p(1 - \alpha\beta - \alpha\delta)} - \frac{2\alpha^3\gamma p' \delta}{(1 - \alpha\beta)^3(1 - \alpha\beta-\alpha\delta)}$. Zato, $\frac{\partial G}{\partial\beta}|_{\beta=\beta_2} < 0$. Zgornje predstavlja protislovje, zato predpostavimo, da so naše domneve napačne. Torej G ne doseže maksimuma na intervalih (0, 1 - $\delta$).Sepravi, G vedno narašča na $\beta$, ko $\delta$ ostane konstanten. Torej je rezultat
+\newline
+\newline
+\textbf{Posledica 4} \textit{Če je $\frac{\gamma p}{(1 - \alpha + \alpha\beta)} + \frac{\alpha - k\alpha^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \beta)}{p' (1 - \alpha)}$, kjer je p $\geq \frac{1}{k}$, G narašča skupaj z $\delta$, medtem ko $\beta$ ostaja konstanten.}
+
+\textbf{Opomba 1.} V primeru, da se zadosti pogoj Izreka 3, potem se napadlcu najbolj izplača uporabiti vso svojo računsko moč za napad na dva bazena rudarjev. Slika 3 prikazuje grafični izris napdalčevega dobička, ko sta $\beta$ in $\delta$ variabila za različne vrednosit $\delta, p $ in $p'$. Avtorji so z lahkoto opazili, da je dobiček maksimalen pri $\beta + \delta = 1$. To predstavlja visualno skladnost rezultatov leme 3.
+\newline
+\newline
+Table IV prikazuje, da se pogoj $\frac{\gamma p'}{(1 - \alpha + \alpha\delta)^2} + \frac{\delta - k\delta^2}{(1 - \alpha)^2} > \frac{2\alpha(1 - \delta)}{p(1 - \alpha)}$, kjer je $p' \geq \frac{1}{k}$ da doseči. Avtorji so pokazali, da je za niz parametrov pogoj izvedljiv, če parametri zavzamejo praktične vrednosti. 
+
+
+\begin{figure}
+  \includegraphics[scale=0.25]{image8.png}
+  \caption{Grafični prikaz dobička napadalca, ki zaradi napada na oba bazena rudarjev od obeh bazenov dobi nagrado pri čemer se spreminjata $\beta$ in $\delta$}.
+  \label{fig:boat1}
+\end{figure}
+
+
+\subsection{Ko računske moči rudarskih bazenov niso konstantne} \label{sekcija5b}
+
+Tukaj avtorji preučujejo lastnosti gain-funkcije napadalca kadar se računska moč razlikuje od računalniške moči ki jo vloži napadalec v bazena. Naj bosta \textit{$p$} in \textit{$p'$} računska moč bazena \textit{$P$} in \textit{$P'$} brez prispevka napadalca. Ker napadalec potroši \textit{$\alpha\beta$} računske moči za napadanje bazena \textit{$P$}, postane skupna moč bazena \textit{$P$} enaka \textit{$p + \alpha\beta$} kjer je \textit{$\alpha\beta$} računska moč namenjena sponzoriranemu BWH napadu. Podobno postane računska moč bazena \textit{$P'$} enaka \textit{$p' + \alpha\delta$} kjer je \textit{$\alpha\delta$} prispevek napadalca. Tako postane napadalčev dobiček, \newline
+$G = \frac{\alpha - \alpha\beta - \alpha\delta}{1 - \alpha\beta - \alpha\delta} + \frac{p\alpha\beta}{(p+\alpha\beta)(1 - \alpha\beta - \alpha\delta)} + \\ \frac{p'\alpha\delta}{(p' + \alpha\delta)(1 - \alpha\beta - \alpha\delta)} + \frac{\alpha\beta(p' + \alpha\delta)\gamma}{1 - \alpha\beta} + \frac{\alpha\delta(p + \alpha\beta)\gamma}{1 - \alpha\delta}$
+\newline
+
+Teorem 5. \textit{Če napadalec potroši konstantno količino računske moči za napadanje obeh bazenov to je če je $\beta + \delta = e$, bo napadalčev dobiček maksimiran za nekatere $\beta \in \{0,e\}$ če velja $\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p + \alpha e)^2(1 - \alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' + \alpha e)$}.\newline
+
+\noindent\textit{Dokaz}. Ker je \textit{$\beta + \delta = e$} je dobiček napadalca\newline
+
+\textit{$G = \frac{\alpha - \alpha e}{1 - \alpha e} + \frac{p\alpha\beta}{(p+\alpha\beta)(1-\alpha e)} + \frac{p'\alpha\delta}{(p'+\alpha\delta)(1-\alpha e)} + \frac{\alpha\beta(p' + \alpha\delta)\gamma}{1-\alpha\beta} + \frac{\alpha\delta(p+\alpha\beta)\gamma}{1-\alpha\delta}$}\newline
+
+$\frac{\partial G}{\partial \beta}|_{\beta=0} = \frac{\alpha}{1-\alpha e} -
+\frac{\alpha p'^2}{(\alpha e + p')^2(1-\alpha e)} +
+\alpha\gamma(p' + \alpha e) - 
+\frac{\alpha\gamma(p+\alpha^2 e^2 -\alpha e)}{(1 - \alpha e)^2}$.\newline
+
+$\frac{\partial G}{\partial \beta}|_{\beta=e} = 
+\frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} - \frac{\alpha}{1 - \alpha e} +
+\frac{\alpha\gamma(p'+\alpha^2 e^2 -\alpha e)}
+{(1 - \alpha e)^2} -
+\alpha\gamma(p+ \alpha e)$.\newline
+
+Te enačbe lahko zapišemo kot:\newline
+
+$\frac{\partial G}{\partial \beta}|_{\beta=0} =
+\frac{\alpha}{1-\alpha e} - (
+\frac{\alpha p'^2}{(p' + \alpha e)^2(1-\alpha e)} + 
+\frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} -
+\alpha\gamma(p' + \alpha e))$\newline
+
+
+$\frac{\partial G}{\partial \beta}|_{\beta=e} = (
+\frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} +
+\frac{\alpha\gamma(p'+\alpha^2e^2-\alpha e)}{(1 - \alpha e)^2} - \alpha\gamma(p +\alpha e)) - \frac{\alpha}{1 - \alpha e}.
+$\newline
+
+Ker je \textit{$\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p'+\alpha e)$} in \textit{$p > p'$}, \textit{$\frac{\alpha}{1-\alpha e} - (\frac{\alpha p'^2}{(p'+\alpha e)^2(1-\alpha e)}+ \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' +\alpha e)) > 0$}. Torej je \textit{$\frac{\partial G}{\partial \beta}|_{\beta=0} > 0$}.
+
+Spet,\textit{$\frac{\alpha}{1-\alpha e} >
+\frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} +
+\frac{\alpha\gamma(p'+\alpha^2e^2 -\alpha e)}{(1-\alpha e)^2} -
+\alpha\gamma(p+\alpha e)$}.
+
+Torej \textit{$\frac{\partial G}{\partial \beta}|_{\beta=e}<0$}.
+
+
+Ker je \textit{$\frac{\partial G}{\partial \beta}|_{\beta=0}> 0 > \frac{\partial G}{\partial \beta}|_{\beta=e'}$}, so avtorji sklenili, da obstaja tak \textit{$\beta_{max} \in (0, e)$}, da velja \textit{$\frac{\partial G}{\partial \beta}|_{\beta = \beta_{max}} = 0$}  in \textit{$\frac{\partial G}{\partial \beta}|_{\beta = \beta_{max}} < 0$},  \textit{$\forall \beta \in (\beta_{max}, e)$}.
+
+Zato, da se lahko pokaže da vzamemo delno izpeljavo \textit{$\frac{\partial G}{\partial \beta}$} glede na \textit{$\beta$} in vidimo \textit{$\frac{\partial^2G}{\partial \beta^2} = - \frac{2\alpha^2p^2}{(1-\alpha e)(p+\alpha\beta}^3 - \frac{2\alpha^2p'^2}{(p'+\alpha(e-\beta))^3(1-\alpha e)} - \frac{2\alpha^2\gamma(1-p-\alpha e)}{(1-\alpha\beta)^3}-\frac{2\alpha^2\gamma(1-p-\alpha e)}{(1-\alpha(e-\beta))^3} < 0$}.
+
+Torej \textit{$\frac{\partial G}{\partial \beta}$} vedno upada.
+
+
+Zato je lahko obstaja največ en \textit{$\beta_{max} \in (0,e)$} tako da velja \textit{$\frac{\partial G}{\partial \beta}|_{\beta=\beta_{max}} = 0$} in \textit{$\frac{\partial G}{\partial \beta} < 0$}, \textit{$\forall \beta \in (\beta_{max}, e)$}.
+
+\textbf{Opomba 2.} Tabela 5 prikazuje da pogoj \textit{$\frac{\alpha}{1-\alpha e} > \frac{\alpha p^2}{(p+\alpha e)^2(1-\alpha e)} + \frac{\alpha\gamma(p+\alpha^2e^2-\alpha e)}{(1-\alpha e)^2} - \alpha\gamma(p' +\alpha e)$} mogoče doseči. Avtorji so to dokazali, za nekaj vrednosti iz seta parametrov, da je ta pogoj mogoče doseči, ko imajo parametri praktične vrednosti.
+
+\subsection{PREPREČEVANJE NAPADA}
+
+Napad BWH je lahko katastrofalen za katerikoli odprt bazen rudarjev, ki dovoljuje včlanjenje nezaupljivim rudarjem kadarkoli. Do nastanka tega članka ni obstajal noben način za obrambo pred takšnimi napadi. Rosenfeld \cite{analysisofbitcoin} je predlagal tehniko za generiranje opravil, ki bi napeljevala k rešitvi bloka. Ta tehnika uporablja "Honeypot" za izvabljanje  rudarjev v past. Bazen bi tako ujel napadalca, ki bi zadržal rešitev takšnega bloka. Toda v takšni shemi mora bazen zahtevati od rudarjev, da potrošijo računsko moč za neuporabne izračune. Schrijvers et al. \cite{incentivecompabiliti} je  predlagal, da se BWH napade prepreči tako, da se izboljša nagradno strategijo. Bag et al. \cite{noteonblockattack} je predlaga dodatno nagrado za najditelja zmagovalnega bloka. Razlika med tema dvema shemama je ta, da v metodi Bag et al. sheme najditelj vedno dobi dodatno nagrado medtem ko v drugi metodi najditelj dobi dodatno nagrado samo, ko ostali rudarji zakasnijo oddajo deleža bazena. To je, v Schrijvers et al. shemi najditelj dobi večjo nagrado samo če deleži bazena niso oddani administratorju. V tej sekciji avtorji predlaga enostavno izboljšavo obstoječi rudarski shemi, ki bi naredila BWH napade nepraktične tako za navadne rudarje kot za administratorje bazena. Predlagana je generična shema, ki uporablja kriptografske vezavne sheme.
+
+Potem v razdelku \ref{sekcija6b} je prikazano kako lahko isto shemo implementiramo z uporabi razpršitvenih funkcij, ki je v nekem smislu sama po sebi zavezujoča shema. Vseeno pa je potrebno opraviti majhen popravek na izvorni shemi, da to lahko deluje. Shema avtorjev v \cite{originalarticle} se brani pred NPB tako, da onemogoča rudarjem možnost, da bi bili sposobni razlikovati med delnim dokazom dela in med celovitim dokazom dela.
+
+\newpage
+\subsection{Shema 1} \label{sekcija6a}
+
+V obstoječi Bitcoin shemi mora rudar izračunati \textit{"nonce" n} (nonce je 32 bitno polje v Bitcoin bloku)  in Bitcoin blok ki vsebuje "nonce" in transakcije tako, da bo razpršilna vrednost v glavi bloka vsebovala \textit{z} vodilnih '0' bitov. Temu rečemo "tarča" dokaza dela. Torej bo tarča niz bitov z dolžino \textit{z}. V trenutnem Bitcoin rudarskem protokolu je tarča niz, ki ima \textit{z} število bitov z vrednostjo 0. Tako je pravilno zgrajen Bitcoin blok čigar razpšilna vrednost z razpršilno funkcijo SHA-256 vrne niz ,ki se začne z \textit{z} številom bitov z vrednostjo 0, zmagoviti blok, ki lahko dobrinese dobiček v višini 25BTC iz Bitcoin sistema. Delni dokazi dela, ki se neprestano oddajajo v pregled dela  administratorju bazena  s strani rudarjev v bazenu, imajo ciljni bitni niz čigar velikost je \textit{z} kjer je {$ z' \le z $}. Vrednost z' določi administrator bazena in mora biti taka, da lahko rudarji v bazenu konstantno poiščejo delne dokaze dela, vendar preverjanje teh delnih dokazov ne sme predstavljati prevelikega računskega bremena administratorju bazena. Tako so avtorji \cite{originalarticle} dopolnijo trenutno shemo in predlagajo novo, v kateri bazen lahko sam izbera tarčo. Predlagana shema deluje po naslednjih korakih:
+\begin{itemize}
+	\item V shemi avtorjev se kot v obstoječi shemi pusti administratorju bazena odločitev koliko bitnih vrednosti "0" je potrebnih v delnih dokazih dela, da jih lahko posamezni rudarji oddajo administratorju. Naj bo \textit{z'} kjer je \textit{$z' \le z$}. Delni dokaz dela je blok čigar razpršitvena vrednost se začne s številom \textit{z'} ničelnih bitov.
+	\item Bazen rudarjev izbere \textit{$z - z'$} najmanj pombembnih bitov ciljnega celovitega dokaza dela. Naj bo to \textit{r}, $r \in \{0, 1\} z - z'$ . Bazen izbere tudi naključen niz $s \in \{0, 1\}^*$ , kjer je \textit{$ |s| + |r| = k$}, kjer je \textit{k} varnostni parameter zavezujoče sheme, ki jo definira Bitcoin sistem in ne bazen sam. Tukaj je vloga \textit{s} ta, da naredi dolžino združenega "nonce" \textit{$r||s$} enako \textit{k}, ki je predpisana dolžina zavezujoče sheme. Vrednost varnostnega parametra naj bi bila taka, da naj bi bil "zlom" zavezujoče sheme težji kot iskanje celovitega dokaza dela. Splošno lahko uporabimo kot varnostni parameter 256 za shemo avtorjev \cite{originalarticle}. Glavna razlika med shemo avtorjev in trenutno rudarsko shemo je ta, da v shemi avtorji bazen določi zadnjih \textit{$ z - z' $} zadnjih bitov tarče, ki je lahko v obliki $\{0, 1\}^{z-z'}$.
+	\item Končna tarča celovitega dokaza dela bazena tako postane \textit{$0^{z'}||r$}, ki je dolžine \textit{z} in je enake dolžine kot tarča trenutne Bitcoin rudarske sheme.
+	\item Bazen rudarjev proizvede zavezo \textit{$(com, decom) \leftarrow \\ - Commit(r||s, CK)$}. Bazen pošlje zavezo vsem rudarjem in zaenkrat ohrani začetno vrednost \textit{decom} skrito.
+	\item  Vsi rudarji bazena vključijo zavezo \textit{com} in \textit{z'} v dokazih dela, ki ga izračunajo. Ko rudar zgradi blok se zaveza \textit{com} in dolžina tarče delnega dokaza prav tako vključi v blok. Delni dokazi vkjučujejo vse bloke katerih razpršitvena vrednost se začne z $0^{z'}$. Tako lahko rudar odda vse bloke, ki imajo razpršitvene vrednosti enake $0^{z'}||\{0, 1\}^*$
+	\item Administrator bazena prejme kot delne dokaze vse bloke katerih razpršitvena vrednost se začne z $0^{z'}$. Sedaj administrator pregleduje te delne dokaze dokler ne najde celovitega dokaza, ki vsebuje razpršitveno vrednost, ki se začne z $0^{z'}||r$. Če lahko najde takšen blok, potem odda ta blok v Bitcoin sistem skupaj z začetno zavezo \textit{decom}. 
+	\item Ko vozlišča Bitcoin omrežja prejmejo ta blok in začetno vrednost \textit{decom} bodo izluščili vrednost zaveze \textit{com} in \textit{z'}, ki sta vsebovani v bloku in nato izluščijo \textit{$ r||s \leftarrow Open(com,decom)$}. Blok je sprejet, če se izkaže da je prvih \textit{z} bitov razpršitvene vrednosti enakih $0^{z'}||r$, kjer je \textit{r} prvih \textit{$z-z'$} bitov iz \textit{Open(com, decom)}. Če je kaj neskladja, se blok zavrne. Opozoriti velja, da je lahko vrednost \textit{z'} med bazeni različna. Vseeno lahko Bitcoin vozlišče poišče isto vrednost za določen bazen v oddanem bloku bazena. Če se razpršitvena vrednost bloka začne z \textit{'1'}, potem mora biti vrednost \textit{z} za blok enaka 0.
+\end{itemize}
+
+\noindent\textbf{Varnostna lastnost predlagane sheme:} Tukaj avtorji \cite{originalarticle} pokažejo, da je njihova shema varna pred NPB. Pokažejo tudi, da ta shema ne omogoča nobenega maneverskega prostora kateremukoli bazenu rudarjev za reševanje rudarske uganke z uporabo manjše količine računske moči kakršno sami pričakujejo. To pomeni, da shema ne omogoča lažje poti do zmage pri rudarski igri. Trdnost predlagane sheme je enaka kot pri obstoječi Bitcoin shemi in rudarji ne dobijo nobene prednosti v primerjavi z obstoječo shemo.
+
+Enostavno je videti, da je predlagana shema odporna na NPB, ki jo izvedejo rudarji, saj rudarji vedo le "tarčo" delnega dokaza dela ($O^{z'}$) in jim ni dovoljeno, da bi vedeli ostalih $z-z'$ bitov \textit{(r)} iz katerega je sestavlen celovit dokaz dela, dokler ni rudarsko delo osveženo, zaradi pojavitve Bitcoin bloka, ki ga je zgradil nek drugi bazen, ki vsebuje eno ali več transakcij iz množice transakcij nad katerimi rudarijo rudarji iz trenutnega bazena. Rudarji izvedo le zavezo \textit{com} k kombiniranemu "nonce" \textit{r||s} in prvih nekaj bitom (\textit{r}) ne morejo poznati iz zaveze \textit{com} zaradi lastnosti skrivanja, ki jo ima zavezujoča shema. Tako rudarji ne morejo razlikovati med delnim dokazom dela in celovitim dokazom dela. Zaradi tega ne morejo prikriti veljavne rešitve. Avtorji dokažejo varnost sheme v  Lemi \ref{lema3} in 4.
+
+\begin{lema}\label{lema3}
+	Predlagano rudarjenje zagotavlja, da bazen rudarjev ne more ugotoviti dokaz dela z uporabo manj računske moči kot bi jo morali.
+\end{lema}
+
+
+\noindent \textit{Dokaz.} Če bazen rudarjev poskuša pretentati obstoječo rudarsko shemo, mora storiti naslednje; Predpostavimo, da bazen rudarjev izbere dvobitna niza \textit{r} in \textit{s} tako, da je \textit{$|r| + |s| = K$} in potem izračuna zavezo \textit{$com \leftarrow Commit(r||s, CK)$}. Bazen rudarjev mora potem najti blok katerega hash se začne z bitnim nizom \textit{$0^{z'}||r$}. Ker je \textit{$|r| = z - z'$}, je verjetnost, da bi dobili takšen blok v vsakem naključnem poskusu $\frac{1}{2^{z}}$ kar je povsem enako kot je v trenutni Bitcoin shemi rudarjenja. 
+
+Alternativno, lahko bazen rudarjev izbere arbitraren \textit{$p$} kot zavezo. Ustvari blok B z hash vrednostjo, katere prvih \textit{$z$} bitov je danih od \textit{$0^{z'}||r$}. Nato bazenu rudarjev mora samo še najti niz  \textit{$s' \in \{0, 1\}^{\kappa-|r'|}$}, tako da velja \\ \textit{$p = Commit(r'||s',CK)$}. Torej, če bazen rudarjev lahko to naredi, bi se zlomila vezava lastnosti zveznega protokola, ker obstaja samo ena vrednost \textit{$r||s$}, da velja \textit{$p \leftarrow Commit(r||s, CK)$} in verjetnost \textit{$Pr [r'||s' = r||s] = \frac{1}{2^{K}}$}. Izberemo lahko varnostni parameter \textit{$K$}, ki lahko prepreči zmožnost lomljenja vezave lastnosti zveznega protokola.
+
+Bazen rudarjev lahko izbere dve vrednosti "nonce" \textit{$r$} in \textit{$s$}, tako da je \textit{$|r| + |s| = \kappa$}. Potem lahko izračuna \\ \textit{$p = Commit(r||s,CK)$}. Nato bazen rudarjev lahko ustvari blok B tako, za  prvih \textit{$z$} bitov hash-a bloka B velja \\ \textit{$\{0\}^{z'}||r',r' \neq r$}.\\ Nato mora bazen rudarjev izračunati "nonce" \textit{$s'$}, \textit{$|s'| = K - |r'|$} tako da je \textit{$p = Commit(r'||s',CK)$}. Toda to bi bilo v nasprotju z vezavnimi lastnostmi zvezne sheme.
+
+\begin{lema}\label{lema4}
+	Predlagana shema rudarjenja je varna pred BWH napadi, ki jih vloži administrator bazena.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Avtorji predpostavljajo, da administrator bazena javno razkrije prekinitev zveze \textit{$d$} (na primer= v združeni "nonce" \textit{$r||s$} vsakič ko se spremeni set transakcij. Naj bo \textit{$p$} zveza za združeni "nonce" \textit{$r||s$}. Vsi rudarji vključijo \textit{$p$} v dokaz dela, ki ga izračunajo. Vsakič, ko administrator bazena spremeni set transakcij, le-ta razkrije prekinitev zveze \textit{$d$} vsem rudarjem. Potem lahko rudarji izračunajo \textit{$r||s = Open(p,d)$} in ciljni \textit{$0^{z'}||r$}, kjer je \textit{$|r| = z -z'$}. Tako lahko rudar zazna, če je res izračunal poln dokaz dela ali ne.
+
+\subsection{Shema 2}\label{sekcija6b}
+
+Tukaj avtorji predlagajo alternativno implementacijo prejšnje sheme. Tukaj je namesto vezalne sheme uporabljena hash funkcija. To je edina razlika v primerjavi z prejšnjo shema, glavna ideja pa ostaja enaka v obeh shemah. V tej shemi se prav tako posveti posebno polje v bloku za shranjevanje niza, ki neposredno povezuje "nonce", ki določa nekaj skrajno desnih bitov cilja. Ta shema deluje na sledeči način:
+
+\begin{itemize}
+
+\item Bazen rudarjev \textit{$P$} izbere naključen bitni niz \textit{$r, |r| = z - z'$}. Bazen izbere tudi dodaten naključen niz \textit{$s \in \{0,1\}^*$}, pri čemer naj velja \textit{$p = H(r||s)$}. Opomba, če ne bi imeli \textit{$s$} bi bilo enostavno najti \textit{$r$} z uporabo grobe sile. Tukaj je uporabljen niz \textit{$s$} zato, da postane iskanje vrednosti \textit{$r$} z metodo grobe sile za napadalce težje.
+
+\item  Bazen naredi \textit{$p$} in \textit{$z'$} javna. Nato vsi člani bazena  vključijo \textit{$p$} in \textit{$z'$} v glavo bloka in medtem rudarijo na enak način kot v shemi 1. To je iskanje bloka, ki vključuje \textit{$p$} in \textit{$z'$} kot novo polje v glavi bloka (kot je prikazano na sliki 4). To polje je poimenovano 'blockpad'.
+
+\item Bazen prejme delež bazena (delni dokazi) od njegovih članov tako, da bloki, ki so jih oddali člani vsebujejo nekaj \textit{$z'$} ničelnih bitov. Bazen izračuna hash-e vseh blokov dokler ne najde bloka z hash vrednostjo \textit{$0^{z'}||r||\{0,1\}^*$}. Če bazen najde takšen blok ga objavi skopaj z vrednostjo \textit{$r||s$}.
+
+\item Potem, ko eden izmed bazenov rudarjev pošlje blok skupaj združenim "nonce"\textit{$r||s$}, vsako Bitcoin vozlišče preveri, če je hash pad-a (\textit{$H(r||s)$}) vključen v blok in če je prvih \textit{$z - z'$} bitov združenega "nonce" enakih \textit{$r$}, kjer je hash bloka enak \textit{$0^{z'}||r||\{0,1\}^*$}. Če je to preverjanje uspešno je blok sprejet in dodan v bločno verigo.
+\end{itemize}
+
+Na ta način postane Bitcoin shema rudarjenja odporna na BWH napade tako, da se prepusti administratorju, da določi zadnjih \textit{$z - z'$} bitov v izzivu. Ker vsak delni delež bazena mora imeti \textit{$z'$} vodilnih ničelnih bitov, noben Bitcoin rudar ne more razločiti med blokom z delnim dokazom dela in blokom z polnim dokazom dela. Posledično tudi ne more izvesti BWH napada na bazen. Poleg tega, ker mora bazen vljučiti \textit{$p$} znotraj glave bloka, ni mogoče, da bi se zmanjšala količina dela, ki je potrebna za rešitev uganke. Količina dela, ki ga je potrebno opraviti je enaka kot izvirni Bitcoin shemi rudarjenja. Formalno je prikazano v lemmi 5.
+
+\begin{figure}
+  \includegraphics[scale=0.30]{image10.png}
+  \caption{Nova shema za rudarjenje}
+  \label{fig:boat3}
+\end{figure}
+
+\begin{lema}\label{lema5}
+	Predlagana shema 2 povzroči, da je rudarjenje v bazenu odporno na BWH napade dokler je združeni "nonce"\textit{$r||s$} tajen.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Shema preprečuje BWH napad, če administrator bazena ne razkrije \textit{$r$} in \textit{$s$} rudarjem v bazenu. Rudarji izvejo samo vrednost \textit{$H(r||s)$}. Zato ne morejo uganiti vrednosti \textit{$r$} dokler je vrednost \textit{$s$} tajna. Toda, če je \textit{$s$} razkrit, lahko rudarji uganejo \textit{$r$} z napadom grobe sile preko vseh možnih  vrednosti \textit{$r$}. Ker velja \textit{$|r| = z - z'$} lahko bilo kateri rudar najde \textit{$r$} z izračunom največ \textit{$2^{z-z'}$} hash-ov, kar je trivialno za majhne vrednosti \textit{$z - z'$}. Zato mora administrator bazena zagotoviti, da ostaneta \textit{$r$} in \textit{$s$} tajna dokler se ni dokaz o izvedenem delu najden in oddan.
+
+\begin{lema}\label{lema6}
+	Shema 2 ne zmanjša količine opravljenega dela, ki ga potrebuje bazen rudarjev za izračun dokaza o opravljenem delu.
+\end{lema}
+
+\noindent\textit{$Dokaz$}. Če lahko bazen rudarjev ogoljufa shemo, potem mora izračunati "nonce"\textit{$r,s$} tako, da velja \textit{$|r| = z - z'$}, \textit{$0 \leq z' \leq z$}, \textit{$|r| + |s| = \kappa$} in \textit{$p = H(r||s)$} kjer je \textit{$p$} vključen v blok. Predpostavimo, da je bazen rudarjev našel blok B, katerega hash se prične z \textit{$z'$} ničlami, kjer je \textit{$0 \leq z' \leq z$}. Verjetno najdbe takšnega bloka v vsakem poskusu je enaka $\frac{1}{2^{z'}}$. Naj bo prvih \textit{$z - z'$} bitov po \textit{$0^{z'}$} v hash-u bloka B enakih \textit{$r'$}. Torej vse kar morajo rudarji narediti, je to da odkrijejo "nonce" \textit{$s'$}, \textit{$|r'| + |s'| = \kappa$} in \textit{$p = H(r'||s')$}. Izberemo lahko hash funkcijo, ki ima izhod dolžine \textit{$|p|$} in je tako velik, da zahteva iskanje vrednosti \textit{$s'$} tako računsko zahtevno, da postane nepraktično za rudarja.
+
+Tako kot shema 1 se lahko tudi shema 2 uporablja za preprečevanje BHW napadov, ki jih izvede administrator bazena. Če protokol bazena določa, da mora administrator razkriti združeni "nonce"\textit{$r||s$} vsakič ko se "blockpad" posodobi. Torej bodo vsi rudarji bili sposobni preveriti če so ustvarili veljaven blok z polnim dokazom o opravljenem delu. Opomba, vsakič, ko se set transakcij posodobljen se mora posodobiti tudi "blockpad" in "nonce" razkriti vsem rudarjem.
+
+\section{ZAKLJUČEK}
+Avtorji so v tem članku pokazali kako lahko sebičen rudar pridobi dodaten zaslužek za izvajanje napada s prikrivanjem blokov. Ta dobiček dobi od drugih bazenov, ki si prav tako želijo povečati zaslužek potom tega napada. Izmerili so pričakovan dobiček napadalca in razkrili nekaj zanimivih strategij s katerimi si napadalec lahko poveča dobiček. Predstavili so tudi ukrep s katerimi bi lahko izničili zmožnosti takšnega napada s pomočjo preprostih kriptografskih metod. Ukrep temelji na slepljenju rudarjev in odvzemanju sposobnosti napada ter zavezovanju administratorja v sistem, kjer rudarji lahko preverijo njegovo poštenost. Ukrep je mogoče zlahka implementirati in to brez spreminjanja količine dela, ki je potrebna za izračun delnega dokaza o opravljenem delu.
+
+\newpage
+\begin{thebibliography}{9}
+ 
+ \bibitem{nakamoto}
+ S. Nakamoto, 
+ \textit{Bitcoin: A peer-to-peer electronic cash system}, 2008.
+ 
+ \bibitem{permacoin}
+ A. Miller, A. Juels, E. Shi, B. Parno, and J. Katz, 
+ \textit{Permacoin: Repurposing bitcoin work for data preservation}, in 2014 IEEE Symposium on Security and Privacy, SP 2014, Berkeley, CA, USA, May 18-21, 2014. IEEE Computer Society, 2014, pp. 475–490.
+ 
+ \bibitem{retriecoin}
+ B. Sengupta, S. Bag, S. Ruj, and K. Sakurai, 
+ \textit{Retricoin: Bitcoin based on compact proofs of retrievability}, in Proceedings of the 17th International Conference on Distributed Computing and Net- working, ser. ICDCN ’16, 2016, pp. 14:1–14:10.
+ 
+ \bibitem{economicsofbitcoin}
+ J. A. Kroll, I. C. Davey, and E. W. Felten, 
+ \textit{The economics of bitcoin mining, or bitcoin in the presence of adversaries,}Proceedings of WEIS, vol. 2013, 2013.
+ 
+ \bibitem{analysisofbitcoin}
+ M. Rosenfeld,
+ \textit{Analysis of bitcoin pooled mining reward systems}, CoRR, vol. abs/1112.4980, 2011. [Online]. Available: http://arxiv.org/abs/1112.4980
+ 
+ \bibitem{financialcryptography}
+ A. Laszka, B. Johnson, and J. Grossklags, 
+ \textit{Financial Cryptography and Data Security: FC 2015 International Workshops, BITCOIN, WAHC, and Wearable, San Juan, Puerto Rico, January 30, 2015, Revised Selected Papers.} Berlin, Heidelberg: Springer Berlin Heidelberg, 2015, ch. When Bitcoin Mining Pools Run Dry, pp. 63–77.
+ 
+ \bibitem{minnersdilemma}
+ . Eyal, 
+ \textit{The miner’s dilemma}, in 2015 IEEE Symposium on Security and Privacy, SP 2015, San Jose, CA, USA, May 17-21, 2015. IEEE Computer Society, 2015, pp. 89–103.
+ 
+ \bibitem{powersplitting}
+ L. Luu, R. Saha, I. Parameshwaran, P. Saxena, and A. Hobor, 
+ \textit{On power splitting games in distributed computation: The case of bit- coin pooled mining}, in IEEE 28th Computer Security Foundations Symposium, CSF 2015, Verona, Italy, 13-17 July, 2015, C. Fournet, M. W. Hicks, and L. Vigano`, Eds. IEEE Computer Society, 2015, pp. 397–411.
+ 
+ \bibitem{subversivestrategies}
+ N. T. Courtois and L. Bahack, 
+ \textit{On subversive miner strategies and block withholding attack in bitcoin digital currency}, arXiv preprint arXiv:1402.1718, 2014.
+ 
+ \bibitem{datamininglectures}
+ I. Damg{\'a}rd, 
+ \textit{Lectures on Data Security: Modern Cryptology in The- ory and Practice.} Berlin, Heidelberg: Springer Berlin Heidelberg, 1999, ch. Commitment Schemes and Zero-Knowledge Protocols, pp. 63–86.
+ 
+ \bibitem{incentivecompability}
+ D. B. Okke Schrijvers, Joseph Bonneau and T. Roughgarde, 
+ \textit{In- centive compatibility of bitcoin mining pool reward functions}, in Financial Cryptography and Data Security: FC 2016 International Workshops.
+ 
+ \bibitem{noteonblockattack}
+ S. Bag and K. Sakurai, 
+ \textit{Yet another note on block withholding attack on bitcoin mining pools}, in Information Security - 19th International Conference, ISC 2016, Honolulu, HI, USA, September 3-6, 2016, Proceedings, ser. Lecture Notes in Computer Science,
+ M. Bishop and A. C. A. Nascimento, Eds., vol. 9866. 2016, pp. 167–180.
+ 
+ \bibitem{originalarticle}
+ Samiran Bag, Sushmita Ruj and Kouichi Sakurai,
+\textit{Bitcoin Block Withholding Attack : Analysis and
+Mitigation}
+IEEE Transactions on Information Forensics and Security
+\end{thebibliography}
+\end{document}
+

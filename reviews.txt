@@ -1,0 +1,262 @@
+[Forenzika]
+
+
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 20
+TITLE: Bitcoin napad s prikrivanjem blokov : Analiza in ublažitev napada
+AUTHORS: Matjaž Glumac, Luka Golinar and Anej Budihna
+
+Overall evaluation: 0 (borderline paper)
+Presentation flow: 2 (very poor)
+Form: 3 (ugly)
+
+----------- Interesting points -----------
+Neortodoksna uporaba googlovega prevajalnika in splošno pomanjkanje lektoriranja povzrocita, da je branje (in dešifriranje) te seminarske naloge razmeroma zabavno.
+Predstavljene sheme, ki preprečujejo možnost napadov s prikrivanjem blokov so zanimive, čeprav ne vem, če bi se rudarji strinjali z njih uvajanjem.
+Tretje zadeve ne bom zapisal, ker mi možgan začenja štrajkati.
+
+----------- Overall evaluation -----------
+Imam nekaj pripomb; prvo me moti dolzina seminarske naloge, za pregled in branje sem porabil ogromno casa, pa mislim, da se mi skoraj ni splacalo.
+Povsem zadovoljivo bi bilo pol toliko strani z bolj obširnim povzemanjem. Izbrskal sem izvorni članek, tam so stvari precej bolj jasne - med prevodom se je namreč izgubilo nekaj podatkov,
+nekateri odstavki pa so pridobili nove (drugacne) pomene. Ne vem, kaj naj si mislim o tem prispevku.
+
+----------- Presentation flow -----------
+Preveč matematike. In nesmiselnih prevodov.
+
+----------- Form -----------
+V prispevku se kar naprej pojavlja šponzorirani napad z bločnim prikrivanjem," ki je posledica povr"snosti, Latex namre"c iz narekovaja pred si"cnikom naredi "sumnik.
+Predvidevam, da je za popravljanje zadeve dovolj "ze kak"sna leva po"sevnica pred narekovajem.
+Alternativna re"sitev bi bila uporaba narekovajev na na"cin, ki ga zapoveduje Slovnica.
+Tocnega postopka se ne spomnim, najdete ga v predlogi za diplomsko delo.
+
+Tudi v splo"snem slovnica "sepa.
+
+
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 20
+TITLE: Bitcoin napad s prikrivanjem blokov : Analiza in ublažitev napada
+AUTHORS: Matjaž Glumac, Luka Golinar and Anej Budihna
+
+Overall evaluation: -1 (weak reject)
+Presentation flow: 4 (fair)
+Form: 4 (fair)
+
+----------- Interesting points -----------
+Vsaka novica ali članek o Bitcoin-u se trenutno že sam po sebi zdi kot vroče žemljice v poslovnem svetu.
+Vsebina tega članka mi je še posebej zanimiva zaradi predstavitve iznajdljivih tehnik manipuliranja mehanizma rudarjenja za čimvečji zaslužek rudarjev.
+Na drugi strani pa članek tudi prikaže potencialne grožnje obstoja bitcoin ekosistema, v primeru, da bi se tovrstne tehnike zlorab preveč izrodile.
+Gre torej za zaupanje ali je bitcoin ekositem sposoben zagotoviti pošteno delovanje vseh njegovih ključnih mehanizmov.
+
+----------- Overall evaluation -----------
+Na kratko: ideja in zasnova sta zelo dobro postavljeni, vendar je še veliko nedodalanih podrobnosti, predvsem samo izražanje - jezik.
+
+#### Splošne kritike
+
+Prve pojavitve kratic morajo biti obrazložene, nadalje se morajo pojavljati s konsistentnim poimenovanjem, vedno enako.
+Sopomenke - izberati je potrebno eno od želenih besed in nadalje uporabljaj le to. Konsistentno uporabljaj ali le rimske ali le arabske oznake za števila.
+
+Glavne in velike težave so predvsem pri tvorjenju stavkov in slovničnih napakah, uporabljene so tudi pogovorne besede ter preveč direktni(/trdi) prevodi!
+Ponekod je zaradi tega težko slediti vsebini. Jezik je vsaj v prvi polovici milo rečeno katastrofalen, komaj kaj razumljivo.
+
+Predolgo razvlečeno, namesto jedrnato, besedilo. Glede na namen in vrsto občinstva (zbornik za policaje/kriminaliste),
+mislim, da namem članka ni bil narediti tako obširnega in podrobnega pregled problemske domene, temveč povzetek, na zgolj nekaj straneh.
+Tako je morda bolj smiselno poenostaviti obsežne izpeljave matematičnih formul z nekaj stavki poenostavljenega opisa/namena le-teh.
+Po mojem mnenju bi bilo bolje napisati zgolj 3-5 strani jedrnatega članka, pregleda področja s ključnimi dognanji iz izvirnega članka.
+
+Vrjemem, da so avtorji vložili ogromno truda v tako obsežno pisanje pa vendar sem moral iti sprva skozi povzetek originalnega angleškega članka, da sem šele razumel "big picture" oz. namen članka.
+
+Čeprav mi je osnovna teorija delovanja mehanizma Bitcoin poznana, pa ne morem z zagotovostjo potrditi veljavnost navedenih matematičnih izpeljav in analiz.
+Avtorjem zato predlagam naj jih še enkrat podrobno preverijo ter se morebiti (v tem primeru najbrž ni potrebe) obrnejo na nekoga z bolj specifičnim znanjem - matematik/kriptograf.
+
+#### Pomisleki/predlogi
+
+#Povzetek
+Se mi zdi rahlo predolg, ne tako jedrnat kot bi lahko bil.
+
+#1.Uvod
+Napadi z bločnim prikrivanjem [5],[6] -- kar na enkrat zmanjka stavka, iz konteksta bi torej pričakoval, da se bo vsebina še nadaljevala.
+
+...sprožijo NPB... -- to je prva pojavitev te kratice, in nevedi bralec nima niti najmanjše ideje kaj naj bi pomenila ali na kaj naj bi se navezovala.
+Običajno se ob prvi pojavitvi kratice postavijo oklepaji s kratko obrazložitvijo, lahko je tudi zgolj angleška izpeljanka kratice.
+
+...razlikuje od dela Eyal in drugih [7] na naslednje načine: (a) ... (b) ... -- loči navedbi kot ločena odstavka/kot alineje, npr. preko "itemize" okolja v Latexu.
+V trenutni obliki je precej nepregledno.
+
+#1.3
+Navajanje v stilu "Zaključek članka sledi v razdelku VII" daje bralcu občutek, kot da gre za oznake znotraj vašega članku, vendar očitno ne gre za to.
+Tovrstno sklicevanje na tuj članek je po mojem mnenju brez pomena, vliva le dodatno zmedo.
+
+#4.
+Izrekov, dokazov, izpeljav in lem po mojem mnenju ni potrebno/zaželjeno vstavljati v takem obsegu. Gre vendarle za povzetek, potrebna so torej le dognanja/rezultati. Če je že potrebno le ključne formule, brez podrobnih izpeljav. To ni matematični učbenik, temveč pozetek.
+
+Figure 2: -- besedilo legende in koordinat ni berljivo, prav tako ni razvidna razlika med črtami krivulj na sliki. Mora biti berljivo/razvidno pri 100% velikosti dokumenta.
+
+####Slovnične opazke
+
+#Povzetek
+Tak napad so avtorji poimenovali šponzorirani napad - "sponzorirani" namesto "Šponzorirani". Verjetno š nastane zaradi kombinacije narekovaja in črke s ("s)
+
+kvantitivno - verjetno mišljeno "kvantitativno".
+
+#UVOD
+...vzdržljivosti Nash ravnotežja med napadnjem bazenov v Bitcoin omrežju. -- beseda "napadnjem" ni razumljiva, tudi stavek na splošno je težko razumljiv.
+Kaj naj bi na primer pomenilo " priskrbijo na podlagi igre teoretično analizo napada" ?
+
+... bazen rudarjev poskuša vtihotapiti v druge bazne rudarjev...-- najbrž mišljeno "bazene" namesto "bazne".
+
+.. v, ko je scenarij napada omrežja v sanju ravnotežja. -- najbrž "stanju" namesto "sanju".
+
+Pokazali so, v primeru, da se dva ali več bazenov napada med seboj, bodo pošteni rudarji zaslužili manj kot pričakujejo. -- poleg bazenov bi dodal "bazenov rudarjev".
+
+V izvornem članku se o takem primeru tudi razpravlja. -- vsebinsko prazen stavek, poleg tega še slovnično napačno strukturiran.
+
+#1.Motivacija in ostalo delo
+... zaslužijo manj kot če se ne bi napadali drug drugega. - brez "se"
+
+V članku [13] avtorji predlagajo tako imenovani špozorirani napad s prikrivanjem blokov”. -- "sponzorirani", s namesto š (" s)
+
+To je motivacija za analize avtorjev članka [13]... -- morda "analizo" , o nameto e ?!
+
+V razdelku VI avtorji članka [13] iščejo oblažitve za NPB -- ne razumem kaj naj bi predstavljala beseda "oblažitve".
+
+Nato predlagajo različico te sheme, ki uporalja razpršilne funkcije namesto sheme... -- popravi besedo "uporalja".
+
+Rudar lahko to izve šele nato, ko njen delež v bazenu posredovan -- med besedi "ko" in "njen" vstavi še "je"
+
+... ne le za šponzorirane napade s prikrivanjem blokov...-- ponovno napaka pri besedi "šponzorirane"
+
+#1.2 Prispevek
+
+... oblažitev tem napadom ...-- beseda "oblažitev" ne obstaja v SSKJ, morda mišljena "ublažitev"
+
+... potem napadalec napasti več bazenov istočasno..-- mogoče "napade" namesto "napasti" ?!
+
+.. nekontantna... -- morda "nekonstantna"
+
+Zato lahko bralec, če je zainteresiran samo v spoznavanje obrambnega mehanizma proti NPB, preskoči razdelek VI in 5 ter nadaljuje neposredno na razdelek VI.
+-- Kaotično napisan stavek, npr. "preskoči razdelek VI" in "nadaljuje neposredno na razdelek VI" sta protislovna. Konsistentno uporabljaj ali rimske ali arabske oznake za števila.
+
+#2.1
+.. spodbude celonega Bitcoin omrežja... -- "celotnega"
+
+#3.
+... šponzoriranih ...-- sičnik namesto šumnik, "sponzoriranih"
+
+... v naslednji dveh razdelkih.. -- "naslednjih"
+
+... ta ,da ... -- "ta, da" (vejica, presledek)
+
+... skorupiran ... -- "skorumpiran" (čeprav ne najlepša sopomenka)
+
+... celotetn ... -- "celoten"
+
+...
+
+(( Preprosto preveč očitnih osnovnih napak, sem odnehal! ))
+Izjemoma še:
+
+#4.4. ANALIZA ZASLUžENE -- ž popravi v veliki
+
+Figure 1 -- prevedi v Slo. ( v datoteki acm_proc_article-sp.cls, okoli vrstice 560, preimenuj v \def\fnum@figure{Slika \thefigure} )
+
+Figure 2 -- prevod, popravi tudi berljivost na sliki.
+
+”Honeypotža -- ?!
+
+#5.3
+... Schrijvers et al. [?] je predlagal, ... -- mrtva referenca
+
+...žlomžavezujoče sheme... -- ?!
+
+----------- Presentation flow -----------
+Jezik je katastrofalen, nedodelan. Ideja je sicer dobro zastavljena. Dobil sem občutek, kot da gre za razvlečen povzetek, ki na koncu izpade kot dobeseden prevod osnovnega članka, z občasnimi komentarji avtorjev tega članka. Več je navedeno že v splošnem komentarju.
+
+----------- Form -----------
+Članek je zgledno strukturiran in vsebuje tudi slike za lažje razumevanje, vendar je še precej dela. Od prevodov angleške predloge do povečave nečitljivih slik.
+
+Namigi: veliki ČŠŽ v naslovu poglavij lahko v latexu dobite v kolikor uporabite npr. "\V C" namesto "Č". Prevod za "Figure" lahko naredite v datoteki acm_proc_article-sp.cls, okoli vrstice 560, kjer preimenujete kodo v \def\fnum@figure{Slika \thefigure} .
+
+Več je navedeno že v splošnem komentarju.
+
+
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 20
+TITLE: Bitcoin napad s prikrivanjem blokov : Analiza in ublažitev napada
+AUTHORS: Matjaž Glumac, Luka Golinar and Anej Budihna
+
+Overall evaluation: 1 (weak accept)
+Presentation flow: 4 (fair)
+Form: 4 (fair)
+
+----------- Interesting points -----------
+Možnost napada Bitcoinov
+
+----------- Overall evaluation -----------
+Opaženih je kar precej slovničnih napak, raba vejic, napačnih sklanjatev. Nekateri stavki so napisani nejasno in površno.
+Primer takšnega stavka je tale: "V [4] so Kroll in drugi pokazali, da Bitcoin rudarjenje ni tako ”končno”, vodeno z vlogami in motivacijsko kompatibilen sistem kot pravijo nekateri njegovi zagovorniki.
+Napadi z bločnim prikrivanjem [5],[6]". Tukaj torej opazka pri referenci [4] in nasploh logičnost stavka.
+Za reference poizkušajte tako, da recimo omenite članek, ne samo številko reference: "V članku [4] so Kroll ...". Takšnih primerov je ogromno.
+Primer napačne reference: "Schrijvers et al. [?] reference" in pa primer, kjer bi po mojem mnenju referenca morala biti, saj se sklicuje na neko podpoglavje: "Potem v razdelku 5.5 je ..."
+
+Pri pisanju uvoda bodite bolj razumljivi in poudarite bistvo. Mislim, da uvod vsebuje že preveč detajlov, ki jih nato izvemo tudi kasneje v članku.
+Predvsem naj bo strnjen, jedrnat in naj bo hkrati še vedno razumljiv. Mogoče kakšna slika, skica?
+
+Pri poglavjih 1.1 Motivacija in ostalo delo in 1.2 Prispevek opažam naslednje.
+Zelo suhoparno in oteženo branje. Sicer pohvalno za naštevanje idej, pristopov, definicij, predlogov, vendar se mi zdi smiselno, da se jih ne razglablja preveč v detajle.
+Torej predlagam, da se jih omeni in na kratko povzame ter doda referenco - če bralca zanima bolj podrobno, si bo pogledal sam.
+Članek se bo tako bolj držal svoje teme. Primer lepega zgleda je podpoglavje 1.3 organizacija - kratko in jedrnato.
+Poskušajte preoblikovati še 1.1 in 1.2.
+
+Tabela oznak in definicij na pravem mestu - na začetku, kot je treba, da vemo zakaj se gre. Super!
+
+Na splošno pa poglavja, ki vsebujejo veliko matematičnih definicij, dokazov in izpeljav, bi jih po mojem mnenju bilo potrebno napisati krajše.
+Pri čemer bi bilo dobro ohraniti le bistvene formule/dokaze/izpeljave skupaj s kakšnimi grafičnimi podobami za boljše razumevanje.
+Torej, mogoče manj tekstovno in bolj slikovno, da lahko dobimo kakšen občutek, kaj vse pomenijo te matematične formule in kako si jih lahko predstavljamo. V teh poglavjih sem se nekoliko izgubil.
+
+Drugih pripomb pa nimam.
+
+----------- Presentation flow -----------
+Na splošno gledano je članek dober, več komentarjev in izboljšav kot tudi pripomb pa v zavihku Overall evaluation.
+
+----------- Form -----------
+Izgled članka je soliden. Vsebuje ključne elemente, slike in tabele.
+
+
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 20
+TITLE: Bitcoin napad s prikrivanjem blokov : Analiza in ublažitev napada
+AUTHORS: Matjaž Glumac, Luka Golinar and Anej Budihna
+
+Overall evaluation: 2 (accept)
+Presentation flow: 5 (good)
+Form: 5 (nice)
+
+----------- Interesting points -----------
+Zanimiv problem
+
+----------- Overall evaluation -----------
+Članek se mi je zdel zelo temeljit. Mogoče celo nekoliko preveč, vsaj kar se tiče izpeljav
+
+V 1.1 so opisi napadov napisani zelo zmedeno. Zdi se mi tudi, da mogoče male presegajo obseg članka.
+Na splošno je uvod mogoče malo predolg.
+
+----------- Presentation flow -----------
+Članku je lahko slediti.
+
+----------- Form -----------
+Nekonsistentna uporaba kratic BWA, NPB.
+
+šponzorirane napade s prikrivanjem blokov” je verjetno mišljeno "sponzorirane napade s prikrivanjem blokov".
+
+Za oznake slik je uporabljena angleški izraz (figure) namesto slovenskega.
+
+
+
